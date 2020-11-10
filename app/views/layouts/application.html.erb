@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Combi19</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title> Critter </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= javascript_pack_tag 'application' %>
+<%= render 'layouts/header' %>
 
-  <body>
-    <%= yield %>
-  </body>
+<div class="container"> 
+  
+  <% if flash[:notice] %>
+    <div class="alert alert-info"> <%= flash[:notice] %> </div>
+  <% end %>
+  
+  <%= yield %>
+</div>
+
+</body>
 </html>
