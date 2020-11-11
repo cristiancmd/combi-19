@@ -9,7 +9,7 @@ class RoutesController < ApplicationController
 		@route = Route.new
 	end
 	def edit
-		@route = Route.new
+		@route = Route.find(params[:id])
 	end
 	def create
 		params.require(:route).permit(:inicio, :destino)
@@ -31,9 +31,14 @@ class RoutesController < ApplicationController
 		redirect_to routes_path
 	end
 
-
-private
-	  # Only allow a list of trusted parameters through.
-    def city_params
-    end
+	def update
+		@route = Route.find(params[:id])
+  		respond_to do |format|
+  		if @route.update(params.require(:route).permit(:inicio, :destino))
+  			format.html { redirect_to routes_path, notice: 'La ciudad se actualizo correctamente.' }
+  		else
+  			format.html { render :edit }
+  		end
+  	end
+  	end
 end
