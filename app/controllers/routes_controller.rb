@@ -12,7 +12,10 @@ class RoutesController < ApplicationController
 		@route = Route.new
 	end
 	def create
-		@route = Route.new(city_params)
+		params.require(:route).permit(:inicio, :destino)
+		ini = City.find(params[:route][:inicio])
+		desti = City.find(params[:route][:destino])
+		@route = Route.new(inicio: ini.nombre, destino: desti.nombre)
 
 		respond_to do |format|
 			if @route.save
@@ -22,11 +25,15 @@ class RoutesController < ApplicationController
 			end
 		end
 	end
+	def destroy
+		route = Route.find(params[:id])
+		route.destroy
+		redirect_to routes_path
+	end
 
 
 private
 	  # Only allow a list of trusted parameters through.
     def city_params
-    	params.require(:city).permit(:nombre)
     end
 end
