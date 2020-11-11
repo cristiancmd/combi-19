@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> COMBI-19 by Grupo Nueve </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= render 'layouts/header' %>
+
+<div class="container"> 
+  
+  <% if flash[:notice] %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+  
+  <%= yield %>
+</div>
+
+</body>
+</html>

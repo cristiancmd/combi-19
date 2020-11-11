@@ -1,0 +1,33 @@
+<%= form_with(model: route, local: true) do |form| %>	
+  <% if route.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(route.errors.count, "errores") %> impidieron que se guarde la ciudad:</h2>
+
+      <ul>
+        <% route.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+    <div class="row">
+      <%= form_for Route.new, html: { class: 'form-horizontal' } do |f| %>
+          <%= f.label :Ciudad_de_Origen %>
+          <%= collection_select( :city, :city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
+      
+
+          <%= f.label :Ciudad_de_Destino %>
+          <%= collection_select( :city, :city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
+
+        <div class="row-sm-3 ">
+          <%= f.submit 'Crear', class: 'btn btn-danger' %>
+          <%= link_to 'Volver', routes_path , class: "btn btn-primary"%>
+      <% end %>
+    </div>
+
+    </div>
+  
+<% end %>

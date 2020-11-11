@@ -1,0 +1,27 @@
+<h2>Ciudades</h2>
+
+
+<table class="table table-striped table-dark">
+		<thead class="thead-dark">
+		<tr>
+			<th>Nombre</th>
+		
+			
+		</tr>
+		</thead>
+		<% @city.each do |c| %>
+		<tr>
+			
+			<td><%= link_to c.nombre, city_path(c)  %>  </td>
+			<td><%= link_to 'Editar', edit_city_path(c) %></td>
+			<td><%= button_to 'Eliminar', c , method: :delete, data: { confirm: 'Esta seguro ?' } %></td>
+			
+
+		</tr>
+		<% end %>
+
+	</table>	
+
+	
+
+	<h4><%= link_to 'Nueva ciudad', new_city_path, class:"btn btn-primary" %></h4>
