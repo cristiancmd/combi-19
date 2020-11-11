@@ -1,6 +1,0 @@
-
-# Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
-#ignorar los node modules para que no jodan con git
-/node_modules

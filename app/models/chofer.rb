@@ -1,2 +1,0 @@
-class Chofer < ApplicationRecord
-end
