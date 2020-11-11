@@ -7962,3 +7962,135 @@ Processing by RoutesController#index as HTML
 Completed 200 OK in 35ms (Views: 31.9ms | ActiveRecord: 0.5ms | Allocations: 7183)
 
 
+Started GET "/routes/new" for 127.0.0.1 at 2020-11-11 12:20:50 -0300
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RoutesController#new as HTML
+  Rendering routes/new.html.erb within layouts/application
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:19
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:23
+  Rendered routes/_form.html.erb (Duration: 17.6ms | Allocations: 8256)
+  Rendered routes/new.html.erb within layouts/application (Duration: 19.3ms | Allocations: 8815)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 0.9ms | Allocations: 657)
+Completed 200 OK in 88ms (Views: 69.2ms | ActiveRecord: 1.5ms | Allocations: 38599)
+
+
+Started POST "/routes" for 127.0.0.1 at 2020-11-11 12:20:52 -0300
+Processing by RoutesController#create as HTML
+  Parameters: {"authenticity_token"=>"Fy9yGLoscwDg/d5m1rygM6ViOqxQqegCCyQy63FQ00MKQCWCCk1/qutC0A6GvlO68RlNqwtKaB/S1diHSxG07A==", "route"=>{"inicio"=>"1", "destino"=>"1"}, "commit"=>"Crear"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+  [1m[36mRoute Create (1.7ms)[0m  [1m[32mINSERT INTO "routes" ("inicio", "destino", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["inicio", "1"], ["destino", "1"], ["created_at", "2020-11-11 15:20:52.604469"], ["updated_at", "2020-11-11 15:20:52.604469"]]
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+  [1m[35m (340.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+Redirected to http://localhost:3000/routes
+Completed 302 Found in 357ms (ActiveRecord: 342.7ms | Allocations: 5394)
+
+
+Started GET "/routes" for 127.0.0.1 at 2020-11-11 12:20:52 -0300
+Processing by RoutesController#index as HTML
+  Rendering routes/index.html.erb within layouts/application
+  [1m[36mRoute Load (0.6ms)[0m  [1m[34mSELECT "routes".* FROM "routes"[0m
+  ↳ app/views/routes/index.html.erb:12
+  Rendered routes/index.html.erb within layouts/application (Duration: 13.6ms | Allocations: 1900)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 488)
+Completed 200 OK in 39ms (Views: 35.4ms | ActiveRecord: 0.6ms | Allocations: 7357)
+
+
+Started GET "/routes" for 127.0.0.1 at 2020-11-11 12:23:52 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by RoutesController#index as HTML
+  Rendering routes/index.html.erb within layouts/application
+  [1m[36mRoute Load (0.1ms)[0m  [1m[34mSELECT "routes".* FROM "routes"[0m
+  ↳ app/views/routes/index.html.erb:12
+  Rendered routes/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 4619)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 0.7ms | Allocations: 490)
+Completed 200 OK in 16ms (Views: 13.8ms | ActiveRecord: 0.6ms | Allocations: 10348)
+
+
+Started GET "/routes/new" for 127.0.0.1 at 2020-11-11 12:23:54 -0300
+Processing by RoutesController#new as HTML
+  Rendering routes/new.html.erb within layouts/application
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:19
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:23
+  Rendered routes/_form.html.erb (Duration: 9.7ms | Allocations: 4637)
+  Rendered routes/new.html.erb within layouts/application (Duration: 10.6ms | Allocations: 4720)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 1.2ms | Allocations: 486)
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.7ms | Allocations: 10005)
+
+
+Started POST "/routes" for 127.0.0.1 at 2020-11-11 12:23:56 -0300
+Processing by RoutesController#create as HTML
+  Parameters: {"authenticity_token"=>"ckvsGrVl567Vz2QbVUpBGkJISpsyKAf13p0KSdycGi/410DfMrRLgDOiFVOZcSNFoQc8EYOkTGFj1N/nIR58Tw==", "route"=>{"inicio"=>"1", "destino"=>"15"}, "commit"=>"Crear"}
+[31mUnpermitted parameter: :destino[0m
+[31mUnpermitted parameter: :inicio[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+  [1m[36mRoute Create (0.6ms)[0m  [1m[32mINSERT INTO "routes" ("inicio", "destino", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["inicio", "{\"inicio\"=>\"1\"}"], ["destino", "{\"destino\"=>\"15\"}"], ["created_at", "2020-11-11 15:23:56.660635"], ["updated_at", "2020-11-11 15:23:56.660635"]]
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+  [1m[35m (77.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/routes_controller.rb:18:in `block in create'
+Redirected to http://localhost:3000/routes
+Completed 302 Found in 88ms (ActiveRecord: 77.7ms | Allocations: 3441)
+
+
+Started GET "/routes" for 127.0.0.1 at 2020-11-11 12:23:56 -0300
+Processing by RoutesController#index as HTML
+  Rendering routes/index.html.erb within layouts/application
+  [1m[36mRoute Load (0.2ms)[0m  [1m[34mSELECT "routes".* FROM "routes"[0m
+  ↳ app/views/routes/index.html.erb:12
+  Rendered routes/index.html.erb within layouts/application (Duration: 7.1ms | Allocations: 1883)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 1.8ms | Allocations: 489)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.2ms | Allocations: 7184)
+
+
+Started GET "/routes" for 127.0.0.1 at 2020-11-11 12:26:55 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by RoutesController#index as HTML
+  Rendering routes/index.html.erb within layouts/application
+  [1m[36mRoute Load (0.1ms)[0m  [1m[34mSELECT "routes".* FROM "routes"[0m
+  ↳ app/views/routes/index.html.erb:12
+  Rendered routes/index.html.erb within layouts/application (Duration: 7.6ms | Allocations: 4860)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 0.7ms | Allocations: 490)
+Completed 200 OK in 15ms (Views: 12.7ms | ActiveRecord: 0.7ms | Allocations: 10598)
+
+
+Started GET "/routes/new" for 127.0.0.1 at 2020-11-11 12:26:56 -0300
+Processing by RoutesController#new as HTML
+  Rendering routes/new.html.erb within layouts/application
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:19
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  ↳ app/views/routes/_form.html.erb:23
+  Rendered routes/_form.html.erb (Duration: 16.1ms | Allocations: 4625)
+  Rendered routes/new.html.erb within layouts/application (Duration: 16.3ms | Allocations: 4707)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_header.html.erb (Duration: 0.8ms | Allocations: 486)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 1.3ms | Allocations: 10004)
+
+
+Started POST "/routes" for 127.0.0.1 at 2020-11-11 12:26:58 -0300
+Processing by RoutesController#create as HTML
+  Parameters: {"authenticity_token"=>"f5fS+pCA3I3XIRKRib0AZ2JJIln/4rc4Y1xvj8cJ+eD1C34/F1FwozFMY9lFhmI4gQZU005u/KzeFbohOoufgA==", "route"=>{"inicio"=>"1", "destino"=>"16"}, "commit"=>"Crear"}
+[31mUnpermitted parameter: :destino[0m
+[31mUnpermitted parameter: :inicio[0m
+  [1m[36mCity Load (0.7ms)[0m  [1m[34mSELECT "cities".* FROM "cities" WHERE "cities"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/routes_controller.rb:17:in `create'
+Completed 404 Not Found in 22ms (ActiveRecord: 0.7ms | Allocations: 2230)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find City with 'id'={"inicio"=>"1"}):
+  
+app/controllers/routes_controller.rb:17:in `create'

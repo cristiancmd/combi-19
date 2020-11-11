@@ -16,11 +16,11 @@
     <div class="row">
       <%= form_for Route.new, html: { class: 'form-horizontal' } do |f| %>
           <%= f.label :Ciudad_de_Origen %>
-          <%= collection_select( :city, :city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
+          <%= collection_select( :route, :inicio, City.all, :id, :nombre, {}, { :multiple => false } ) %>
       
 
           <%= f.label :Ciudad_de_Destino %>
-          <%= collection_select( :city, :city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
+          <%= collection_select( :route, :destino, City.all, :id, :nombre, {}, { :multiple => false } ) %>
 
         <div class="row-sm-3 ">
           <%= f.submit 'Crear', class: 'btn btn-danger' %>
