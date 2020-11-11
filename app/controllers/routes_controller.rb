@@ -12,11 +12,10 @@ class RoutesController < ApplicationController
 		@route = Route.new
 	end
 	def create
-		inicio = params.require(:route).permit(:inicio)
-		destino = params.require(:route).permit(:destino)
-		a = City.find(inicio)
-		b = City.find(destino)
-		@route = Route.new(inicio: a, destino: b)
+		params.require(:route).permit(:inicio, :destino)
+		ini = City.find(params[:route][:inicio])
+		desti = City.find(params[:route][:destino])
+		@route = Route.new(inicio: ini.nombre, destino: desti.nombre)
 
 		respond_to do |format|
 			if @route.save
