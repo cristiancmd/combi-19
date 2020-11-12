@@ -1,0 +1,2 @@
+class ChofersController < ApplicationController
+end
