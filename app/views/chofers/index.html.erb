@@ -1,0 +1,33 @@
+<h2>Ciudades</h2>
+
+
+<table class="table table-striped table-dark">
+		<thead class="thead-dark">
+		<tr>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>DNI</th>
+			<th>Inicio de Actividad</th>
+
+		
+			
+		</tr>
+		</thead>
+		<% @chofers.each do |chofer| %>
+		<tr>
+			
+			<td><%= link_to chofer.nombre, chofers_path(chofer)  %>  </td>
+			<td><%= link_to chofer.apellido, chofers_path(chofer)  %>  </td>
+			<td><%= chofer.dni  %>  </td>
+			<td><%= chofer.inicio_actividad  %>  </td>
+			<td><%= button_to 'Eliminar', chofer , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
+			<td><%= link_to 'Editar', edit_chofer_path(chofer), class: "btn btn-primary" %></td>
+
+		</tr>
+		<% end %>
+
+	</table>	
+
+	
+
+	<h4><%= link_to 'Nuevo chofer', new_chofer_path, class:"btn btn-primary" %></h4>
