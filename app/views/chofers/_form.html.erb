@@ -1,0 +1,36 @@
+<%= form_with(model: chofer, local: true) do |form| %>
+  <% if chofer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chofer.errors.count, "errores") %> impidieron que se guarde la ciudad:</h2>
+
+      <ul>
+        <% chofer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    <%= form.label :Nombre %>
+    <%= form.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= form.label :Apellido %>
+    <%= form.text_field :apellido %>
+  </div>
+  <div class="field">
+    <%= form.label :DNI %>
+    <%= form.number_field :dni %>
+  </div>
+  <div class="field">
+    <%= form.label :Fecha_de_inicio %>
+    <%= form.date_field :inicio_actividad %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Guardar" %>
+  </div>
+<% end %>

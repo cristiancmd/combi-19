@@ -1,4 +1,4 @@
-<h2>Ciudades</h2>
+<h2>Choferes</h2>
 
 
 <table class="table table-striped table-dark">
@@ -16,8 +16,8 @@
 		<% @chofers.each do |chofer| %>
 		<tr>
 			
-			<td><%= link_to chofer.nombre, chofers_path(chofer)  %>  </td>
-			<td><%= link_to chofer.apellido, chofers_path(chofer)  %>  </td>
+			<td><%= link_to chofer.nombre, chofer_path(chofer)  %>  </td>
+			<td><%= link_to chofer.apellido, chofer_path(chofer)  %>  </td>
 			<td><%= chofer.dni  %>  </td>
 			<td><%= chofer.inicio_actividad  %>  </td>
 			<td><%= button_to 'Eliminar', chofer , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
