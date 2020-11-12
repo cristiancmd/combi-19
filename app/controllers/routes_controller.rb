@@ -38,9 +38,10 @@ class RoutesController < ApplicationController
 	
 
 	def update
-		@route = Route.new(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+		@route = Route.find(params[:id])
+
 		respond_to do |format|
-			if @route.update(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+			if @route.update(nombre: params[:route][:nombre])
 				format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
 			else
 				format.html { render :edit , notice: 'Hubo un error' }
