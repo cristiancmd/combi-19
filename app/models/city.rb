@@ -1,3 +1,4 @@
 class City < ApplicationRecord
-# branch ciudades
+	has_many :routes
+	
 end

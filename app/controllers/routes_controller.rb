@@ -13,10 +13,11 @@ class RoutesController < ApplicationController
 	end
 	def create
 		params.require(:route).permit(:inicio, :destino)
-		ini = City.find(params[:route][:inicio])
-		desti = City.find(params[:route][:destino])
-		@route = Route.new(inicio: ini.nombre, destino: desti.nombre)
+		inicio = City.find(params[:route][:inicio])
+		destino = City.find(params[:route][:destino])
 
+		@route = Route.new(inicio: inicio, destino: destino)
+		
 		respond_to do |format|
 			if @route.save
 				format.html { redirect_to routes_path , notice: 'Ciudad creada.' }
@@ -33,8 +34,12 @@ class RoutesController < ApplicationController
 
 	def update
 		@route = Route.find(params[:id])
+
+		params.require(:route).permit(:inicio, :destino)
+		inicio = City.find(params[:route][:inicio])
+		destino = City.find(params[:route][:destino])
   		respond_to do |format|
-  		if @route.update(params.require(:route).permit(:inicio, :destino))
+  		if @route.update(inicio: inicio, destino: destino)
   			format.html { redirect_to routes_path, notice: 'La ciudad se actualizo correctamente.' }
   		else
   			format.html { render :edit }
