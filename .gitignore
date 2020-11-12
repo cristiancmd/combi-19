@@ -9,7 +9,7 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/*.sqlite3-[0-9]*
-/public/system
+#/public/system
 /coverage/
 /spec/tmp
 *.orig
@@ -71,4 +71,4 @@ yarn-debug.log*
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-/public/uploads	
+#/public/uploads	
