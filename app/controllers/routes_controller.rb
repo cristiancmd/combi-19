@@ -20,7 +20,7 @@ class RoutesController < ApplicationController
 		
 		respond_to do |format|
 			if @route.save
-				format.html { redirect_to routes_path , notice: 'Ciudad creada.' }
+				format.html { redirect_to routes_path , notice: 'Ruta creada.' }
 			else
 				format.html { render :new }
 			end
@@ -40,7 +40,7 @@ class RoutesController < ApplicationController
 		destino = City.find(params[:route][:destino])
   		respond_to do |format|
   		if @route.update(inicio: inicio, destino: destino)
-  			format.html { redirect_to routes_path, notice: 'La ciudad se actualizo correctamente.' }
+  			format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
   		else
   			format.html { render :edit }
   		end

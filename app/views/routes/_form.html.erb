@@ -1,7 +1,7 @@
 <%= route.inspect %>
   <% if route.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(route.errors.count, "errores") %> impidieron que se guarde la ciudad:</h2>
+      <h2><%= pluralize(route.errors.count, "errores") %> impidieron que se guarde la ruta:</h2>
 
       <ul>
         <% route.errors.full_messages.each do |message| %>
