@@ -9,13 +9,11 @@
 			
 		</tr>
 		</thead>
-		<% @routes.each do |r| %>
+		<% @route.each do |r| %>
 		<tr>
-			
-			<td><% ini = City.find(r.inicio_id)  %>
-				<%= link_to ini.nombre, city_path(r.inicio_id)  %>  </td>
-			<td><% dest = City.find(r.destino_id)  %>
-				<%= link_to dest.nombre, city_path(r.destino_id)  %>  </td>
+				
+			<td><%= link_to 	City.find(r.inicio_city_id).nombre , city_path(r.inicio_city_id) %> </td>
+			<td><%= link_to 	City.find(r.destino_city_id).nombre , city_path(r.destino_city_id)  %>  </td>
 			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>
 			<td><%= button_to 'Eliminar', r , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %></td>
 			

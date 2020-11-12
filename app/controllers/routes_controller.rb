@@ -1,7 +1,10 @@
 class RoutesController < ApplicationController
+
 	def index
-		@routes = Route.all
+		@route = Route.all
+
 	end
+
 	def show
 		@routes = Route.find(params[:id])
 	end
@@ -12,15 +15,15 @@ class RoutesController < ApplicationController
 		@route = Route.find(params[:id])
 	end
 	def create
-		params.require(:route).permit(:inicio, :destino)
-		inicio = City.find(params[:route][:inicio])
-		destino = City.find(params[:route][:destino])
+		
+		#inicio = City.find(params[:route][:inicio])
+		#destino = City.find(params[:route][:destino])
 
-		@route = Route.new(inicio: inicio, destino: destino)
+		@route = Route.new(params.require(:route).permit(:inicio_city_id, :destino_city_id))
 		
 		respond_to do |format|
 			if @route.save
-				format.html { redirect_to routes_path , notice: 'Ruta creada.' }
+				format.html { redirect_to routes_path , notice: 'Ruta creada exitosamente.' }
 			else
 				format.html { render :new }
 			end
@@ -32,18 +35,16 @@ class RoutesController < ApplicationController
 		redirect_to routes_path
 	end
 
-	def update
-		@route = Route.find(params[:id])
+	
 
-		params.require(:route).permit(:inicio, :destino)
-		inicio = City.find(params[:route][:inicio])
-		destino = City.find(params[:route][:destino])
-  		respond_to do |format|
-  		if @route.update(inicio: inicio, destino: destino)
-  			format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
-  		else
-  			format.html { render :edit }
-  		end
-  	end
-  	end
+	def update
+		@route = Route.new(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+		respond_to do |format|
+			if @route.update(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+				format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
+			else
+				format.html { render :edit , notice: 'Hubo un error' }
+			end
+		end
+	end
 end
