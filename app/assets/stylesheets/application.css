@@ -5,3 +5,6 @@
 
 *= require_self
  */
+a:link, a:visited {
+	color: 00566f;
+}
