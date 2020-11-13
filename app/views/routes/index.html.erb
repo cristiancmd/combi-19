@@ -15,9 +15,11 @@
 			
 			<td><%= link_to 	r.initial_city.nombre , city_path(r.initial_city_id) %> </td>
 			<td><%= link_to 	r.destination_city.nombre , city_path(r.initial_city_id)  %>  </td>
-			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>
-			<td><%= button_to 'Eliminar', r , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %></td>
-			
+			<% if user_signed_in? %>
+
+				<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>
+				<td><%= button_to 'Eliminar', r , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %></td>
+			<% end %>
 
 		</tr>
 		<% end %>

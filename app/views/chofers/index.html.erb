@@ -20,9 +20,10 @@
 			<td><%= link_to chofer.apellido, chofer_path(chofer)  %>  </td>
 			<td><%= chofer.dni  %>  </td>
 			<td><%= chofer.inicio_actividad  %>  </td>
-			<td><%= button_to 'Eliminar', chofer , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
-			<td><%= link_to 'Editar', edit_chofer_path(chofer), class: "btn btn-primary" %></td>
-
+			<% if user_signed_in? %>
+				<td><%= button_to 'Eliminar', chofer , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
+				<td><%= link_to 'Editar', edit_chofer_path(chofer), class: "btn btn-primary" %></td>
+			<% end %>	
 		</tr>
 		<% end %>
 
