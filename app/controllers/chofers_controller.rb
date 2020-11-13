@@ -24,10 +24,9 @@ class ChofersController < ApplicationController
 
     def update
     	@chofer = Chofer.find(params[:id])
-    	params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)
-
+    	parametros = params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)
 	  	respond_to do |format|
-	  		if @chofer.update(nombre: params[:chofer][:nombre])
+	  		if @chofer.update(parametros)
 	  			format.html { redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.' }
 	  		else
 	  			format.html { render :edit }
