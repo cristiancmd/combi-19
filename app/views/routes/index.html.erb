@@ -12,6 +12,7 @@
 		<% @route.each do |r| %>
 		<tr>
 				
+			
 			<td><%= link_to 	City.find(r.inicio_city_id).nombre , city_path(r.inicio_city_id) %> </td>
 			<td><%= link_to 	City.find(r.destino_city_id).nombre , city_path(r.destino_city_id)  %>  </td>
 			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>
