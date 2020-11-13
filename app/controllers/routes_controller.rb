@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
-	
+	before_action :authenticate_user!, except: [:show, :index]
+
 	def index
 		@route = Route.all
 	end
