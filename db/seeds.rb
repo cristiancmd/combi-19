@@ -17,8 +17,6 @@ ciudad_4 = City.find_or_create_by(nombre: "Tandil")
 ciudad_5 = City.find_or_create_by(nombre: "Bahia Blanca")
 ciudad_6 = City.find_or_create_by(nombre: "Capital Federal")
 
-Route.find_or_create_by(inicio_city_id: ciudad_1.id, destino_city_id: ciudad_2.id)
-Route.find_or_create_by(inicio_city_id: ciudad_3.id, destino_city_id: ciudad_4.id)
 
 
 Chofer.find_or_create_by(nombre: "Jorge", apellido: "Iess",dni: 25589319,inicio_actividad: Date.parse("2006-04-2") )

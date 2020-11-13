@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-
+	
 	def index
 		@route = Route.all
 	end
@@ -14,8 +14,7 @@ class RoutesController < ApplicationController
 		@route = Route.find(params[:id])
 	end
 	def create
-		
-    	@route = Route.new(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+    	@route = Route.new(route_params)
 		
 		respond_to do |format|
 			if @route.save
@@ -36,11 +35,16 @@ class RoutesController < ApplicationController
 		@route = Route.find(params[:id])
 
 		respond_to do |format|
-			if @route.update(params.require(:route).permit(:inicio_city_id, :destino_city_id))
+			if @route.update(route_params)
 				format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
 			else
 				format.html { render :edit , notice: 'Hubo un error' }
 			end
 		end
 	end
+private
+	def route_params
+		params.require(:route).permit(:initial_city_id, :destination_city_id)
+	end
+
 end

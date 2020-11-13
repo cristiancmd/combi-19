@@ -29,8 +29,13 @@ class CitiesController < ApplicationController
 
 	def destroy
 		city = City.find(params[:id])
-		city.destroy
-		redirect_to cities_path
+		if Route.where(initial_city: city).or(Route.where(destination_city: city)).exists?
+			redirect_to cities_path , alert: 'La ciudad tiene rutas asignadas'
+		else
+			city.destroy
+			redirect_to cities_path
+		end
+		
 	end
 
 

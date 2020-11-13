@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_032256) do
+ActiveRecord::Schema.define(version: 2020_11_13_122444) do
 
   create_table "buses", force: :cascade do |t|
     t.integer "asientos"
@@ -41,10 +41,12 @@ ActiveRecord::Schema.define(version: 2020_11_13_032256) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.integer "inicio_city_id"
-    t.integer "destino_city_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "initial_city_id"
+    t.integer "destination_city_id"
+    t.index ["destination_city_id"], name: "index_routes_on_destination_city_id"
+    t.index ["initial_city_id"], name: "index_routes_on_initial_city_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -69,4 +71,6 @@ ActiveRecord::Schema.define(version: 2020_11_13_032256) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "routes", "cities", column: "destination_city_id"
+  add_foreign_key "routes", "cities", column: "initial_city_id"
 end
