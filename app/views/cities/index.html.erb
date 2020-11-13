@@ -1,8 +1,8 @@
 <h2>Ciudades</h2>
 
 
-<table class="table table-striped table-dark">
-		<thead class="thead-dark">
+<table class="table table-striped">
+		<thead class="thead">
 		<tr>
 			<th>Nombre</th>
 		
@@ -13,8 +13,8 @@
 		<tr>
 			
 			<td><%= link_to c.nombre, city_path(c)  %>  </td>
-			<td><%= link_to 'Editar', edit_city_path(c) %></td>
-			<td><%= button_to 'Eliminar', c , method: :delete, data: { confirm: 'Esta seguro ?' } %></td>
+			<td><%= link_to 'Editar', edit_city_path(c), class: "btn btn-primary"%></td>
+			<td><%= button_to 'Eliminar', c , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger" %></td>
 			
 
 		</tr>
