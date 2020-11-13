@@ -18,14 +18,17 @@
           <%= f.label :Ciudad_de_Origen %>
           <%= collection_select( :route, :inicio_city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
            
-
+          
           <%= f.label :Ciudad_de_Destino %>
           <%= collection_select( :route, :destino_city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
 
         <div class="row-sm-3 ">
+          <br>
           <%= f.submit 'Guardar', class: 'btn btn-danger' %>
           <%= link_to 'Volver', routes_path , class: "btn btn-primary"%>
       <% end %>
-    </div>
+       </div>
 
     </div>
+
+
