@@ -18,7 +18,7 @@ class RoutesController < ApplicationController
 
 		@route = Route.new(route_params)
 		if @route.initial_city_id==@route.destination_city_id
-			redirect_to new_route_path , alert: 'Las rutas deben ser diferentes'		
+			redirect_to new_route_path , alert: 'Las ciudades de origen y destino deben ser diferentes'		
 		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city).exists?
 			redirect_to new_route_path , alert: 'La ruta ya existe'
 		else
