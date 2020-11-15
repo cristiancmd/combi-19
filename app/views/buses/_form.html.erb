@@ -1,0 +1,33 @@
+<%= form_with(model: bus, local: true) do |form| %>
+  <% if bus.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bus.errors.count, "errores") %> impidieron que se guarde la combi:</h2>
+
+      <ul>
+        <% bus.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    <%= form.label :Patente %>
+    <%= form.text_field :patente %>
+  </div>
+  <div class="field">
+    <%= form.label :TipoDeCombi %>
+    <%= form.text_field :tipo %>
+  </div>
+  <div class="field">
+    <%= form.label :Asientos %>
+    <%= form.number_field :asientos %>
+  </div>
+  
+
+  <div class="actions">
+    <%= form.submit "Guardar" %>
+  </div>
+<% end %>

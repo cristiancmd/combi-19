@@ -1,0 +1,33 @@
+<h2>Combis</h2>
+
+
+<table class="table table-striped">
+		<thead class="thead">
+		<tr>
+			<th>Patente</th>
+			<th>Tipo</th>
+			<th>Asientos</th>
+
+		
+			
+		</tr>
+		</thead>
+		<% @buses.each do |bus| %>
+		<tr>
+			
+			<td><%= link_to bus.patente, bus_path(bus)  %>  </td>
+			<td><%= bus.tipo  %>  </td>
+			<td><%= bus.asientos  %>  </td>
+			
+			<%# if user_signed_in? %>
+				<td><%= button_to 'Eliminar', bus , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
+				<td><%= link_to 'Editar', edit_bus_path(bus), class: "btn btn-primary" %></td>
+			<%# end %>	
+		</tr>
+		<% end %>
+
+	</table>	
+
+	
+
+	<h4><%= link_to 'Nueva Combi', new_bus_path, class:"btn btn-primary" %></h4>
