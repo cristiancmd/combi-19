@@ -1,0 +1,50 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> (dejar en blanco si no queres cambiarla) <br>
+    <%= f.password_field :password %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> caracteres como minimo</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(ingresa tu contraseña actual para confirmar los cambios)</i><br>
+    <%= f.password_field :current_password %>
+  </div>
+
+  <div class="field"><%= f.label 'Fecha de nacimiento' %>
+        <%= f.date_field :date_of_birth %>
+  </div>
+   <div class="field"><%= f.label :dni %>
+        <%= f.number_field :dni ,autocomplete: "Dni"%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+<% end %>
+
+<h4>Desea eliminar su cuenta?</h4>
+
+<p> <%= button_to "Cancelar cuenta", registration_path(resource_name), data: { confirm: "Estas seguro?" }, method: :delete %></p>
+
+<%= link_to "Volver", :back %>

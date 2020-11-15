@@ -1,4 +1,6 @@
 class ChofersController < ApplicationController
+		before_action :authenticate_user! #, except: [:show, :index]
+
 	def index
 		@chofers = Chofer.all()
 	def new
