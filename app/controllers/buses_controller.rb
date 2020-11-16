@@ -1,46 +1,61 @@
 class BusesController < ApplicationController
-		before_action :authenticate_user! #, except: [:show, :index]
+	before_action :set_bus, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user! #, except: [:show, :index]
 
 	def index
-		@buses = Bus.all()
+		@bus = Bus.all
+	end	
 	def new
-		@bus = Bus.new()
+		@bus = Bus.new
 	end
+
 	def show
 		@bus = Bus.find(params[:id])
 	end
+	def edit
+	end	
+
 	def create
-		parametros = params.require(:bus).permit(:patente, :tipo, :asientos)	
-		@bus = Bus.new(parametros)
-	  	respond_to do |format|
-	  		if @bus.save
-	  			format.html { redirect_to buses_path, notice: 'La combi se agregó correctamente.' }
-	  		else
-	  			format.html { render :index }
-	  		end
-	  	end
-  	end
-  	def edit
-  		@bus = Bus.find(params[:id])
-	end
+			@bus = Bus.new(bus_params)
+			respond_to do |format|
+				if @bus.save
+					format.html { redirect_to buses_path, notice: 'La combi se agregó correctamente.' }
+				else
+					format.html { render :new }
+				end
+			end
+	end	
 
-    def update
-    	@bus = Bus.find(params[:id])
-    	parametros = params.require(:bus).permit(:patente, :tipo, :asientos)
-	  	respond_to do |format|
-	  		if @bus.update(parametros)
-	  			format.html { redirect_to buses_path, notice: 'La combi se actualizó correctamente.' }
-	  		else
-	  			format.html { render :edit }
-	  		end
-	  	end
-	  	end
-	 end
-	
+
+	def update
+			respond_to do |format|
+				if @bus.update(bus_params)
+					format.html { redirect_to buses_path, notice: 'La combi se actualizó correctamente.' }
+				else
+					format.html { render :edit }
+				end
+			end
+	end	
+
 	def destroy
-		bus = Bus.find(params[:id])
-		bus.destroy
-		redirect_to buses_path
+			bus = Bus.find(params[:id])
+			bus.destroy
+			redirect_to buses_path
 	end
 
-  	end
+	private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_bus
+    	@bus = Bus.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def bus_params
+    	params.require(:bus).permit(:patente, :tipo, :asientos)
+    end
+
+
+
+
+end
+

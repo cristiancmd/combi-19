@@ -12,18 +12,19 @@
 			
 		</tr>
 		</thead>
-		<% @buses.each do |bus| %>
-		<tr>
+		
+		<% @bus.each do |b| %>
+		
+			<tr>
+				<td><%= link_to b.patente, bus_path(b)  %>  </td>
+				<td><%= b.tipo  %>  </td>
+				<td><%= b.asientos  %>  </td>
+				
 			
-			<td><%= link_to bus.patente, bus_path(bus)  %>  </td>
-			<td><%= bus.tipo  %>  </td>
-			<td><%= bus.asientos  %>  </td>
+					<td><%= button_to 'Eliminar', b , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
+					<td><%= link_to 'Editar', edit_bus_path(b), class: "btn btn-primary" %></td>
 			
-			<%# if user_signed_in? %>
-				<td><%= button_to 'Eliminar', bus , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-danger"%></td>
-				<td><%= link_to 'Editar', edit_bus_path(bus), class: "btn btn-primary" %></td>
-			<%# end %>	
-		</tr>
+			</tr>
 		<% end %>
 
 	</table>	
