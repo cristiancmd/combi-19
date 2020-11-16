@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :date_of_birth, :presence => true
+  #validates :date_of_birth, :presence => true
   validate :validate_age
 
   private
