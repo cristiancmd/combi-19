@@ -9,7 +9,11 @@ class RoutesController < ApplicationController
 		@route = Route.find(params[:id])
 	end
 	def new
-		@route = Route.new
+		if not City.any?
+			redirect_to cities_path , alert: 'Debe crear ciudades para poder crear rutas' 
+		else
+			@route = Route.new
+		end
 	end
 	def edit
 		@route = Route.find(params[:id])
@@ -46,8 +50,8 @@ class RoutesController < ApplicationController
 		@route = Route.find(params[:id])
 		if route_params["initial_city_id"]==route_params["destination_city_id"]
 			redirect_to new_route_path , alert: 'Origen y destino deben ser diferentes!'
-		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city).exists?
-			redirect_to new_route_path , alert: 'La ruta ya existe'
+		elsif Route.where(initial_city: route_params["initial_city_id"], destination_city: route_params["destination_city_id"]).exists?
+			redirect_to edit_route_path , alert: 'La ruta ya existe'
 		else
 			respond_to do |format|
 				if @route.update(route_params)

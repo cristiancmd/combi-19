@@ -4,5 +4,4 @@ class Chofer < ApplicationRecord
 	
 
 	
-	
-end
+	end
