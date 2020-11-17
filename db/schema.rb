@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_11_14_231232) do
   end
 
   create_table "routes", force: :cascade do |t|
+    t.string "nombre"
+    t.string "duracion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "initial_city_id"

@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :Ruta %>
-    <%= form.collection_select( :route_id,  Route.all, :id, :id ,prompt: "Seleccione" ) %>
+    <%= form.collection_select( :route_id ,  Route.all, :id, :nombre,prompt: "Seleccione" ) %>
   </div> 
 <%#= f.collection_select(:author_id, Author.all, :id, :name_with_initial, prompt: true) %>
  

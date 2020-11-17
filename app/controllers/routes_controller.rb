@@ -21,6 +21,8 @@ class RoutesController < ApplicationController
 	def create
 
 		@route = Route.new(route_params)
+		puts @route.initial_city.nombre + ' - '+@route.destination_city.nombre
+		byebug
 		if @route.initial_city_id==@route.destination_city_id
 			redirect_to new_route_path , alert: 'Las ciudades de origen y destino deben ser diferentes'		
 		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city).exists?
