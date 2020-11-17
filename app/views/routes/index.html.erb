@@ -4,6 +4,7 @@
 <table class="table table-striped">
 		<thead class="thead">
 		<tr>
+			<th>Id</th>
 			<th>Inicio</th>
 			<th>Destino</th>
 			
@@ -11,8 +12,7 @@
 		</thead>
 		<% @route.each do |r| %>
 		<tr>
-				
-			
+			<td><%= r.id  %> </td>	
 			<td><%= link_to r.initial_city.nombre , city_path(r.initial_city_id) %> </td>
 			<td><%= link_to r.destination_city.nombre , city_path(r.initial_city_id)  %>  </td>
 			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>

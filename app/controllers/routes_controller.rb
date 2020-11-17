@@ -6,7 +6,7 @@ class RoutesController < ApplicationController
 	end
 
 	def show
-		@routes = Route.find(params[:id])
+		@route = Route.find(params[:id])
 	end
 	def new
 		@route = Route.new
@@ -33,8 +33,12 @@ class RoutesController < ApplicationController
 	end
 	def destroy
 		route = Route.find(params[:id])
-		route.destroy
-		redirect_to routes_path
+		if Trip.tiene_ruta(params[:id]).exists?
+			redirect_to routes_path, alert: 'La ruta tiene un viaje asociado activo.'
+		else
+			route.destroy
+			redirect_to routes_path , notice: 'La ruta se elimino correctamente'
+		end	
 	end
 
 

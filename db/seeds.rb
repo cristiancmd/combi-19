@@ -8,7 +8,13 @@
 
 City.destroy_all
 Route.destroy_all
-Chofer.destroy_all
+#Chofer.destroy_all
+
+user = User.create! :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456
+
+chofer = Chofer.create! :nombre => 'Jorge', apellido => 'Iess', :dni => 33333, :inicio_actividad => "Date.parse('2000-04-2')"
+chofer = Chofer.create! :nombre => 'Alberto', apellido => 'Aninstein', :dni => 222222, :inicio_actividad => "Date.parse('1999-04-2')"
+
 
 ciudad_1 = City.find_or_create_by(nombre: "La Plata")
 ciudad_2 = City.find_or_create_by(nombre: "Cordoba")
@@ -23,9 +29,7 @@ Route.find_or_create_by(initial_city_id: 5, destination_city_id: 6);
 Route.find_or_create_by(initial_city_id: 1, destination_city_id: 4);
 Route.find_or_create_by(initial_city_id: 3, destination_city_id: 5);
 
-Chofer.find_or_create_by(nombre: "Jorge", apellido: "Iess",dni: 25589319,inicio_actividad: Date.parse("2006-04-2") )
-Chofer.find_or_create_by(nombre: "Juan", apellido: "Ortis",dni: 12654789,inicio_actividad: Date.parse("2015-06-25"))
-Chofer.find_or_create_by(nombre: "Chavo", apellido: "Del Ocho",dni: 40654987,inicio_actividad: Date.parse("2023-05-3"))
-Chofer.find_or_create_by(nombre: "Walter", apellido: "White",dni: 15369258,inicio_actividad: Date.parse("2000-07-7"))
-Chofer.find_or_create_by(nombre: "Rust", apellido: "Cohle",dni: 29753951,inicio_actividad: Date.parse("2011-08-25"))
-Chofer.find_or_create_by(nombre: "Pedro", apellido: "Ibañes",dni: 33453875,inicio_actividad: Date.parse("2003-05-12"))
+
+
+
+

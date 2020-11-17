@@ -1,0 +1,51 @@
+<%= form_with(model: trip, local: true) do |form| %>
+  <% if trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chofer.errors.count, "errores") %> impidieron que se guarde el viaje:</h2>
+
+      <ul>
+        <% chofer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :Fecha %>
+    <%= form.date_field :fecha_inicio %>
+  </div>
+  <div class="field">
+    <%= form.label :Horario %>
+    <%= form.datetime_field :horario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Chofer %>
+    <%= form.collection_select( :chofer_id, Chofer.all , :id, :nombre, prompt: "Seleccione" ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Combi %>
+    <%= form.collection_select( :bus_id,  Bus.all, :id, :patente, prompt: "Seleccione" ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Ruta %>
+    <%= form.collection_select( :route_id,  Route.all, :id, :id ,prompt: "Seleccione" ) %>
+  </div> 
+<%#= f.collection_select(:author_id, Author.all, :id, :name_with_initial, prompt: true) %>
+ 
+
+  <div class="field">
+    <%= form.label :Tarifa %>
+    <%= form.number_field :rate, :step => 0.05%>
+  </div>
+  
+
+
+  <div class="actions">
+    <%= form.submit "Guardar" %>
+  </div>
+<% end %>
