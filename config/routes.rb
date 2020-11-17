@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :buses
   resources :routes
   resources :cities
-  
+  resources :additionals
+
   root 'main#home'
   
 
