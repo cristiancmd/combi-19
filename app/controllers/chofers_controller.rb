@@ -11,9 +11,11 @@ class ChofersController < ApplicationController
 	def new
 		@chofer = Chofer.new()
 	end
+
 	def show
 		@chofer = Chofer.find(params[:id])
 	end
+
 	def create
 		parametros = params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)	
 		@chofer = Chofer.new(parametros)
@@ -21,7 +23,7 @@ class ChofersController < ApplicationController
 	  		if @chofer.save
 	  			format.html { redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.' }
 	  		else
-	  			format.html { render :index }
+	  			format.html { render :new }
 	  		end
 	  	end
   	end
