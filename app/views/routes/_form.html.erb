@@ -21,7 +21,9 @@
           <%= f.label :Ciudad_de_Destino %>
           <%= collection_select( :route, :destination_city_id, City.all, :id, :nombre, {}, { :multiple => false } ) %>
 
-        <div class="row-sm-3 ">
+          <%= f.label :duracion %>
+          <%= f.text_field :duracion %>
+          <br>
           <br>
           <%= f.submit 'Guardar', class: 'btn btn-danger' %>
           <%= link_to 'Volver', routes_path , class: "btn btn-primary"%>

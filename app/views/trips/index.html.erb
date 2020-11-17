@@ -15,7 +15,7 @@
 		<% @trip.each do |t| %>
 		<tr>
 				
-			<td><%= link_to t.route.id, route_path(t.route.id)  %> </td>
+			<td><%= link_to t.route.nombre, route_path(t.route.id)  %> </td>
 			<td><%=  t.chofer.nombre  %>  </td>
 			<td><%=  t.bus.patente  %>  </td>
 			<td><%=  t.horario  %>  </td>
