@@ -38,10 +38,15 @@ class BusesController < ApplicationController
 	end	
 
 	def destroy
-			bus = Bus.find(params[:id])
+		bus = Bus.find(params[:id])
+		if Trip.tiene_combi(params[:id]).exists?	
+			redirect_to buses_path, alert: 'La combi tiene un viaje asociado activo.'
+		else
 			bus.destroy
-			redirect_to buses_path
+			redirect_to buses_path, notice: 'La combi se elimino correctamente'
+		end	
 	end
+	
 
 	private
     # Use callbacks to share common setup or constraints between actions.

@@ -18,10 +18,16 @@ class Trip < ApplicationRecord
 	scope :tiene_chofer, -> (chofer) { where(chofer_id: chofer) }
 	scope :en_dia, -> (dia) { where(horario: dia ) }
 	scope :tiene_ruta, -> (r) { where(route_id: r) }
+	scope :tiene_combi, -> (c) { where(bus_id: c) }
 
 
 	def self.tiene_chofer_dia(chofer,dia)
 		where(chofer_id: chofer).where(horario: dia)
 	end
 
+	def self.tiene_combi_dia(combi,dia)
+		where(bus_id: combi).where(horario: dia)
+	end
+
+	
 end

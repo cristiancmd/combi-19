@@ -23,7 +23,7 @@ class RoutesController < ApplicationController
 
 	def create
 		@route = Route.new(route_params)
-		@route.nombre = @route.initial_city.nombre + ' - ' + @route.destination_city.nombre
+		# mal @route.nombre = @route.initial_city.nombre + ' - ' + @route.destination_city.nombre
 
 		#CHECK SI INICIO Y DESTINO SON IGUALES
 		if @route.initial_city_id==@route.destination_city_id

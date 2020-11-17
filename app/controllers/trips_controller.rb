@@ -4,7 +4,7 @@ class TripsController < ApplicationController
 	
 	def index
 		
-		@trip = Trip.all
+		@trip = Trip.all.order("horario ASC")
 
 	end
 	def show
@@ -16,8 +16,11 @@ class TripsController < ApplicationController
 
 	def create
 		@trip = Trip.new(trip_params)
-		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?										#Trip.en_dia(trip_params["horario"])			#Trip.tiene_chofer(trip_params["chofer_id"]).exists?
+		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?	
 			redirect_to new_trip_path, alert: 'El chofer no esta disponible en esa fecha, seleccione otro chofer'
+		
+		elsif Trip.tiene_combi_dia(trip_params["bus_id"],trip_params["horario"]).exists?	
+			redirect_to new_trip_path, alert: 'La combi no esta disponible en esa fecha, seleccione otra combi'
 		else	
 			respond_to do |format|
 				if @trip.save
@@ -30,6 +33,7 @@ class TripsController < ApplicationController
 	end
 
 	def edit
+		@trip = Trip.find(params[:id])
 	end
 
 	def destroy
@@ -39,10 +43,21 @@ class TripsController < ApplicationController
 
 
 
-  def update
-  	
-  end
+  	def update
+  		@trip = Trip.find(params[:id])
+  		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?	
+			redirect_to edit_trip_path, alert: 'El chofer no esta disponible en esa fecha, seleccione otro chofer'
+		
+		elsif Trip.tiene_combi_dia(trip_params["bus_id"],trip_params["horario"]).exists?	
+			redirect_to edit_trip_path, alert: 'La combi no esta disponible en esa fecha, seleccione otra combi'
+		
+		else @trip.update(trip_params)
+			redirect_to trips_path , notice: 'Viaje modificado correctamente.' 
+		end	
+
+  	end
   
+
   
 
   private

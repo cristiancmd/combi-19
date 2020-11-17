@@ -16,17 +16,15 @@
 		<% @trip.each do |t| %>
 		<tr>
 				
-			<td><%= link_to t.route.nombre, route_path(t.route.id)  %> </td>
+			<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
 			<td><%=  t.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
 			<td><%=  t.chofer.nombre_apellido  %>  </td>
 			<td><%=  t.bus.patente  %>  </td>
 			<td><%=  t.bus.asientos  %>  </td>
 			
 			<td><%= t.rate %></td>
-
-
-
-			<%#= link_to 'Editar', edit_trip_path(t), class:"btn btn-primary" %>
+			<td> <%= link_to 'Editar', edit_trip_path(t), class:"btn btn-primary" %> </td>
+			
 			<%#= button_to 'Eliminar', t , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %>
 			
 
