@@ -1,10 +1,10 @@
 <%= form_with(model: trip, local: true) do |form| %>
   <% if trip.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(chofer.errors.count, "errores") %> impidieron que se guarde el viaje:</h2>
+      <h2><%= pluralize(trip.errors.count, "errores") %> impidieron que se guarde el viaje:</h2>
 
       <ul>
-        <% chofer.errors.full_messages.each do |message| %>
+        <% trip.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -12,18 +12,15 @@
   <% end %>
 
 
+  
   <div class="field">
-    <%= form.label :Fecha %>
-    <%= form.date_field :fecha_inicio %>
-  </div>
-  <div class="field">
-    <%= form.label :Horario %>
+    <%= form.label :Dia_y_Horario %>
     <%= form.datetime_field :horario %>
   </div>
 
   <div class="field">
     <%= form.label :Chofer %>
-    <%= form.collection_select( :chofer_id, Chofer.all , :id, :nombre, prompt: "Seleccione" ) %>
+    <%= form.collection_select( :chofer_id, Chofer.all , :id, :nombre_apellido, prompt: "Seleccione" ) %>
   </div>
 
   <div class="field">

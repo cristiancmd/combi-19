@@ -16,14 +16,17 @@ class TripsController < ApplicationController
 
 	def create
 		@trip = Trip.new(trip_params)
-
-		respond_to do |format|
-			if @trip.save
-				format.html { redirect_to trips_path , notice: 'Viaje creado exitosamente.' }
-			else
-				format.html { render :new }
+		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?										#Trip.en_dia(trip_params["horario"])			#Trip.tiene_chofer(trip_params["chofer_id"]).exists?
+			redirect_to new_trip_path, alert: 'El chofer no esta disponible en esa fecha, seleccione otro chofer'
+		else	
+			respond_to do |format|
+				if @trip.save
+					format.html { redirect_to trips_path , notice: 'Viaje creado exitosamente.' }
+				else
+					format.html { render :new }
+		 		end
 			end
-		end
+		end	
 	end
 
 	def edit
