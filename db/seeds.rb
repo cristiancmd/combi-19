@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-City.destroy_all
 Route.destroy_all
+City.destroy_all
 Chofer.destroy_all
 
 ciudad_1 = City.find_or_create_by(nombre: "La Plata")

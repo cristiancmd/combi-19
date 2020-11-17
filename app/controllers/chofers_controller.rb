@@ -2,7 +2,12 @@ class ChofersController < ApplicationController
 		before_action :authenticate_user! #, except: [:show, :index]
 
 	def index
-		@chofers = Chofer.all()
+		if not Chofer.any?
+			redirect_to  new_chofer_path, notice: 'Todavía no existe ningun chofer'
+		else
+			@chofers = Chofer.all()
+		end
+	end
 	def new
 		@chofer = Chofer.new()
 	end
@@ -26,15 +31,13 @@ class ChofersController < ApplicationController
 
     def update
     	@chofer = Chofer.find(params[:id])
-    	parametros = params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)
-	  	respond_to do |format|
-	  		if @chofer.update(parametros)
-	  			format.html { redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.' }
+	  		if Chofer.where(nombre: chofer_params["nombre"], apellido: chofer_params["apellido"]).exists?
+				redirect_to edit_chofer_path , alert: 'El chofer ya existe'
+	  		elsif @chofer.update(chofer_params)
+	  			redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.'
 	  		else
-	  			format.html { render :edit }
+	  			render :edit 
 	  		end
-	  	end
-	  	end
 	 end
 	
 	def destroy
@@ -42,5 +45,8 @@ class ChofersController < ApplicationController
 		chofer.destroy
 		redirect_to chofers_path
 	end
-
-  	end
+private
+	def chofer_params
+		params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)
+	end
+end
