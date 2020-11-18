@@ -13,4 +13,8 @@ class Route < ApplicationRecord
 	def check_equality
 	    initial_city.id != destination_city.id
 	end
+
+	def origen_destino(i,d)
+    	"#{i.nombre} - #{d.nombre}"
+  	end
 end

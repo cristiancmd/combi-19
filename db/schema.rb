@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_11_17_001613) do
   end
 
   create_table "routes", force: :cascade do |t|
+    t.string "nombre"
+    t.string "duracion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "initial_city_id"
@@ -61,11 +63,15 @@ ActiveRecord::Schema.define(version: 2020_11_17_001613) do
     t.datetime "horario"
     t.date "fecha_inicio"
     t.date "fecha_fin"
-    t.string "chofer"
-    t.integer "bus"
-    t.integer "route"
+    t.decimal "rate"
+    t.integer "chofer_id"
+    t.integer "bus_id"
+    t.integer "route_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["bus_id"], name: "index_trips_on_bus_id"
+    t.index ["chofer_id"], name: "index_trips_on_chofer_id"
+    t.index ["route_id"], name: "index_trips_on_route_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,4 +91,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_001613) do
 
   add_foreign_key "routes", "cities", column: "destination_city_id"
   add_foreign_key "routes", "cities", column: "initial_city_id"
+  add_foreign_key "trips", "buses"
+  add_foreign_key "trips", "chofers"
+  add_foreign_key "trips", "routes"
 end

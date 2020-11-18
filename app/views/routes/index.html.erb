@@ -6,17 +6,17 @@
 		<tr>
 			<th>Inicio</th>
 			<th>Destino</th>
+			<th>Duración</th>
 			
 		</tr>
 		</thead>
 		<% @route.each do |r| %>
 		<tr>
-				
-			
 			<td><%= link_to r.initial_city.nombre , city_path(r.initial_city_id) %> </td>
-			<td><%= link_to r.destination_city.nombre , city_path(r.initial_city_id)  %>  </td>
-			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-primary" %></td>
-			<td><%= button_to 'Eliminar', r , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %></td>
+			<td><%= link_to r.destination_city.nombre , city_path(r.destination_city_id)  %>  </td>
+			<td><%= r.duracion %> </td>
+			<td><%= link_to 'Editar', edit_route_path(r), class:"btn btn-outline-primary" %></td>
+			<td><%= button_to 'Eliminar', r , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-outline-danger" %></td>
 			
 
 		</tr>

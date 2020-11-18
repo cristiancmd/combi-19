@@ -31,6 +31,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Guardar" %>
+    <%= form.submit "Guardar", class: 'btn btn-danger' %>
+    <%= link_to 'Volver', chofers_path , class: "btn btn-primary"%>
   </div>
 <% end %>

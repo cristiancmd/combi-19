@@ -6,21 +6,32 @@ class RoutesController < ApplicationController
 	end
 
 	def show
-		@routes = Route.find(params[:id])
+		@route = Route.find(params[:id])
 	end
+
 	def new
-		@route = Route.new
+		if not City.any?
+			redirect_to cities_path , alert: 'Debe crear ciudades para poder crear rutas' 
+		else
+			@route = Route.new
+		end
 	end
+
 	def edit
 		@route = Route.find(params[:id])
 	end
-	def create
 
+	def create
 		@route = Route.new(route_params)
+		# mal @route.nombre = @route.initial_city.nombre + ' - ' + @route.destination_city.nombre
+
+		#CHECK SI INICIO Y DESTINO SON IGUALES
 		if @route.initial_city_id==@route.destination_city_id
 			redirect_to new_route_path , alert: 'Las ciudades de origen y destino deben ser diferentes'		
-		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city).exists?
+		#CHECK SI EXISTE UNA RUTA IGUAL
+		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city, duracion: @route.duracion).exists?
 			redirect_to new_route_path , alert: 'La ruta ya existe'
+		#CREA LA RUTA
 		else
 			respond_to do |format|
 				if @route.save
@@ -31,19 +42,28 @@ class RoutesController < ApplicationController
 			end
 		end
 	end
+
 	def destroy
 		route = Route.find(params[:id])
-		route.destroy
-		redirect_to routes_path
+		if Trip.tiene_ruta(params[:id]).exists?
+			redirect_to routes_path, alert: 'La ruta tiene un viaje asociado activo.'
+		else
+			route.destroy
+			redirect_to routes_path , notice: 'La ruta se elimino correctamente'
+		end	
 	end
 
-
+#hay bugs
 	def update
 		@route = Route.find(params[:id])
+		#CHECK SI INICIO Y DESTINO SON IGUALES
+		#byebug
 		if route_params["initial_city_id"]==route_params["destination_city_id"]
 			redirect_to new_route_path , alert: 'Origen y destino deben ser diferentes!'
-		elsif Route.where(initial_city: @route.initial_city, destination_city: @route.destination_city).exists?
-			redirect_to new_route_path , alert: 'La ruta ya existe'
+		#CHECK SI EXISTE UNA RUTA IGUAL
+		elsif Route.where(initial_city: route_params["initial_city_id"], destination_city: route_params["destination_city_id"]).exists?
+			redirect_to edit_route_path , alert: 'La ruta ya existe'
+		#ACTUALIZA LA RUTA
 		else
 			respond_to do |format|
 				if @route.update(route_params)
@@ -58,7 +78,7 @@ class RoutesController < ApplicationController
 
 	private
 		def route_params
-			params.require(:route).permit(:initial_city_id, :destination_city_id)
+			params.require(:route).permit(:initial_city_id, :destination_city_id, :duracion)
 		end
 
 	
