@@ -3,6 +3,9 @@ class RoutesController < ApplicationController
 
 	def index
 		@route = Route.all
+		if not Route.any?
+			redirect_to new_route_path, alert: 'No existen rutas nuevas, agregue una ruta.'
+		end
 	end
 
 	def show
