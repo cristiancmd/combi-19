@@ -23,7 +23,7 @@ class RoutesController < ApplicationController
 
 	def create
 		@route = Route.new(route_params)
-		@route.nombre = @route.initial_city.nombre + ' - ' + @route.destination_city.nombre
+		# mal @route.nombre = @route.initial_city.nombre + ' - ' + @route.destination_city.nombre
 
 		#CHECK SI INICIO Y DESTINO SON IGUALES
 		if @route.initial_city_id==@route.destination_city_id
@@ -65,12 +65,7 @@ class RoutesController < ApplicationController
 		#ACTUALIZA LA RUTA
 		else
 			respond_to do |format|
-				ciudad_inicio = City.find(params[:route][:initial_city_id])
-				ciudad_destino = City.find(params[:route][:destination_city_id])
-				@route.nombre = ciudad_inicio.nombre + ' - ' + ciudad_destino.nombre
 				if @route.update(route_params)
-					
-					byebug
 					format.html { redirect_to routes_path, notice: 'La ruta se actualizo correctamente.' }
 				else
 					format.html { render :edit , notice: 'Hubo un error' }
