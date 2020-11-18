@@ -17,4 +17,8 @@ class Route < ApplicationRecord
 	def origen_destino(i,d)
     	"#{i.nombre} - #{d.nombre}"
   	end
+
+  	def origin_destination
+    	"#{initial_city.nombre} - #{destination_city.nombre}"
+  	end
 end
