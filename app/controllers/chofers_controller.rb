@@ -26,16 +26,14 @@ class ChofersController < ApplicationController
 		def edit
 			@chofer = Chofer.find(params[:id])
 		end
-
+# habria que mejorar el update
 		def update
 			@chofer = Chofer.find(params[:id])
 				
-			if Chofer.where(nombre: chofer_params["nombre"], apellido: chofer_params["apellido"]).exists?
-					redirect_to edit_chofer_path , alert: 'El chofer ya existe'
-			elsif @chofer.update(chofer_params)
-					redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.'
+			if @chofer.update(chofer_params)
+				redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.'
 			else
-				render :edit 
+				render :edit , alert: 'Hubo un problema'
 			end
 		end
 

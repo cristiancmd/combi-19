@@ -53,14 +53,15 @@ class RoutesController < ApplicationController
 		end	
 	end
 
-
+#hay bugs
 	def update
 		@route = Route.find(params[:id])
 		#CHECK SI INICIO Y DESTINO SON IGUALES
+		#byebug
 		if route_params["initial_city_id"]==route_params["destination_city_id"]
 			redirect_to new_route_path , alert: 'Origen y destino deben ser diferentes!'
 		#CHECK SI EXISTE UNA RUTA IGUAL
-		elsif Route.where(initial_city: route_params["initial_city_id"], destination_city: route_params["destination_city_id"], duracion: route_params["duracion"]).exists?
+		elsif Route.where(initial_city: route_params["initial_city_id"], destination_city: route_params["destination_city_id"]).exists?
 			redirect_to edit_route_path , alert: 'La ruta ya existe'
 		#ACTUALIZA LA RUTA
 		else

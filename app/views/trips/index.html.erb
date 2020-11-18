@@ -23,9 +23,9 @@
 			<td><%=  t.bus.asientos  %>  </td>
 			
 			<td><%= t.rate %></td>
-			<td> <%= link_to 'Editar', edit_trip_path(t), class:"btn btn-primary" %> </td>
+			<td> <%= link_to 'Editar', edit_trip_path(t), class:"btn btn-outline-primary" %> </td>
+			<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 			
-			<%#= button_to 'Eliminar', t , method: :delete, data: { confirm: 'Esta seguro ?' },class:"btn btn-danger" %>
 			
 
 		</tr>

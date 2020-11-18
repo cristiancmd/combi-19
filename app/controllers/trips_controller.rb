@@ -34,21 +34,28 @@ class TripsController < ApplicationController
 
 	def edit
 		@trip = Trip.find(params[:id])
+
 	end
 
-	def destroy
+
 	
+	def destroy
+		trip = Trip.find(params[:id])
+		trip.destroy
+		redirect_to trips_path, notice: 'Viaje eliminado'
 		
 	end
 
 
+#tiene un bug todavia no verifica bien los criterios como en el create..
 
   	def update
   		@trip = Trip.find(params[:id])
-  		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?	
+  		
+  		if trip_params[:chofer_id].to_i != @trip.chofer_id and Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?	
 			redirect_to edit_trip_path, alert: 'El chofer no esta disponible en esa fecha, seleccione otro chofer'
 		
-		elsif Trip.tiene_combi_dia(trip_params["bus_id"],trip_params["horario"]).exists?	
+		elsif trip_params[:bus_id].to_i != @trip.bus_id and Trip.tiene_combi_dia(trip_params["bus_id"],trip_params["horario"]).exists?	
 			redirect_to edit_trip_path, alert: 'La combi no esta disponible en esa fecha, seleccione otra combi'
 		
 		else @trip.update(trip_params)
