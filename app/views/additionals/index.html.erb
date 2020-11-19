@@ -20,9 +20,9 @@
 				<td><%= a.stock  %>  </td>
 				<td><%= a.precio  %>  </td>
 				
-			
-					<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
 					<td><%= link_to 'Editar', edit_additional_path(a), class: "btn btn-outline-primary" %></td>
+					<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
+					
 			
 			</tr>
 		<% end %>
