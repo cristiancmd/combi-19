@@ -4,9 +4,6 @@ class ChofersController < ApplicationController
 
 		def index
 			@chofer = Chofer.all
-			if not Chofer.any?
-				redirect_to new_chofer_path, alert: 'Aun no se cargo ningún chofer, cargue alguno'
-			end
 		end
 		def new
 			@chofer = Chofer.new
@@ -33,11 +30,11 @@ class ChofersController < ApplicationController
 		def update
 			@chofer = Chofer.find(params[:id])
 				
-				if @chofer.update(chofer_params)
-					redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.'
-				else
-					render :edit , alert: 'Hubo un problema'
-				end
+			if @chofer.update(chofer_params)
+				redirect_to chofers_path, notice: 'El chofer se actualizo correctamente.'
+			else
+				render :edit , alert: 'Hubo un problema'
+			end
 		end
 
 
