@@ -15,7 +15,7 @@
   
   <div class="field">
     <%= form.label :Dia_y_Horario %>
-    <%= form.datetime_field :horario %>
+    <%= form.datetime_field :horario, min: Date.today %>
   </div>
 
   <div class="field">

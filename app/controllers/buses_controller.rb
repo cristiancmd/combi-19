@@ -2,8 +2,10 @@ class BusesController < ApplicationController
 	before_action :set_bus, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user! #, except: [:show, :index]
 
+
 	def index
 		@bus = Bus.all
+		
 	end	
 	def new
 		@bus = Bus.new

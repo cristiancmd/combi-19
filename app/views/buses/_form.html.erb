@@ -19,7 +19,9 @@
   </div>
   <div class="field">
     <%= form.label :Tipo_De_Combi %>
-    <%= form.text_field :tipo %>
+    <% @tipos= ['Cómoda','Super-cómoda'] %>
+    <%= form.collection_select :tipo, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+
   </div>
   <div class="field">
     <%= form.label :Asientos %>

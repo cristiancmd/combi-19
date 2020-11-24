@@ -8,6 +8,8 @@ class Trip < ApplicationRecord
 
 #validaciones
 	validates :horario, presence: {message:": Debe seleccionar horario y dia!"}
+	validate :horario_cannot_be_in_the_past
+
 	validates :chofer, presence: {message:": Debe seleccionar un chofer!"}
 	validates :bus, presence: {message:": Debe seleccionar combi!"}
 	validates :route, presence: {message:": Debe seleccionar una ruta!"}
@@ -29,5 +31,14 @@ class Trip < ApplicationRecord
 		where(bus_id: combi).where(horario: dia)
 	end
 
+	def horario_cannot_be_in_the_past
+	    if horario.past?
+	      errors.add(:Fecha!, "Debe seleccionar dias futuros")
+	    end
+  end 
+
+
 	
 end
+
+    
