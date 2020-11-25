@@ -2,6 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
+            <% if current_admin %>
             <li class="nav-item ">
                 <%= link_to 'Ciudades', cities_path , class: "nav-link"%>
             </li>
@@ -22,6 +23,21 @@
                 <%= link_to 'Viajes', trips_path, class: "nav-link"%>
             </li>
             
+        <% elsif current_user %>
+            <li class="nav-item">
+                <%= link_to 'Mis viajes', "", class: "nav-link"%>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Mis pasajes', "", class: "nav-link"%>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'etc', "", class: "nav-link"%>
+            </li>
+        <% else %>   
+            <li class="nav-item">
+                <%= link_to 'Viajes', "", class: "nav-link"%>
+            </li> 
+            <% end %>
         </ul>
     </div>
     <div class="mx-auto order-0">
@@ -42,8 +58,16 @@
             <li class="nav-item">
                 <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete,class: "nav-link" %>
             </li>
-            <% else %>
-            <li class="nav-item">
+            
+        <% end %>    
+        <% if current_admin %>
+                <li class="nav-item"> <%= link_to 'Administrador',"",  class: "nav-link" %> </li>     
+                <li class="nav-item">
+                <%= link_to 'Cerrar sesión ', destroy_admin_session_path, method: :delete,class: "nav-link" %>
+                </li>
+        <% end %>    
+        <% if !user_signed_in? and !admin_signed_in? %>    
+                 <li class="nav-item">
                 <%= link_to 'Iniciar sesión', new_user_session_path,class: "nav-link" %>
             </li>
         <% end %>    

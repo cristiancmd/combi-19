@@ -1,5 +1,5 @@
 class ChofersController < ApplicationController
-		before_action :authenticate_user! #, except: [:show, :index]
+		before_action :authenticate_admin! #, except: [:show, :index]
 		before_action :set_chofer, only: [:show, :edit, :update, :destroy]
 
 		def index

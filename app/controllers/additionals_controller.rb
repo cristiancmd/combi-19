@@ -1,6 +1,6 @@
 class AdditionalsController < ApplicationController
 	before_action :set_additional, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user! #, except: [:show, :index]
+	before_action :authenticate_admin! #, except: [:show, :index]
 
 	def index
 		@additional = Additional.all

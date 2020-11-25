@@ -1,6 +1,6 @@
 class BusesController < ApplicationController
 	before_action :set_bus, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user! #, except: [:show, :index]
+	before_action :authenticate_admin! #, except: [:show, :index]
 
 
 	def index
