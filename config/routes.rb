@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :routes
   resources :cities
   resources :additionals
-
+  resources :searches
   root 'main#home'
   
 

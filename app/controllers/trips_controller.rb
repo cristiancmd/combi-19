@@ -1,11 +1,10 @@
 class TripsController < ApplicationController
 	before_action :set_trip, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_admin! #, except: [:show, :index]
+	before_action :authenticate_admin! , except: [:show, :index]
 	
 	def index
 		
-		@trip = Trip.all.order("horario ASC")
-
+		@trip = Trip.all.order(horario: :desc)
 	end
 	def show
 		@trip = Trip.find(params[:id])

@@ -1,0 +1,37 @@
+
+<h1>Index searches</h1>
+
+
+
+
+<% if @search.empty? %>
+
+	<p> No hay coincidencias</p>
+<% else %>
+
+<table class="table table-striped">
+		<thead class="thead">
+		<tr>
+			<th>Ruta</th>
+			<th>Fecha</th>
+			<th>ID Viaje</th>
+			
+		</tr>
+		</thead>
+		<% @search.each do |s| %>
+		<tr>
+			<td><%= s.route.origin_destination %>  </td>
+			<td><%= s.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
+			<td><%= s.id %>  </td>
+			<td><%= link_to 'Seleccionar', "" , class: "btn btn-danger"%></td>
+			
+			
+
+		</tr>
+		<% end %>
+
+	</table>	
+
+	
+
+<% end %>

@@ -1,0 +1,22 @@
+
+<h2>Busqueda magica</h2>
+
+<%= form_with url: searches_path , method: :get, local: true do |f| %>
+ 
+  <%= f.label :origen %>
+  <%#= f.select :origen_id, options_for_select(@origenes), :prompt => "Seleccione" %>
+   <%= f.select :origen_id, options_from_collection_for_select(@origenes, 'id', 'nombre'), :include_blank => "Todos" %>    
+
+  <%= f.label :destino %> 
+  <%#= f.select :destino_id, options_for_select(@destinos), :include_blank => 'Todos' %>
+  <%= f.select :destino_id, options_from_collection_for_select(@destinos, 'id', 'nombre'), :include_blank => 'Todos' %>      
+  <%= f.label :Fecha %> 
+  <%= f.date_field :fecha, min: Date.today  %>
+
+          <br>
+          <br>
+  <%= f.submit 'Buscar', class: 'btn btn-danger' %>
+  <%= link_to 'Volver', trips_path , class: "btn btn-primary"%>
+<% end %>
+
+  

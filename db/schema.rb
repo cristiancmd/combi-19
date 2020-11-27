@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_143626) do
+ActiveRecord::Schema.define(version: 2020_11_27_012425) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 2020_11_25_143626) do
     t.index ["initial_city_id"], name: "index_routes_on_initial_city_id"
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "origen_id"
+    t.integer "destino_id"
+    t.index ["destino_id"], name: "index_searches_on_destino_id"
+    t.index ["origen_id"], name: "index_searches_on_origen_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.datetime "horario"
     t.date "fecha_inicio"
@@ -103,6 +112,8 @@ ActiveRecord::Schema.define(version: 2020_11_25_143626) do
 
   add_foreign_key "routes", "cities", column: "destination_city_id"
   add_foreign_key "routes", "cities", column: "initial_city_id"
+  add_foreign_key "searches", "cities", column: "destino_id"
+  add_foreign_key "searches", "cities", column: "origen_id"
   add_foreign_key "trips", "buses"
   add_foreign_key "trips", "chofers"
   add_foreign_key "trips", "routes"

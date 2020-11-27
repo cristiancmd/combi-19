@@ -22,7 +22,6 @@ class Trip < ApplicationRecord
 	scope :tiene_ruta, -> (r) { where(route_id: r) }
 	scope :tiene_combi, -> (c) { where(bus_id: c) }
 
-
 	def self.tiene_chofer_dia(chofer,dia)
 		where(chofer_id: chofer).where(horario: dia)
 	end
