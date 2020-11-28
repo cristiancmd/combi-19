@@ -1,7 +1,8 @@
 <h1>Listando usuarios</h1>
 
-<table>
-  <thead>
+<table class="table table-striped">
+    <thead class="thead">
+    <tr>
     <tr>
       <th>Email</th>
       <th>Nombre</th>
@@ -9,19 +10,19 @@
     </tr>
   </thead>
 
-  <tbody>
+
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.nombre %></td>
-        <td><%= link_to 'Show', user %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to 'Show', users_show_path(user) %></td>
         <td><%#= link_to 'Edit', edit_user_path(user) %></td>
         <td><%#= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
+
 </table>
 
 <br>
 
-<%#= link_to 'New User', new_user_path %>
+ 
