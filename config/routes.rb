@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   
+  #get 'order/index'
+  #get 'order/show'
+  #get 'order/new'
   #devise_for :admins, path: 'admin'
   devise_for :admins, path_names: {
       sign_in: 'login', sign_out: 'logout',
@@ -15,7 +18,12 @@ Rails.application.routes.draw do
   resources :routes
   resources :cities
   resources :additionals
-  resources :searches
+  resources :searches #, shallow: true do
+    #resources :orders
+  #end
+
+  resources :orders
+
   root 'main#home'
   
 

@@ -1,0 +1,63 @@
+<h1>Comprar viaje</h1>
+
+
+<br>
+<table class="table table-bordered">
+<tr>
+
+		<thead class="thead-dark">
+		<tr>
+			<th>Ruta</th>
+			<th>Fecha</th>
+			<th>ID Viaje</th>
+			<th>Asientos disponibles</th>
+			
+		</tr>
+		</thead>	
+			<td><%= @viaje.route.origin_destination %>  </td>
+			<td><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
+			<td><%= @viaje.id %>  </td>
+			<td><%= @viaje.bus.asientos %>  </td>
+			
+			
+				 
+
+		</tr>
+</table>
+
+<%= current_user.inspect %>
+
+<%= form_with(model: @order, local: true) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trip.errors.count, "errores") %> impidieron que se genere su odern:</h2>
+
+      <ul>
+        <% trip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field">
+    <%= form.label :Tarjeta %>
+    <%= form.number_field :horario %>
+  </div>
+
+
+ 
+
+  <div class="field">
+    <%= form.label :Algo %>
+    <%= form.number_field :rate, :step => 0.05%>
+  </div>
+  
+
+
+  
+    <%= form.submit "Comprar" , class: "btn btn-danger" %>
+<%#= @viaje.inspect %>
+
+
+<% end %>
