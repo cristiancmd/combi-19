@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile'
     }
+  get '/users/index', to: 'users#index'
+  get '/users/show', to: 'users#show'
   devise_for :users
   get 'main/home'
   resources :chofers
