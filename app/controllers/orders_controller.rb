@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       if @order.save
          redirect_to orders_path, notice: 'Su orden se genero exitosamente'
       else
-         redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es invalida'
+         redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es valida. Seleccione otra tarjeta.'
          
         
       end

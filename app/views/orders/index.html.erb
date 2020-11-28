@@ -8,28 +8,27 @@
 <table class="table table-striped table-bordered table-hover">
 		<thead class="thead">
 		<tr>
+			<th></th>
 			<th>order id</th>
 			<th>Ruta</th>
-			<th>Fecha</th>
+			<th>Fecha del viaje</th>
 			<th>user</th>
-			<th>cobro</th>
+			<th>abonado</th>
 			<th>trip id</th>
 			
 		</tr>
 		</thead>
 		<% @orders.each do |order| %>
 		<tr>
-			
+			<td><%= link_to 'Ver', "" , class: "btn btn-secondary"%> </td>
 			<td><%= order.id %>  </td>
 			<td><%= order.trip.route.origin_destination %>  </td>
 			<td><%= order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
 			<td><%= order.user.name %>  </td>
-			<td><%= order.cobro %>  </td>
+			<td><%= '$ ' + order.cobro.to_s %>  </td>
 			<td><%= order.trip_id %>  </td>
+ 			
 
-			
-			
-				 
 
 		</tr>
 		<% end %>

@@ -1,5 +1,5 @@
 
-<h1>Index searches</h1>
+<h1>Resultados de la busqueda</h1>
 
 
 
@@ -14,6 +14,8 @@
 		<tr>
 			<th>Ruta</th>
 			<th>Fecha</th>
+			<th>Combi</th>
+			<th>Precio</th>
 			<th>ID Viaje</th>
 			
 		</tr>
@@ -22,7 +24,10 @@
 		<tr>
 			<td><%= s.route.origin_destination %>  </td>
 			<td><%= s.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
+			<td><%= s.bus.tipo %></td>
+			<td><%= s.rate %>  </td>
 			<td><%= s.id %>  </td>
+			
 			<td><%= link_to 'Seleccionar', new_order_path(:viaje => s ) , class: "btn btn-danger"%> </td>
 			
 				 

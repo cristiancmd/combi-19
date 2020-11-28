@@ -1,34 +1,8 @@
-<h1>Comprar viaje</h1>
 
-<%#= render 'checkout', order: @order %>
-
-<br>
-<table class="table table-bordered">
-<tr>
-		<thead class="thead-dark">
-		<tr>
-			<th>Ruta</th>
-			<th>Fecha</th>
-			<th>ID Viaje</th>
-			<th>Asientos disponibles</th>
-		
-		</tr>
-		</thead>	
-			<% if @viaje %>
-			<td><%= @viaje.route.origin_destination %>  </td>
-			<td><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
-			<td><%= @viaje.id %>  </td>
-			<td><%= @viaje.bus.asientos %>  </td>
-			<% end %>
-
-		</tr>
-</table>
 
 <%#= current_user.inspect %> 
 <%#= @viaje.inspect %>
 <%#= @order.inspect %>
-
-
 
 <%= form_with(model: @order, local: true) do |form| %>
   <% if @order.errors.any? %>
@@ -45,18 +19,16 @@
 
 
 <div class="container">
+	
   <div class="row">
+
   	<div class="col">
   	<h4>Datos del pasajero:</h4>
 	<h6> <%= 'Nombre: ' + current_user.name %> </h6>
 	<h6> <%= 'DNI: ' + current_user.dni.to_s %> </h6>
 	<h6> <%= 'Email: ' + current_user.email %> </h6>
-	</div>
 
-  </div>
- <br>
-   <div class="row">
-    <div class="col">
+	<br>
       	<div class="field" >
       		<h4>Ingresá los datos de la tarjeta</h4>
 	    <%= form.label :"NUMERO_DE_TARJETA" %>
@@ -65,22 +37,43 @@
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		<% if @viaje %> <%= form.hidden_field :trip_id, value: @viaje.id %> 	
  		<%= form.hidden_field :cobro, value: @viaje.rate %><% end %>
- 		<br><%= form.submit "Confirmar" , class: "btn btn-primary" %>
-    </div>
-    <div class="col"> </div> 
+ 		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
+ 		<%= link_to 'Cancelar', new_search_path , class: "btn btn-primary btn-lg"%>
+    
+	</div>
+	    <div class="col"> 
 
+		   <div class="card" style="width: 20rem;">
+		   	<ul class="list-group list-group-flush">
+	    		<li class="list-group-item">TOTAL <h5>  <%='$' +@viaje.rate.to_s %></li>	</h5>
+	    		</ul>
+		  <% if @viaje.bus.tipo=='Cómoda' %>
+		  <img src="https://www.whatvan.co.uk/imagegen.ashx?width=650&image=/media/3529/2piaggio-porter.jpg" class="card-img-top" alt="...">
+		  <% else %> <img src="https://i.pinimg.com/originals/01/a2/ea/01a2eac66af0470a42d2d1b90aa94659.jpg" class="card-img-top" alt="..."> <% end %>
+		  <div class="card-body">
+		    <h5 class="card-title">Pasaje</h5>
+		    <p class="card-text">Puedes cancelar el viaje hasta 48hs antes de la fecha, luego solo recibiras el 50% de reembolso.</p>
+		  </div>
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item"><h5><%= @viaje.route.origin_destination %></li> </h5> 
+		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
+		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
+		    
+		  </ul>
+		  
+		     
+		    
+  	
+	</div>
+    </div> 
   </div>
+ <br>
+   
   
 </div>
 
 
 
- 
-
-
-
- 
- 
 
 
 

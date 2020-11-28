@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  root 'main#home'
+  root 'trips#index'
   
 
 
