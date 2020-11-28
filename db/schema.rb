@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_023148) do
+ActiveRecord::Schema.define(version: 2020_11_28_171152) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -63,6 +63,12 @@ ActiveRecord::Schema.define(version: 2020_11_28_023148) do
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "trip_id"
+    t.integer "user_id"
+    t.integer "tarjeta"
+    t.decimal "cobro"
+    t.index ["trip_id"], name: "index_orders_on_trip_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -115,6 +121,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_023148) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "orders", "trips"
+  add_foreign_key "orders", "users"
   add_foreign_key "routes", "cities", column: "destination_city_id"
   add_foreign_key "routes", "cities", column: "initial_city_id"
   add_foreign_key "searches", "cities", column: "destino_id"

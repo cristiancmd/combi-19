@@ -1,63 +1,93 @@
 <h1>Comprar viaje</h1>
 
+<%#= render 'checkout', order: @order %>
 
 <br>
 <table class="table table-bordered">
 <tr>
-
 		<thead class="thead-dark">
 		<tr>
 			<th>Ruta</th>
 			<th>Fecha</th>
 			<th>ID Viaje</th>
 			<th>Asientos disponibles</th>
-			
+		
 		</tr>
 		</thead>	
+			<% if @viaje %>
 			<td><%= @viaje.route.origin_destination %>  </td>
 			<td><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
 			<td><%= @viaje.id %>  </td>
 			<td><%= @viaje.bus.asientos %>  </td>
-			
-			
-				 
+			<% end %>
 
 		</tr>
 </table>
 
-<%= current_user.inspect %>
+<%#= current_user.inspect %> 
+<%#= @viaje.inspect %>
+<%#= @order.inspect %>
+
+
 
 <%= form_with(model: @order, local: true) do |form| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(trip.errors.count, "errores") %> impidieron que se genere su odern:</h2>
-
+      <h2><%= pluralize(@order.errors.count, "errores") %> impidieron que se genere su orden:</h2>
       <ul>
-        <% trip.errors.full_messages.each do |message| %>
+        <% @order.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
- <div class="field">
-    <%= form.label :Tarjeta %>
-    <%= form.number_field :horario %>
+
+
+<div class="container">
+  <div class="row">
+  	<div class="col">
+  	<h4>Datos del pasajero:</h4>
+	<h6> <%= 'Nombre: ' + current_user.name %> </h6>
+	<h6> <%= 'DNI: ' + current_user.dni.to_s %> </h6>
+	<h6> <%= 'Email: ' + current_user.email %> </h6>
+	</div>
+
   </div>
+ <br>
+   <div class="row">
+    <div class="col">
+      	<div class="field" >
+      		<h4>Ingresá los datos de la tarjeta</h4>
+	    <%= form.label :"NUMERO_DE_TARJETA" %>
+	    <%= form.text_field :tarjeta , placeholder: "XXXX XXXX XXXX XXXX", :required => 'required' , class:"form-control" %>
+		</div>
+		<%= form.hidden_field :user_id, value: current_user.id %>
+ 		<% if @viaje %> <%= form.hidden_field :trip_id, value: @viaje.id %> 	
+ 		<%= form.hidden_field :cobro, value: @viaje.rate %><% end %>
+ 		<br><%= form.submit "Confirmar" , class: "btn btn-primary" %>
+    </div>
+    <div class="col"> </div> 
+
+  </div>
+  
+</div>
+
 
 
  
 
-  <div class="field">
-    <%= form.label :Algo %>
-    <%= form.number_field :rate, :step => 0.05%>
-  </div>
-  
 
 
-  
-    <%= form.submit "Comprar" , class: "btn btn-danger" %>
-<%#= @viaje.inspect %>
+ 
+ 
 
 
-<% end %>
+
+<% end %>   
+
+
+
+
+
+

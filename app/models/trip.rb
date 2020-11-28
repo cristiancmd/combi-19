@@ -13,6 +13,7 @@ class Trip < ApplicationRecord
 	validates :chofer, presence: {message:": Debe seleccionar un chofer!"}
 	validates :bus, presence: {message:": Debe seleccionar combi!"}
 	validates :route, presence: {message:": Debe seleccionar una ruta!"}
+	validates :rate, presence: {message:": Debe seleccionar una precio para el viaje!"}
 
 
 	
