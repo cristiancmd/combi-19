@@ -8,14 +8,14 @@ class Trip < ApplicationRecord
 
 #validaciones
 	validates :horario, presence: {message:": Debe seleccionar horario y dia!"}
-	validate :horario_cannot_be_in_the_past
+	
 
 	validates :chofer, presence: {message:": Debe seleccionar un chofer!"}
 	validates :bus, presence: {message:": Debe seleccionar combi!"}
 	validates :route, presence: {message:": Debe seleccionar una ruta!"}
 	validates :rate, presence: {message:": Debe seleccionar una precio para el viaje!"}
-
-
+	validates :rate, :numericality => { :greater_than => 0 ,message: " Debe ser mayor a 0"}
+	#validate :horario_cannot_be_in_the_past
 	
 #scopes
 	scope :tiene_chofer, -> (chofer) { where(chofer_id: chofer) }

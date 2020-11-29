@@ -93,8 +93,6 @@ ActiveRecord::Schema.define(version: 2020_11_28_171152) do
 
   create_table "trips", force: :cascade do |t|
     t.datetime "horario"
-    t.date "fecha_inicio"
-    t.date "fecha_fin"
     t.decimal "rate"
     t.integer "chofer_id"
     t.integer "bus_id"
