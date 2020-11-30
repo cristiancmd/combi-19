@@ -32,7 +32,7 @@
       	<div class="field" >
       		<h4>Ingresá los datos de la tarjeta</h4>
 	    <%= form.label :"NUMERO_DE_TARJETA" %>
-	    <%= form.text_field :tarjeta , placeholder: "XXXX XXXX XXXX XXXX", :required => 'required' , class:"form-control" %>
+	    <%= form.text_field :tarjeta , maxlength: 16 ,placeholder: "XXXX XXXX XXXX XXXX", :required => 'required' , class:"form-control" %>
 		</div>
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		<% if @viaje %> <%= form.hidden_field :trip_id, value: @viaje.id %> 	

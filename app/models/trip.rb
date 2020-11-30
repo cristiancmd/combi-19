@@ -2,6 +2,8 @@ class Trip < ApplicationRecord
 	has_many :chofers
 	has_many :routes
 	has_many :buses
+	
+
 	belongs_to :chofer, class_name: 'Chofer'
 	belongs_to :bus, class_name: 'Bus'
 	belongs_to :route, class_name: 'Route'
@@ -22,6 +24,7 @@ class Trip < ApplicationRecord
 	scope :en_dia, -> (dia) { where(horario: dia ) }
 	scope :tiene_ruta, -> (r) { where(route_id: r) }
 	scope :tiene_combi, -> (c) { where(bus_id: c) }
+	scope :tiene_pasaje, -> (o) { where(order_id: o) }
 
 	def self.tiene_chofer_dia(chofer,dia)
 		where(chofer_id: chofer).where(horario: dia)

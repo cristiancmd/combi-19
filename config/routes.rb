@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     }
   get '/users/index', to: 'users#index'
   get '/users/show', to: 'users#show'
+  get '/orders/past_trips', to: 'orders#past_trips'
+  
   devise_for :users
   get 'main/home'
   resources :chofers

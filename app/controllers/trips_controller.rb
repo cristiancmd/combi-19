@@ -40,9 +40,12 @@ class TripsController < ApplicationController
 	
 	def destroy
 		trip = Trip.find(params[:id])
+		if Order.tiene_viaje(params[:id]).exists?
+			redirect_to trips_path, alert: 'El viaje tiene pasajes asignados.'
+		else	
 		trip.destroy
 		redirect_to trips_path, notice: 'Viaje eliminado'
-		
+		end
 	end
 
 

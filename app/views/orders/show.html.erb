@@ -1,4 +1,53 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
-<%= @viaje.inspect %>
 
+
+<h1>Detalle de Pasaje # <%= @order.id %> </h1>
+<table class="table table-striped table-bordered table-hover">
+		<thead class="thead">
+		<tr>
+			<th>order ID</th>
+			
+			<th>Ruta</th>
+			<th>Fecha del viaje</th>
+			<th>user</th>
+			<th>abonado</th>
+			<th>Combi</th>
+			<th>trip id</th>
+			
+		</tr>
+		</thead>
+		
+		<tr>
+			
+			<td><%= @order.id %>  </td>
+			<td><%= @order.trip.route.origin_destination %>  </td>
+			<td><%= @order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
+			<td><%= @order.user.name %>  </td>
+			<td><%= '$ ' + @order.cobro.to_s %>  </td>
+			<td><%= @order.trip.bus.tipo %>  </td>
+			<td><%= @order.trip_id %>  </td>
+
+ 
+		</tr>
+		
+
+	</table>	
+
+
+
+<% if @order.trip.horario > (Date.today + 2) %>
+	<div class="alert alert-success" role="alert">
+	  <h4 class="alert-heading">Cancela ahora sin penalizacion</h4>
+	  <p>Los pasajes pueden ser devueltos hasta 48hs antes de la fecha del viaje. Pasado ese tiempo, solo recibiras el 50% del valor total.</p>
+	  <hr>
+	  <%= button_to 'Cancelar', "" , class: "btn btn-success" %>
+	</div>
+
+<% else %>
+	<div class="alert alert-warning" role="alert">
+	  <h4 class="alert-heading">Cancela ahora y recibe el 50% de reintegro </h4>
+	  <p>Los pasajes pueden ser devueltos hasta 48hs antes de la fecha del viaje. Pasado ese tiempo, solo recibiras el 50% del valor total.</p>
+	  <hr>
+	  <%= button_to 'Cancelar', "" , class: "btn btn-warning" %>
+	</div>
+
+<% end %>

@@ -4,7 +4,8 @@ class Order < ApplicationRecord
 	validates :tarjeta, presence: true,  format: { with: /[0-9]{12}(?:[0-9]{3})?/ } #{message:"Debe ingresar una tarjeta!"}
 	validate :validar_fondos
 	
-	
+	scope :tiene_viaje, -> (v) { where(trip_id: v) }	
+
 	def validar_tarjeta?
 		tarjeta =~ /4[0-9]{12}(?:[0-9]{3})?/
 		

@@ -1,4 +1,4 @@
-    <h1>Mis pasajes</h1>
+    <h1>Mis viajes</h1>
 
 <% if @orders.empty? %>
 
@@ -14,20 +14,18 @@
 			<th>Fecha del viaje</th>
 			<th>user</th>
 			<th>abonado</th>
-			
 			<th>trip id</th>
 			
 		</tr>
 		</thead>
 		<% @orders.each do |order| %>
 		<tr>
-			<td><%= link_to 'Ver', order_path(order) , class: "btn btn-secondary"%> </td>
+			<td><%= link_to 'Ver', "" , class: "btn btn-secondary"%> </td>
 			<td><%= order.id %>  </td>
 			<td><%= order.trip.route.origin_destination %>  </td>
 			<td><%= order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
 			<td><%= order.user.name %>  </td>
 			<td><%= '$ ' + order.cobro.to_s %>  </td>
-			
 			<td><%= order.trip_id %>  </td>
  			
 
