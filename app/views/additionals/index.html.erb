@@ -1,6 +1,12 @@
 <h3>Extras</h3>
 
 
+<%= form_for "", url: additionals_path, role: "search", method: :get do %>
+  <%= text_field_tag :search, @search_term, placeholer: "Search.." %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
 <table class="table table-striped">
 		<thead class="thead">
 		<tr>
@@ -12,17 +18,20 @@
 			
 		</tr>
 		</thead>
-		
+
 		<% @additional.each do |a| %>
 		
 			<tr>
 				<td><%= link_to a.nombre, additional_path(a)  %>  </td>
 				<td><%= a.stock  %>  </td>
 				<td><%= a.precio  %>  </td>
-				
+
+				<% if user_signed_in? and not admin_signed_in?%>
+					<td><%= link_to 'Seleccionar', new_order_path(:extra => a ), class: "btn btn-outline-primary" %></td>
+				<% elsif admin_signed_in? %>
 					<td><%= link_to 'Editar', edit_additional_path(a), class: "btn btn-outline-primary" %></td>
 					<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
-					
+				<% end %>
 			
 			</tr>
 		<% end %>
@@ -30,5 +39,6 @@
 	</table>	
 
 	
-
-	<h4><%= link_to 'Nuevo Extra', new_additional_path, class:"btn btn-primary" %></h4>
+	<% if admin_signed_in? %>
+		<h4><%= link_to 'Nuevo Extra', new_additional_path, class:"btn btn-primary" %></h4>
+	<% end %>
