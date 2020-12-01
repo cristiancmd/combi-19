@@ -1,5 +1,14 @@
 <h2>Viajes</h2>
+
+<br>
+<div>
+
+<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+
 <% if current_admin %>
+<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
+
+</div> <br>
 <table class="table table-striped">
 		<thead class="thead">
 		<tr>
@@ -34,8 +43,7 @@
 
 	
 
-	<h4><%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %></h4>
-
+	
 <% end %>
 
 
@@ -45,7 +53,7 @@
 
 
 <div><br>
-<h4><%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %></h4>	
+
 </div>
 
 

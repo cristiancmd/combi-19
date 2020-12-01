@@ -6,18 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+Trip.destroy_all
 
 Route.destroy_all
 City.destroy_all
 Chofer.destroy_all
 User.destroy_all
-Trip.destroy_all
+
 Admin.destroy_all
 Bus.destroy_all
+Additional.destroy_all
  
 user1 = User.create! :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456, :dni => 37125636
-user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987
+user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987, date_of_birth: Date.parse("1997-01-05")
+
+admin = Admin.create! :email => 'admin@admin.com', :password => 123456 , :password_confirmation => 123456
 
 chofer1 = Chofer.create! :nombre => 'Jorge', :apellido => 'Iess', :dni => 33333, :inicio_actividad => "Date.parse('2000-04-2')"
 chofer2 = Chofer.create! :nombre => 'Alberto', :apellido => 'Aninstein', :dni => 222222, :inicio_actividad => "Date.parse('1999-04-2')"
@@ -52,15 +55,18 @@ combi1 = Bus.find_or_create_by(asientos: 30, tipo:"Cómoda", patente:"ASD 123")
 combi2 = Bus.find_or_create_by(asientos: 15 , tipo:"Super-cómoda", patente:"DSA 321")
 combi3 = Bus.find_or_create_by(asientos: 10 , tipo:"Cómoda", patente:"AAA 000")
 
-Trip.find_or_create_by(horario: "2021-12-01 12:30:00", rate: 452, chofer_id:chofer1.id, bus_id: combi1.id, route_id:ruta2.id)
-Trip.find_or_create_by(horario: "2022-12-01 12:30:00", rate: 321354, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta1.id)
-Trip.find_or_create_by(horario: "2022-12-01 12:30:00", rate: 651213, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta3.id)
-Trip.find_or_create_by(horario: "2023-12-01 12:30:00", rate: 8765, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta5.id)
-Trip.find_or_create_by(horario: "2023-12-01 12:30:00", rate: 64456, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta3.id)
-Trip.find_or_create_by(horario: "2024-12-01 12:30:00", rate: 32133, chofer_id:chofer2.id, bus_id: combi3.id, route_id:ruta4.id)
-Trip.find_or_create_by(horario: "2024-12-01 12:30:00", rate: 56132, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta5.id)
-Trip.find_or_create_by(horario: "2024-12-01 12:30:00", rate: 1111, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta4.id)
+Trip.find_or_create_by(horario: "2020-12-01 12:30:00", rate: 452, chofer_id:chofer1.id, bus_id: combi1.id, route_id:ruta2.id)
+Trip.find_or_create_by(horario: "2020-11-30 12:30:00", rate: 321354, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta1.id)
+Trip.find_or_create_by(horario: "2020-12-01 12:30:00", rate: 651213, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta3.id)
+Trip.find_or_create_by(horario: "2020-12-04 12:30:00", rate: 8765, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta5.id)
+Trip.find_or_create_by(horario: "2020-12-05 12:30:00", rate: 64456, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta3.id)
+Trip.find_or_create_by(horario: "2020-12-30 12:30:00", rate: 32133, chofer_id:chofer2.id, bus_id: combi3.id, route_id:ruta4.id)
+Trip.find_or_create_by(horario: "2020-12-31 12:30:00", rate: 56132, chofer_id:chofer1.id, bus_id: combi3.id, route_id:ruta5.id)
+Trip.find_or_create_by(horario: "2020-11-31 12:30:00", rate: 1111, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta4.id)
 
 
+Additional.find_or_create_by(nombre: "Coca Cola", stock: 20, precio: 532)
+Additional.find_or_create_by(nombre: "Hamburguesa", stock: 15, precio: 50)
+Additional.find_or_create_by(nombre: "Alfajor", stock: 10, precio: 532)
 
 

@@ -7,7 +7,8 @@ class TripsController < ApplicationController
 		@trip = Trip.all.order(horario: :desc)
 	end
 	def show
-		@trip = Trip.find(params[:id])
+		@trip = Trip.find(params[:id]) 
+		
 	end
 	def new
 		@trip = Trip.new

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/users/index', to: 'users#index'
   get '/users/show', to: 'users#show'
   get '/orders/past_trips', to: 'orders#past_trips'
+  get '/orders/cancel_order', to: 'orders#cancel_order'
   
   devise_for :users
   get 'main/home'
