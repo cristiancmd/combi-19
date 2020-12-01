@@ -33,8 +33,8 @@
 			<% if current_admin %>
 			<td> <%= link_to 'Editar', edit_trip_path(s), class:"btn btn-outline-primary" %> </td>
 			 <% else %>
-			 <td><%= link_to 'Seleccionar', new_order_path(:viaje => s ) , class: "btn btn-danger"%> </td>
-
+			 <td><%= link_to 'Seleccionar', additionals_path(:viaje => s ) , class: "btn btn-danger"%> </td>
+				
 			 <% end %>
 
 		</tr>

@@ -9,7 +9,7 @@ class Additional < ApplicationRecord
 	 	if search_term and search_term != ""
 	 		return Additional.where("nombre LIKE ?", "%" + search_term +"%")
 	 	else
-	 		return Additional.all
+	 		return Additional.all 
 	 	end
 	 end
 

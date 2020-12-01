@@ -27,10 +27,14 @@
 				<td><%= a.precio  %>  </td>
 
 				<% if user_signed_in? and not admin_signed_in?%>
-					<td><%= link_to 'Seleccionar', new_order_path(:extra => a ), class: "btn btn-outline-primary" %></td>
+
+					<td><%= link_to 'Seleccionar', new_order_path(:extra => a, :viaje => @viaje), class: "btn btn-outline-primary" %></td>
+
 				<% elsif admin_signed_in? %>
+
 					<td><%= link_to 'Editar', edit_additional_path(a), class: "btn btn-outline-primary" %></td>
 					<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
+
 				<% end %>
 			
 			</tr>
