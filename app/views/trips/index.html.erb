@@ -1,10 +1,12 @@
 <h2>Viajes</h2>
-<% if current_admin %>
+
 <br>
 <div>
 
-<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
 <%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+
+<% if current_admin %>
+<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
 
 </div> <br>
 <table class="table table-striped">
