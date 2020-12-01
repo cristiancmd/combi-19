@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_171152) do
+ActiveRecord::Schema.define(version: 2020_12_01_010800) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_171152) do
     t.integer "user_id"
     t.integer "tarjeta"
     t.decimal "cobro"
+    t.boolean "canceled", default: false
+    t.decimal "refunded"
     t.index ["trip_id"], name: "index_orders_on_trip_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

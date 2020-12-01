@@ -5,10 +5,10 @@
 	<p> Cuando compres un pasaje aparecerá aquí</p>
 <% else %>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="table">
 		<thead class="thead">
 		<tr>
-			<th></th>
+			
 			<th>order id</th>
 			<th>Ruta</th>
 			<th>Fecha del viaje</th>
@@ -20,7 +20,7 @@
 		</thead>
 		<% @orders.each do |order| %>
 		<tr>
-			<td><%= link_to 'Ver', "" , class: "btn btn-secondary"%> </td>
+			
 			<td><%= order.id %>  </td>
 			<td><%= order.trip.route.origin_destination %>  </td>
 			<td><%= order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
