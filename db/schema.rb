@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_010800) do
+ActiveRecord::Schema.define(version: 2020_12_01_190704) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -61,14 +61,16 @@ ActiveRecord::Schema.define(version: 2020_12_01_010800) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "trip_id"
-    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "trip_id"
+    t.integer "user_id"
     t.integer "tarjeta"
     t.decimal "cobro"
     t.boolean "canceled", default: false
     t.decimal "refunded"
+    t.integer "additional_id"
+    t.index ["additional_id"], name: "index_orders_on_additional_id"
     t.index ["trip_id"], name: "index_orders_on_trip_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -95,6 +97,8 @@ ActiveRecord::Schema.define(version: 2020_12_01_010800) do
 
   create_table "trips", force: :cascade do |t|
     t.datetime "horario"
+    t.date "fecha_inicio"
+    t.date "fecha_fin"
     t.decimal "rate"
     t.integer "chofer_id"
     t.integer "bus_id"
@@ -121,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_010800) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "orders", "additionals"
   add_foreign_key "orders", "trips"
   add_foreign_key "orders", "users"
   add_foreign_key "routes", "cities", column: "destination_city_id"

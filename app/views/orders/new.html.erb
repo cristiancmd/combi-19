@@ -34,20 +34,25 @@
 	    <%= form.label :"NUMERO_DE_TARJETA" %>
 	    <%= form.text_field :tarjeta , maxlength: 16 ,placeholder: "XXXX XXXX XXXX XXXX", :required => 'required' , class:"form-control" %>
 		</div>
-		<%= form.hidden_field :user_id, value: current_user.id %>
- 		<% if @viaje %> <%= form.hidden_field :trip_id, value: @viaje.id %> 	
- 		<% if @extra %> <%= form.hidden_field :additiona_id, value: @extra.id %> <% end %>
- 		<%= form.hidden_field :cobro, value: @viaje.rate %><% end %>
 
+		<%= form.hidden_field :user_id, value: current_user.id %>
+ 		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
+ 		 
+ 		<% if @extra %>
+ 		<%= form.hidden_field :additional_id, value: @extra.id %> 
+ 		<%= form.hidden_field :cobro, value: @viaje.rate+@extra.precio %>
+		<% else %>
+			<%= form.hidden_field :cobro, value: @viaje.rate %>
+		<% end %>
  		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
  		<%= link_to 'Cancelar', new_search_path , class: "btn btn-primary btn-lg"%>
-    
+    <% end %>  
 	</div>
 	    <div class="col"> 
 
 		   <div class="card" style="width: 20rem;">
 		   	<ul class="list-group list-group-flush">
-	    		<li class="list-group-item">TOTAL <h5>  <%='$' +@viaje.rate.to_s %></li>	</h5>
+	    		<li class="list-group-item">TOTAL <h5>  <%='$' +@total.to_s %></li>	</h5>
 	    		</ul>
 		  <% if @viaje.bus.tipo=='Cómoda' %>
 		  <img src="https://www.whatvan.co.uk/imagegen.ashx?width=650&image=/media/3529/2piaggio-porter.jpg" class="card-img-top" alt="...">
@@ -57,10 +62,14 @@
 		    <p class="card-text">Puedes cancelar el viaje hasta 48hs antes de la fecha, luego solo recibiras el 50% de reembolso.</p>
 		  </div>
 		  <ul class="list-group list-group-flush">
-		    <li class="list-group-item"><h5><%= @viaje.route.origin_destination %></li> </h5> 
+		    <li class="list-group-item"><h5><%= @viaje.route.origin_destination %> </h5> <%= '$ ' + @viaje.rate.to_s %>   </li>  
+
 		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
 		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
-		    <li class="list-group-item"><h5>EXTRA</h5><%=  @extra.nombre %> </br> Precio: $ <%=  @extra.precio  %></li>
+		    <% if @extra %>
+		    <li class="list-group-item"><h5>EXTRA</h5><%=  @extra.nombre %> </br> Precio: $ <%=  @extra.precio  %>
+		    	<% end %>
+		    </li>
 
 		    
 		  </ul>
@@ -81,7 +90,7 @@
 
 
 
-<% end %>   
+ 
 
 
 
