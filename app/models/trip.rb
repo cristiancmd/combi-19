@@ -7,6 +7,7 @@ class Trip < ApplicationRecord
 	belongs_to :chofer, class_name: 'Chofer'
 	belongs_to :bus, class_name: 'Bus'
 	belongs_to :route, class_name: 'Route'
+	
 
 #validaciones
 	validates :horario, presence: {message:": Debe seleccionar horario y dia!"}

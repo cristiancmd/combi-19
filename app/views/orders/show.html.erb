@@ -12,6 +12,7 @@
 			<th>abonado</th>
 			<th>Combi</th>
 			<th>trip id</th>
+			<th>Extras</th>
 			
 		</tr>
 		</thead>
@@ -25,6 +26,7 @@
 			<td><%= '$ ' + @order.cobro.to_s %>  </td>
 			<td><%= @order.trip.bus.tipo %>  </td>
 			<td><%= @order.trip_id %>  </td>
+			<td><%= @order.additional.nombre %>  </td>
 
  
 		</tr>

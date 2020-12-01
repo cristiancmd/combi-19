@@ -1,6 +1,14 @@
 <h3>Extras</h3>
 
 
+<% if user_signed_in? %>
+<center><br><p>Puede seleccionar extras para consumir durante su viaje</p></br>
+<td><%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %></td>
+</center>
+</br>
+<% end %>
+
+
 <%= form_for "", url: additionals_path, role: "search", method: :get do %>
   <%= text_field_tag :search, @search_term, placeholer: "Buscar.." %>
   <%= submit_tag("Buscar") %>
@@ -13,20 +21,15 @@
 			<th>Nombre</th>
 			<th>Stock</th>
 			<th>Precio</th>
-
-		
-			
 		</tr>
 		</thead>
-
-		<% @additional.each do |a| %>
-		
+		<% @additional.each do |a| %>	
 			<tr>
 				<td><%= link_to a.nombre, additional_path(a)  %>  </td>
 				<td><%= a.stock  %>  </td>
 				<td><%= a.precio  %>  </td>
 
-				<% if user_signed_in? and not admin_signed_in?%>
+				<% if user_signed_in? and not admin_signed_in? and @viaje%>
 
 					<td><%= link_to 'Seleccionar', new_order_path(:extra => a, :viaje => @viaje), class: "btn btn-outline-primary" %></td>
 

@@ -1,9 +1,14 @@
 class AdditionalsController < ApplicationController
 	before_action :set_additional, only: [:show, :edit, :update, :destroy]
-	#before_action :authenticate_admin! , except: [:show, :index]
-	#before_action :authenticate_user!
+	before_action :authenticate_admin! , only: [:new, :show, :edit, :update, :destroy]
+	before_action :is_logued?
+
+	def is_logued?
+      redirect_to new_user_session_path , alert: 'Debe loguearse antes de continuar' unless current_admin or current_user
+    end
 
 	def index
+		
 		@viaje = Trip.find_by id:(params[:viaje])
 		@search_term = params[:search]
 		@additional = Additional.buscar(@search_term)
@@ -43,8 +48,12 @@ class AdditionalsController < ApplicationController
 
 	def destroy
 			additional = Additional.find(params[:id])
+			if Order.where(additional_id: additional).exists?
+				redirect_to additionals_path, alert: 'El extra se encuentra siendo utilizado'
+			else
 			additional.destroy
-			redirect_to additionals_path
+			redirect_to additionals_path , notice: 'Se elimino extra exitosamente'
+		end
 	end
 
 	private
