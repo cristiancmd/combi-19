@@ -3,8 +3,8 @@ class AdditionalsController < ApplicationController
 	before_action :authenticate_admin! , except: [:show, :index]
 	before_action :authenticate_user!
 	def index
-		@asd = params[:busqueda]
-		@additional = Additional.buscar(params[:busqueda])
+		@search_term = params[:search]
+		@additional = Additional.buscar(@search_term)
 	end	
 	def new
 		@additional = Additional.new
