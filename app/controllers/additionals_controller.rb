@@ -1,9 +1,10 @@
 class AdditionalsController < ApplicationController
 	before_action :set_additional, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_admin! #, except: [:show, :index]
-
+	before_action :authenticate_admin! , except: [:show, :index]
+	before_action :authenticate_user!
 	def index
-		@additional = Additional.all
+		@asd = params[:busqueda]
+		@additional = Additional.buscar(params[:busqueda])
 	end	
 	def new
 		@additional = Additional.new
