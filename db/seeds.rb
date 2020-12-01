@@ -6,20 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+Trip.destroy_all
 
 Route.destroy_all
 City.destroy_all
 Chofer.destroy_all
 User.destroy_all
-Trip.destroy_all
+
 Admin.destroy_all
 Bus.destroy_all
+Additional.destroy_all
  
 user1 = User.create! :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456, :dni => 37125636
-user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987
+user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987, date_of_birth: Date.parse("1997-01-05")
 
-admin = Admin.create! :name => 'Admin', :email => 'admin@admin.com', :password => 123456 , :password_confirmation => 123456, :dni => 251232455
+admin = Admin.create! :email => 'admin@admin.com', :password => 123456 , :password_confirmation => 123456
 
 chofer1 = Chofer.create! :nombre => 'Jorge', :apellido => 'Iess', :dni => 33333, :inicio_actividad => "Date.parse('2000-04-2')"
 chofer2 = Chofer.create! :nombre => 'Alberto', :apellido => 'Aninstein', :dni => 222222, :inicio_actividad => "Date.parse('1999-04-2')"
@@ -64,5 +65,8 @@ Trip.find_or_create_by(horario: "2020-12-31 12:30:00", rate: 56132, chofer_id:ch
 Trip.find_or_create_by(horario: "2020-11-31 12:30:00", rate: 1111, chofer_id:chofer2.id, bus_id: combi2.id, route_id:ruta4.id)
 
 
+Additional.find_or_create_by(nombre: "Coca Cola", stock: 20, precio: 532)
+Additional.find_or_create_by(nombre: "Hamburguesa", stock: 15, precio: 50)
+Additional.find_or_create_by(nombre: "Alfajor", stock: 10, precio: 532)
 
 

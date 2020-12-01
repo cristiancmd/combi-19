@@ -66,35 +66,33 @@ class OrdersController < ApplicationController
   def new
   	
     @order = Order.new 
-
+    @extra = Additional.find_by id:(params[:extra])
+    stock = @extra.stock - 1
+    @extra.update(stock: stock)
     @viaje = Trip.find_by id:(params[:viaje])
-    
-    
+    @viaje.rate = @extra.precio + @viaje.rate
+
   	if current_user.date_of_birth.nil? or current_user.name.blank?
   		redirect_to edit_user_registration_path, alert: 'Debe completar su perfil para realizar compras'
   	end	
     
-
   end
 
   def create
 
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
-
     
       if @order.save
          redirect_to orders_path, notice: 'Su orden se genero exitosamente'
       else
          redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es valida. Seleccione otra tarjeta.'
-         
-        
       end
   
   end
 
   def order_params
-      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded)
+      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded, :additional_id)
     end
 
   def set_order

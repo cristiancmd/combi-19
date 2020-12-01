@@ -36,7 +36,9 @@
 		</div>
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		<% if @viaje %> <%= form.hidden_field :trip_id, value: @viaje.id %> 	
+ 		<% if @extra %> <%= form.hidden_field :additiona_id, value: @extra.id %> <% end %>
  		<%= form.hidden_field :cobro, value: @viaje.rate %><% end %>
+
  		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
  		<%= link_to 'Cancelar', new_search_path , class: "btn btn-primary btn-lg"%>
     
@@ -58,6 +60,8 @@
 		    <li class="list-group-item"><h5><%= @viaje.route.origin_destination %></li> </h5> 
 		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
 		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
+		    <li class="list-group-item"><h5>EXTRA</h5><%=  @extra.nombre %> </br> Precio: $ <%=  @extra.precio  %></li>
+
 		    
 		  </ul>
 		  
