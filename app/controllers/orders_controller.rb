@@ -72,11 +72,10 @@ class OrdersController < ApplicationController
       stock = @extra.stock - 1
       @extra.update(stock: stock)
       @total = @extra.precio + @viaje.rate
+
     else
       @total = @viaje.rate
     end
-    
-    
   	if current_user.date_of_birth.nil? or current_user.name.blank?
   		redirect_to edit_user_registration_path, alert: 'Debe completar su perfil para realizar compras'
   	end	
