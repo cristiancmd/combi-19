@@ -13,11 +13,11 @@ class AdditionalsController < ApplicationController
 		@search_term = params[:search]
 		@additional = Additional.buscar(@search_term)
 		respond_to do |format|
-			if not @additional.any?
-				format.html { redirect_to additionals_path, alert: 'No hay resultados para la busqueda del extra' }
-			else
-				format.html { render :index }
-			end
+			#if not @additional.any?
+				#format.html { redirect_to additionals_path, alert: 'No hay resultados para la busqueda del extra' }
+			#else
+			format.html { render :index }
+			#end
 		end
 	end	
 	def new 
