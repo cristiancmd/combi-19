@@ -1,14 +1,20 @@
-<h3>Extras:</h3><h6>Puede seleccionar extras para consumir durante su viaje</h6>
+<h3>Extras</h3>
 
 
 
 
 
-<%= form_for "", url: additionals_path, role: "search", method: :get do %>
+
+  <% if user_signed_in? and not admin_signed_in? %>
+  <center>
+  <h6>Puede seleccionar extras para consumir durante su viaje</h6> <br>
+  	<%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %>
+  </center> 
+  <br>
+ 	<%= form_for "", url: additionals_path, role: "search", method: :get do %>
   <%= text_field_tag :search, @search_term, placeholer: "Buscar.." %>
   <%= submit_tag("Buscar") %>
-  <% if user_signed_in? and not admin_signed_in? %>
-  	<%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %>
+
   <% end %>
 <% end %>
 

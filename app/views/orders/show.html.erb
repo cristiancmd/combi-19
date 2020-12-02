@@ -26,8 +26,11 @@
 			<td><%= '$ ' + @order.cobro.to_s %>  </td>
 			<td><%= @order.trip.bus.tipo %>  </td>
 			<td><%= @order.trip_id %>  </td>
-			<td><%= @order.additional.nombre %>  </td>
-
+			<% if !@order.additional.nil? %>
+				<td><%= @order.additional.nombre %>  </td>
+			<% else %>
+			<td><%= '-' %></td>
+			<% end %>
  
 		</tr>
 		

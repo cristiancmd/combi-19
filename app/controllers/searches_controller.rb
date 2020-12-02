@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-	before_action :authenticate_user! , except: [:show, :index]
+	before_action :authenticate_user! , except: [:show, :index, :new]
 	
 	def index
 	@search = Search.buscar(params[:origen_id], params[:destino_id],params[:fecha])
