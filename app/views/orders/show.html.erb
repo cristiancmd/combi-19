@@ -49,7 +49,7 @@
 	<% end %>	
 
 
-
+<% if @order.trip.horario.after?(DateTime.current) %>
 
 	<% if @order.trip.horario.after?(DateTime.current + 2) && @order.canceled==false %>
 		<div class="alert alert-success" role="alert">
@@ -68,5 +68,5 @@
 		</div>
 
 	<% end %>
-
+<% end %>
 
