@@ -1,4 +1,4 @@
-<h3>Extras</h3>
+<center><h3>Extras</h3></center>
 
 
   <% if current_user %>
@@ -18,11 +18,16 @@
  	 <% end %>
 <% end %>  
 
+
+<% if current_user %><center><div class="w-75" style="background-color: #eee;"> <% end %>
+
+
+
 <table class="table table-striped">
 		<thead class="thead">
 		<tr>
 			<th>Nombre</th>
-			<% if current_admin %>		<th>Stock</th> <% end %>
+			<% if current_admin %>	<th>Stock</th> <% end %>
 			<th>Precio</th>
 		</tr>
 		</thead>
@@ -47,7 +52,7 @@
 		<% end %>
 
 	</table>	
-
+<% if current_user %></div></center><% end %>
 	
 	<% if current_admin %>
 		<h4><%= link_to 'Nuevo Extra', new_additional_path, class:"btn btn-primary" %></h4>
