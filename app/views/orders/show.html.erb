@@ -52,20 +52,10 @@
 <% if @order.trip.horario.after?(DateTime.current) %>
 
 	<% if @order.trip.horario.after?(DateTime.current + 2) && @order.canceled==false %>
-		<div class="alert alert-success" role="alert">
-		  <h4 class="alert-heading">Cancela ahora sin penalizacion</h4>
-		  <p>Los pasajes pueden ser devueltos hasta 48hs antes de la fecha del viaje. Pasado ese tiempo, solo recibiras el 50% del valor total.</p>
-		  <hr>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , class: "btn btn-success" %>
-		</div>
-
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , class: "btn btn-primary" %>
 	<% elsif @order.canceled==false %>
-		<div class="alert alert-warning" role="alert">
-		  <h4 class="alert-heading">Cancela ahora y recibe el 50% de reintegro </h4>
-		  <p>Los pasajes pueden ser devueltos hasta 48hs antes de la fecha del viaje. Pasado ese tiempo, solo recibiras el 50% del valor total.</p>
-		  <hr>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, class: "btn btn-warning" %>
-		</div>
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, class: "btn btn-primary" %>
+
 
 	<% end %>
 <% end %>
