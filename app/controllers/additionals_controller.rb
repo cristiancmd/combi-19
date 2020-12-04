@@ -1,6 +1,6 @@
 class AdditionalsController < ApplicationController
 	before_action :set_additional, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_admin! , only: [:new, :show, :edit, :update, :destroy]
+	#before_action :authenticate_admin! , only: [:new, :show, :edit, :update, :destroy]
 	before_action :is_logued?
 
 	def is_logued?
@@ -9,13 +9,10 @@ class AdditionalsController < ApplicationController
 
 	def index
 		
-		@viaje = Trip.find_by id:(params[:viaje])
+		@viaje = Trip.find_by id:(params[:viaje_id])
 		@search_term = params[:search]
-		if (current_admin)
-			@additional = Additional.buscar(@search_term)
-		else
-			@additional = Additional.where("stock > ?",0)
-		end	
+		@additional = Additional.buscar(@search_term)
+		#@additional = Additional.where("stock > ?",0)
 		respond_to do |format|
 			#if not @additional.any?
 				#format.html { redirect_to additionals_path, alert: 'No hay resultados para la busqueda del extra' }

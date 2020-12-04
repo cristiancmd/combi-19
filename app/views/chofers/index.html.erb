@@ -1,5 +1,11 @@
 <h2>Choferes</h2>
 
+<% if current_admin %>
+	<%= form_for "", url: chofers_path, role: "search", method: :get do %>
+ 	 <%= text_field_tag :search, @search_term, placeholer: "Buscar.." %>
+  	<%= submit_tag("Buscar") %>
+ 	 <% end %>
+<% end %>  
 
 <table class="table table-striped">
 		<thead class="thead">

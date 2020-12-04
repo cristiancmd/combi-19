@@ -1,59 +1,65 @@
 <center><h3>Extras</h3></center>
 
-
-  <% if current_user %>
-  <center>
-  <h6>Puede seleccionar extras para consumir durante su viaje</h6> <br>
-  	<%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %>
-  </center> 
-  <br>
- <br>
+<% if current_user %>
+<center>
+	<h6>Puede seleccionar extras para consumir durante su viaje</h6> <br>
+	<%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %>
+</center> 
+<br>
+<br>
 <% end %>
 
-
-<% if current_admin %>
-	<%= form_for "", url: additionals_path, role: "search", method: :get do %>
- 	 <%= text_field_tag :search, @search_term, placeholer: "Buscar.." %>
-  	<%= submit_tag("Buscar") %>
- 	 <% end %>
-<% end %>  
-
-
 <% if current_user %><center><div class="w-75" style="background-color: #eee;"> <% end %>
+	<%= form_for "", url: additionals_path, role: "search", method: :get do %>
+	<%= text_field_tag :search, @search_term, placeholer: "Buscar.." %>
+	<% if @viaje  %>
+	<%=hidden_field_tag "viaje_id", @viaje.id %> 
+	<% end %> 
+	<%= submit_tag("Buscar") %>
+	<% end %>  
 
-
-
-<table class="table table-striped">
+	<%= form_for "", url: new_order_path, method: :get do %>
+	<% if @viaje  %>
+	<%=hidden_field_tag "viaje_id", @viaje.id %> 
+	<% end %>  
+	<table class="table table-striped">
 		<thead class="thead">
-		<tr>
-			<th>Nombre</th>
-			<% if current_admin %>	<th>Stock</th> <% end %>
-			<th>Precio</th>
-		</tr>
+			<tr>
+				<th>Nombre</th>
+				<% if current_admin %>	<th>Stock</th> <% end %>
+				<th>Precio</th>
+			</tr>
 		</thead>
 		<% @additional.each do |a|  %>	
-			<tr>
-				<td><%= link_to a.nombre, additional_path(a)  %>  </td>
-				<% if current_admin %>	<td><%= a.stock  %>  </td><% end %>
-				<td><%= a.precio  %>  </td> 
+		<tr>
+			<td><%= link_to a.nombre, additional_path(a)  %>  </td>
+			<% if current_admin %>	<td><%= a.stock  %>  </td><% end %>
+			<td><%= a.precio  %>  </td> 
 
-				<% if current_user && @viaje %>
+			<% if current_user && @viaje %>
 
-					<td><%= link_to 'Seleccionar', new_order_path(:extra => a, :viaje => @viaje), class: "btn btn-outline-primary" %></td>
+			<td>
+				<%= check_box_tag 'additional_ids[]', a.id -%>
+			</td>
 
-				<% elsif current_admin %>
+			<% elsif current_admin %>
 
-					<td><%= link_to 'Editar', edit_additional_path(a), class: "btn btn-outline-primary" %></td>
-					<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
+			<td><%= link_to 'Editar', edit_additional_path(a), class: "btn btn-outline-primary" %></td>
+			<td><%= button_to 'Eliminar', a , method: :delete, data: { confirm: 'Esta seguro ?' }, class: "btn btn-outline-danger"%></td>
 
-				<% end %>
+			<% end %>
 			
-			</tr>
+		</tr>
 		<% end %>
 
-	</table>	
-<% if current_user %></div></center><% end %>
+	</table>
+	<% if current_user && @viaje %>	
+	<%= submit_tag("Confirmar extras") %>
+	<% end %>
+	<% end %>  
+
+	<% if current_user %></div></center><% end %>
 	
 	<% if current_admin %>
-		<h4><%= link_to 'Nuevo Extra', new_additional_path, class:"btn btn-primary" %></h4>
+	<h4><%= link_to 'Nuevo Extra', new_additional_path, class:"btn btn-primary" %></h4>
 	<% end %>
