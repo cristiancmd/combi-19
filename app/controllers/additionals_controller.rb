@@ -12,7 +12,7 @@ class AdditionalsController < ApplicationController
 		@viaje = Trip.find_by id:(params[:viaje_id])
 		@search_term = params[:search]
 		@additional = Additional.buscar(@search_term)
-		
+		#@additional = Additional.where("stock > ?",0)
 		respond_to do |format|
 			#if not @additional.any?
 				#format.html { redirect_to additionals_path, alert: 'No hay resultados para la busqueda del extra' }
