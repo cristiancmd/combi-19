@@ -73,6 +73,7 @@ class OrdersController < ApplicationController
     else
       @total = @viaje.rate
     end
+    
   	if current_user.date_of_birth.nil? or current_user.name.blank?
   		redirect_to edit_user_registration_path, alert: 'Debe completar su perfil para realizar compras'
   	end	
@@ -84,8 +85,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     
       if @order.save
-         stock = @extra.stock - 1
-         @extra.update(stock: stock)
+         #stock = @extra.stock - 1
+         #@extra.update(stock: stock)
          redirect_to orders_path, notice: 'Su orden se genero exitosamente'
       else
          redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es valida. Seleccione otra tarjeta.'
@@ -94,7 +95,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded, :additional_id)
+      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded, :additional_ids)
     end
 
   def set_order

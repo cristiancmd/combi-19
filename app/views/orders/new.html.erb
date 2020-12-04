@@ -39,10 +39,10 @@
  		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
  		 
  		<% if @extra %>
- 		<%= form.hidden_field :additional_id, value: @extra.id %> 
- 		<%= form.hidden_field :cobro, value: @viaje.rate+@extra.precio %>
+ 		<%= form.hidden_field :additional_ids, value: 'additional_ids[]' %> 
+ 		<%= form.hidden_field :cobro, value: @total %>
 		<% else %>
-			<%= form.hidden_field :cobro, value: @viaje.rate %>
+			<%= form.hidden_field :cobro, value: @total %>
 		<% end %>
  		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
  		<%= link_to 'Cancelar', new_search_path , class: "btn btn-primary btn-lg"%>
