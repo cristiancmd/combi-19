@@ -12,32 +12,54 @@
 <table class="table table-striped table-bordered table-hover">
 		<thead class="thead">
 		<tr>
+			<% if current_admin %>
+			<th>Ruta</th>
+			<th>Dia y horario </th>
+			<th>Chofer</th>
+			<th>Combi</th>
+			
+			<th>Capacidad</th>
+			<th>Tipo</th>
+			<th>Tarifa</th>
+				<% else %>
 			<th>Ruta</th>
 			<th>Fecha</th>
 			<th>Combi</th>
 			<th>Precio</th>
-			<th>ID Viaje</th>
+			<% end %>
 			
 		</tr>
 		</thead>
 		<% @search.each do |s| %>
+		<% if current_admin %>
+		<tr>	
+				
+			<td><%= link_to  s.route.origen_destino(s.route.initial_city, s.route.destination_city) , route_path(s.route.id)  %> </td>
+			<td><%=  s.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
+			<td><%=  s.chofer.nombre_apellido  %>  </td>
+			<td><%=  s.bus.patente  %>  </td>
+			<td><%=  s.bus.asientos  %>  </td>
+			<td><%=  s.bus.tipo  %>  </td>
+			
+			<td><%= s.rate %></td>
+			<td> <%= link_to 'Editar', edit_trip_path(s), class:"btn btn-outline-primary" %> </td>
+			<td> <%= button_to 'Eliminar', s , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>			
+		</tr>
+
+	<% else %>
 		<tr>
 			<td><%= s.route.origin_destination %>  </td>
 			<td><%= s.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
 			<td><%= s.bus.tipo %></td>
 			<td><%= s.rate %>  </td>
-			<td><%= s.id %>  </td>
 			
 			
-			
-			<% if current_admin %>
-			<td> <%= link_to 'Editar', edit_trip_path(s), class:"btn btn-outline-primary" %> </td>
-			 <% else %>
-			 <td><%= link_to 'Seleccionar', additionals_path(:viaje => s ) , class: "btn btn-danger"%> </td>
+			<td><%= link_to 'Seleccionar', additionals_path(:viaje => s ) , class: "btn btn-danger"%> </td>
 				
-			 <% end %>
+			 
 
 		</tr>
+		<% end %>
 		<% end %>
 
 	</table>	

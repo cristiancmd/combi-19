@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Trip.destroy_all
+#Trip.destroy_all
 
-Route.destroy_all
-City.destroy_all
-Chofer.destroy_all
-User.destroy_all
+#Route.destroy_all
+#City.destroy_all
+#Chofer.destroy_all
+#User.destroy_all
 
 Admin.destroy_all
 Bus.destroy_all
