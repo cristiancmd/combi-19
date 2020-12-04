@@ -64,15 +64,12 @@ class OrdersController < ApplicationController
 
 
   def new
-  	@viaje = Trip.find_by id:(params[:viaje])
+  	@viaje = Trip.find_by id:(params[:viaje_id])
     @order = Order.new
     
-    if params[:extra].present?
-      @extra = Additional.find_by id:(params[:extra]) 
-      stock = @extra.stock - 1
-      @extra.update(stock: stock)
-      @total = @extra.precio + @viaje.rate
-
+    if params[:additional_ids].present?
+      @extras = Additional.where(id: params[:additional_ids])
+      @total = @extras.sum(:precio) + @viaje.rate
     else
       @total = @viaje.rate
     end
@@ -82,11 +79,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-
+    
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
     
       if @order.save
+         stock = @extra.stock - 1
+         @extra.update(stock: stock)
          redirect_to orders_path, notice: 'Su orden se genero exitosamente'
       else
          redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es valida. Seleccione otra tarjeta.'

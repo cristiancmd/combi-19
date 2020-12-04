@@ -3,7 +3,10 @@ class ChofersController < ApplicationController
 		before_action :set_chofer, only: [:show, :edit, :update, :destroy]
 
 		def index
-			@chofer = Chofer.all
+			#@chofer = Chofer.all
+			@search_term = params[:search]
+			@chofer = Chofer.buscar(@search_term)
+			
 		end
 		def new
 			@chofer = Chofer.new
