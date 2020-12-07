@@ -38,10 +38,8 @@
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
  		 
- 		<% if @extras %>
- 		<% @extras.each do |a|  %>	
- 			<%= form.hidden_field :additional_ids, :multiple => true, :value => a.id %>
-		<% end %>
+ 		<% if @extra %>
+ 		<%= form.hidden_field :additional_ids, value: 'additional_ids[]' %> 
  		<%= form.hidden_field :cobro, value: @total %>
 		<% else %>
 			<%= form.hidden_field :cobro, value: @total %>
