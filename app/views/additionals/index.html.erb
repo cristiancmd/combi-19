@@ -3,7 +3,7 @@
 <% if current_user %>
 <center>
 	<h6>Puede seleccionar extras para consumir durante su viaje</h6> <br>
-	<%= link_to 'No deseo ningun extra', new_order_path( :viaje => @viaje), class: "btn btn-outline-primary" %>
+	<%= link_to 'No deseo ningun extra', new_order_path( :viaje_id => @viaje.id), class: "btn btn-outline-primary" %>
 </center> 
 <br>
 <br>

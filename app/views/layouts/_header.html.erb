@@ -68,8 +68,14 @@
                 <li class="nav-item">
                 <%= link_to 'Cerrar sesión ', destroy_admin_session_path, method: :delete,class: "nav-link" %>
                 </li>
-        <% end %>    
-        <% if !user_signed_in? and !admin_signed_in? %>    
+        <% end %>
+        <% if current_chofer %>
+                <li class="nav-item"> <%= link_to 'Chofer',"",  class: "nav-link" %> </li>     
+                <li class="nav-item">
+                <%= link_to 'Cerrar sesión ', destroy_chofer_session_path, method: :delete,class: "nav-link" %>
+                </li>
+        <% end %>      
+        <% if !user_signed_in? and !admin_signed_in? and !chofer_signed_in? %>    
                  <li class="nav-item">
                 <%= link_to 'Iniciar sesión', new_user_session_path,class: "nav-link" %>
             </li>

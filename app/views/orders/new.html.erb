@@ -66,12 +66,14 @@
 
 		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
 		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
+		    <% if @extras %>
 		    <li class="list-group-item"><h5>EXTRA</h5>
 		    <% @extras.each do |e|%>
 		    <%=  e.nombre %> </br> Precio: $ <%=  e.precio  %></br></br>
 		    
  			 <% end %>
 		    </li>
+		    <% end %>
 		  </ul>
 		  
 		     
