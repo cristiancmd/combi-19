@@ -68,12 +68,12 @@ class OrdersController < ApplicationController
     @order = Order.new
     
     if params[:additional_ids].present?
-      @prueba = params[:additional_ids]
       @extras = Additional.where(id: params[:additional_ids])
       @total = @extras.sum(:precio) + @viaje.rate
     else
       @total = @viaje.rate
     end
+    
   	if current_user.date_of_birth.nil? or current_user.name.blank?
   		redirect_to edit_user_registration_path, alert: 'Debe completar su perfil para realizar compras'
   	end	
@@ -83,6 +83,7 @@ class OrdersController < ApplicationController
     
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
+
     if params[:order][:additional_ids].present?
       extras = params[:order][:additional_ids]
       extras.each do |e|
@@ -91,6 +92,7 @@ class OrdersController < ApplicationController
           eTabla.save 
       end 
     end 
+
       if @order.save
          #stock = @extra.stock - 1
          #@extra.update(stock: stock)
@@ -102,7 +104,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded)
+      params.require(:order).permit(:tarjeta,:cobro, :user_id, :trip_id, :canceled, :refunded, :additional_ids)
     end
 
   def set_order

@@ -38,10 +38,8 @@
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
  		 
- 		<% if @extras %>
- 		<% @extras.each do |a|  %>	
- 			<%= form.hidden_field :additional_ids, :multiple => true, :value => a.id %>
-		<% end %>
+ 		<% if @extra %>
+ 		<%= form.hidden_field :additional_ids, value: 'additional_ids[]' %> 
  		<%= form.hidden_field :cobro, value: @total %>
 		<% else %>
 			<%= form.hidden_field :cobro, value: @total %>
@@ -68,6 +66,7 @@
 
 		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
 		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
+		    <% if @extras %>
 		    <li class="list-group-item"><h5>EXTRA</h5>
 		    <% if @extras %>	
 			    <% @extras.each do |e|%>
@@ -76,6 +75,7 @@
 	 			<% end %>
  			<% end %>
 		    </li>
+		    <% end %>
 		  </ul>
 		  
 		     

@@ -59,7 +59,7 @@ class ChofersController < ApplicationController
 				@chofer = Chofer.find(params[:id])
 			end
 			def chofer_params
-				params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad)	
+				params.require(:chofer).permit(:nombre, :apellido, :dni, :inicio_actividad,:email, :password, :password_confirmation,:date_of_birth, :name)	
 			end	
 
 		end	

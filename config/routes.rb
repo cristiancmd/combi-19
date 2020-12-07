@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   
+  #devise_for :chofers
   #get 'order/index'
   #get 'order/show'
   #get 'order/new'
@@ -10,6 +11,11 @@ Rails.application.routes.draw do
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile'
     }
+  devise_for :chofers, path_names: {
+      sign_in: 'login', sign_out: 'logout',
+      password: 'secret', confirmation: 'verification',
+      registration: 'register', edit: 'edit/profile'
+    }  
   get '/users/index', to: 'users#index'
   get '/users/show', to: 'users#show'
   get '/orders/past_trips', to: 'orders#past_trips'
