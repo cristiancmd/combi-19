@@ -3,6 +3,7 @@ class AdditionalsController < ApplicationController
 	#before_action :authenticate_admin! , only: [:new, :show, :edit, :update, :destroy]
 	before_action :is_logued?
 
+
 	def is_logued?
       redirect_to new_user_session_path , alert: 'Debe loguearse antes de continuar' unless current_admin or current_user
     end

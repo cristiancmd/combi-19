@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 	belongs_to :user
 	belongs_to :trip
-	belongs_to :additional, optional: true
+	has_many :additionals
 	
 	validates :tarjeta, presence: true,  format: { with: /[0-9]{12}(?:[0-9]{3})?/ } #{message:"Debe ingresar una tarjeta!"}
 	validate :validar_fondos
