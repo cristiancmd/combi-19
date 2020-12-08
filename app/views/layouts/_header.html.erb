@@ -36,6 +36,10 @@
             <li class="nav-item">
                 <%= link_to 'Buscar viajes', new_search_path , class: "nav-link"%>
             </li>
+        <% elsif current_chofer %>
+            <li class="nav-item">
+                <%= link_to 'Mis pasajes', trips_path , class: "nav-link"%>
+            </li>
         <% else %>   
             <li class="nav-item">
                 <%= link_to 'Buscar viajes', trips_path, class: "nav-link"%>

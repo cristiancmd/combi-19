@@ -17,13 +17,13 @@ Admin.destroy_all
 Bus.destroy_all
 Additional.destroy_all
  
-user1 = User.create! :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456, :dni => 37125636
+user1 = User.create!  :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456, :dni => 37125636
 user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987, date_of_birth: Date.parse("1997-01-05")
 
 admin = Admin.create! :email => 'admin@admin.com', :password => 123456 , :password_confirmation => 123456
 
-chofer1 = Chofer.create! :nombre => 'Jorge', :apellido => 'Iess', :dni => 33333, :inicio_actividad => "Date.parse('2000-04-2')"
-chofer2 = Chofer.create! :nombre => 'Alberto', :apellido => 'Aninstein', :dni => 222222, :inicio_actividad => "Date.parse('1999-04-2')"
+chofer1 = Chofer.create! :password => 'asdasd123', :email => 'jorge@chofer.com', :nombre => 'Jorge', :apellido => 'Perez', :dni => 33333, :inicio_actividad => "Date.parse('2000-04-2')"
+chofer2 = Chofer.create! :password => 'asdasd123', :email => 'alberto@chofer.com',:nombre => 'Alberto', :apellido => 'Aninstein', :dni => 222222, :inicio_actividad => "Date.parse('1999-04-2')"
 
 ciudad_1 = City.find_or_create_by(nombre: "La Plata")
 ciudad_2 = City.find_or_create_by(nombre: "Cordoba")
@@ -44,12 +44,6 @@ ruta3 = Route.find_or_create_by(initial_city_id: ciudad_5.id, destination_city_i
 ruta4 = Route.find_or_create_by(initial_city_id: ciudad_1.id, destination_city_id: ciudad_4.id, nombre: ciudad_1.nombre + ' - ' + ciudad_4.nombre, duracion: '8 hs');
 ruta5 = Route.find_or_create_by(initial_city_id: ciudad_3.id, destination_city_id: ciudad_5.id, nombre: ciudad_3.nombre + ' - ' + ciudad_5.nombre, duracion: '11 hs');
 
-Chofer.find_or_create_by(nombre: "Jorge", apellido: "Iess",dni: 25589319,inicio_actividad: Date.parse("2006-04-2") )
-Chofer.find_or_create_by(nombre: "Juan", apellido: "Ortis",dni: 12654789,inicio_actividad: Date.parse("2015-06-25"))
-Chofer.find_or_create_by(nombre: "Chavo", apellido: "Del Ocho",dni: 40654987,inicio_actividad: Date.parse("2023-05-3"))
-Chofer.find_or_create_by(nombre: "Walter", apellido: "White",dni: 15369258,inicio_actividad: Date.parse("2000-07-7"))
-Chofer.find_or_create_by(nombre: "Rust", apellido: "Cohle",dni: 29753951,inicio_actividad: Date.parse("2011-08-25"))
-Chofer.find_or_create_by(nombre: "Pedro", apellido: "Ibañes",dni: 33453875,inicio_actividad: Date.parse("2003-05-12"))
 
 combi1 = Bus.find_or_create_by(asientos: 30, tipo:"Cómoda", patente:"ASD 123")
 combi2 = Bus.find_or_create_by(asientos: 15 , tipo:"Super-cómoda", patente:"DSA 321")
