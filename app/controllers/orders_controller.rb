@@ -85,6 +85,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if params[:order][:additional_ids].present?
+
       extras = params[:order][:additional_ids]
       extras.each do |e|
           eTabla = Additional.find(e)
@@ -92,10 +93,8 @@ class OrdersController < ApplicationController
           eTabla.save 
       end 
     end 
-
       if @order.save
-         #stock = @extra.stock - 1
-         #@extra.update(stock: stock)
+         @order.additional_ids = params[:order][:additional_ids]
          redirect_to orders_path, notice: 'Su orden se genero exitosamente'
       else
          redirect_to session.delete(:return_to) , alert: 'Su tarjeta de credito no es valida. Seleccione otra tarjeta.'

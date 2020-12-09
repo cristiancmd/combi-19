@@ -1,5 +1,6 @@
 class Additional < ApplicationRecord
-		
+	 has_and_belongs_to_many :orders
+
 	 validates :nombre, presence: true
 	 validates :precio, :numericality => { :greater_than_or_equal_to => 0 ,message:" Debe ser mayor a 0"}
 	 validates :stock, :numericality => { :greater_than_or_equal_to => 0 , message:" Debe ser mayor a 0"}

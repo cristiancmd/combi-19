@@ -26,12 +26,7 @@
 			<td><%= '$ ' + @order.cobro.to_s %>  </td>
 			<td><%= @order.trip.bus.tipo %>  </td>
 			<td><%= @order.trip_id %>  </td>
-			<% if !@order.additional_id.nil? %>
-				<td><%= @order.additional_id.nombre %>  </td>
-			<% else %>
-			<td><%= '-' %></td>
-			<% end %>
- 
+			<td><%= @order.additionals.map { |additional| additional.nombre }.join(', ') %>  </td> 
 		</tr>
 		
 
