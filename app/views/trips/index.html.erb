@@ -3,11 +3,11 @@
 <br>
 <div>
 
-	
+			<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+
 
 	<% if current_admin or current_chofer %>
 	<% if current_admin %>
-		<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
 		<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
 	<% end %>
 </div> <br>

@@ -8,7 +8,7 @@ class TripsController < ApplicationController
 		if (current_chofer)
 			
 			@trip = Trip.where(chofer_id: current_chofer.id).order(horario: :asc)
-			byebug
+			#byebug
 		end
 	end
 	def show
