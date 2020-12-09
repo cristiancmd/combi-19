@@ -5,6 +5,11 @@ class TripsController < ApplicationController
 	def index
 		
 		@trip = Trip.all.order(horario: :desc)
+		if (current_chofer)
+			
+			@trip = Trip.where(chofer_id: current_chofer.id)
+			byebug
+		end
 	end
 	def show
 		@trip = Trip.find(params[:id]) 

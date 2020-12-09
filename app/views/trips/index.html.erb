@@ -3,14 +3,15 @@
 <br>
 <div>
 
-<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+	<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
 
-<% if current_admin %>
-<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
-
+	<% if current_admin or current_chofer %>
+	<% if current_admin %>
+		<%= link_to 'Nuevo viaje', new_trip_path, class:"btn btn-primary" %> 
+	<% end %>
 </div> <br>
 <table class="table table-striped">
-		<thead class="thead">
+	<thead class="thead">
 		<tr>
 			<th>Ruta</th>
 			<th>Dia y horario </th>
@@ -20,41 +21,32 @@
 			<th>Tarifa</th>
 			
 		</tr>
-		</thead>
-		<% @trip.each do |t| %>
-		<tr>
-				
-			<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
-			<td><%=  t.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
-			<td><%=  t.chofer.nombre_apellido  %>  </td>
-			<td><%=  t.bus.patente  %>  </td>
-			<td><%=  t.bus.asientos  %>  </td>
-			
-			<td><%= t.rate %></td>
-			<td> <%= link_to 'Editar', edit_trip_path(t), class:"btn btn-outline-primary" %> </td>
-			<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
-			
-			
+	</thead>
+	<% @trip.each do |t| %>
+	<tr>
 
-		</tr>
+		<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
+		<td><%=  t.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
+		<td><%=  t.chofer.nombre_apellido  %>  </td>
+		<td><%=  t.bus.patente  %>  </td>
+		<td><%=  t.bus.asientos  %>  </td>
+
+		<td><%= t.rate %></td>
+		<% if current_admin %>
+		<td> <%= link_to 'Editar', edit_trip_path(t), class:"btn btn-outline-primary" %> </td>
+		<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 		<% end %>
 
-	</table>	
+		<% if current_chofer %>
+		<td> <%= link_to 'Cancelar viaje', t , class:"btn btn-outline-primary" %> </td>
+		<td> <%= button_to 'Gestionar viaje', t ,class:"btn btn-outline-danger" %></td>
+		<% end %>
+	</tr>
+	<% end %>
 
-	
+</table>	
 
-	
 <% end %>
-
-
-
-
-
-
-
-<div><br>
-
-</div>
 
 
 

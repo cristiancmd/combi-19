@@ -83,7 +83,16 @@ class OrdersController < ApplicationController
     
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
-    
+
+    if params[:order][:additional_ids].present?
+      extras = params[:order][:additional_ids]
+      extras.each do |e|
+          eTabla = Additional.find(e)
+          eTabla.stock = eTabla.stock - 1
+          eTabla.save 
+      end 
+    end 
+
       if @order.save
          #stock = @extra.stock - 1
          #@extra.update(stock: stock)

@@ -68,10 +68,12 @@
 		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
 		    <% if @extras %>
 		    <li class="list-group-item"><h5>EXTRA</h5>
-		    <% @extras.each do |e|%>
-		    <%=  e.nombre %> </br> Precio: $ <%=  e.precio  %></br></br>
-		    
- 			 <% end %>
+		    <% if @extras %>	
+			    <% @extras.each do |e|%>
+			    <%=  e.nombre %> </br> Precio: $ <%=  e.precio  %></br></br>
+			    
+	 			<% end %>
+ 			<% end %>
 		    </li>
 		    <% end %>
 		  </ul>
