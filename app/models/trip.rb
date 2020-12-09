@@ -2,7 +2,7 @@ class Trip < ApplicationRecord
 	has_many :chofers
 	has_many :routes
 	has_many :buses
-	
+	has_many :orders, validate: false
 
 	belongs_to :chofer, class_name: 'Chofer'
 	belongs_to :bus, class_name: 'Bus'
@@ -11,7 +11,6 @@ class Trip < ApplicationRecord
 
 #validaciones
 	validates :horario, presence: {message:": Debe seleccionar horario y dia!"}
-	
 
 	validates :chofer, presence: {message:": Debe seleccionar un chofer!"}
 	validates :bus, presence: {message:": Debe seleccionar combi!"}
