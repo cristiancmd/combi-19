@@ -7,7 +7,7 @@ class TripsController < ApplicationController
 		@trip = Trip.all.order(horario: :desc)
 		if (current_chofer)
 			
-			@trip = Trip.where(chofer_id: current_chofer.id)
+			@trip = Trip.where(chofer_id: current_chofer.id).order(horario: :asc)
 			byebug
 		end
 	end

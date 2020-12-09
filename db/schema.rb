@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 2020_12_07_203527) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "additionals_orders", id: false, force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "additional_id"
+    t.index ["additional_id"], name: "index_additionals_orders_on_additional_id"
+    t.index ["order_id"], name: "index_additionals_orders_on_order_id"
+  end
+
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,8 +83,6 @@ ActiveRecord::Schema.define(version: 2020_12_07_203527) do
     t.decimal "cobro"
     t.boolean "canceled", default: false
     t.decimal "refunded"
-    t.integer "additional_id"
-    t.index ["additional_id"], name: "index_orders_on_additional_id"
     t.index ["trip_id"], name: "index_orders_on_trip_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -130,7 +135,6 @@ ActiveRecord::Schema.define(version: 2020_12_07_203527) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "orders", "additionals"
   add_foreign_key "orders", "trips"
   add_foreign_key "orders", "users"
   add_foreign_key "routes", "cities", column: "destination_city_id"

@@ -38,12 +38,12 @@
 		<%= form.hidden_field :user_id, value: current_user.id %>
  		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
  		 
- 		<% if @extra %>
- 		<%= form.hidden_field :additional_ids, value: 'additional_ids[]' %> 
- 		<%= form.hidden_field :cobro, value: @total %>
-		<% else %>
-			<%= form.hidden_field :cobro, value: @total %>
+ 		<% if params[:additional_ids] %>
+	 		<% params[:additional_ids].each do |additional| %>
+	   		<%= form.hidden_field :additional_ids, multiple: true, value: additional %>
+			<% end %>
 		<% end %>
+			<%= form.hidden_field :cobro, value: @total %>
  		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
  		<%= link_to 'Cancelar', new_search_path , class: "btn btn-primary btn-lg"%>
     <% end %>  
