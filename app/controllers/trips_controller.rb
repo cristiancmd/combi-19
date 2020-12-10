@@ -71,11 +71,15 @@ class TripsController < ApplicationController
   	end
   def cancel
   	@Trip = Trip.find(params[:viaje])
+
+
+
+
  	if @Trip.undiscarded?
 	 	@orders = @Trip.orders
 	 	@orders.each do |order|
 	 		order.refunded = order.cobro;
-	 		byebug
+	 		order.canceled = true;
 	 		order.save
 	 	end
 	  	@Trip.discard
