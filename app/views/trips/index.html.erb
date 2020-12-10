@@ -2,8 +2,8 @@
 
 <br>
 <div>
+		<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
 
-			<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
 
 
 	<% if current_admin or current_chofer %>
@@ -40,9 +40,13 @@
 
 		<% if current_chofer %>
 		
-		<td> <%= button_to 'Gestionar viaje', t ,class:"btn btn-outline-danger" %></td>
+		<td> <%= button_to 'Gestionar viaje', t ,class:"btn btn-outline-primary" %></td>
 		<% end %>
-		<td> <%= link_to 'Cancelar viaje', t , class:"btn btn-outline-primary" %> </td>
+		<% if t.discarded? %>
+			<td> <%= link_to 'este viaje se encuentra CANCELADO, te quedo claro?', '', class:"btn btn-outline-danger" %> </td>
+		<% else %>
+			<td> <%= link_to 'Cancelar viaje', trips_cancel_path(viaje: t) , data: { confirm: "Esta acción tiene como consecuencia la cancelación del viaje, el dinero será devuelto a todos los clientes y no es posible anular esta acción." + "\r\r\n" + "¿Está seguro de continuar?"  }, class:"btn btn-outline-primary" %> </td>
+		<% end %>
 	</tr>
 	<% end %>
 

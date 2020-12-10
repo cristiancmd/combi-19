@@ -1,4 +1,5 @@
 class Trip < ApplicationRecord
+	include Discard::Model
 	has_many :chofers
 	has_many :routes
 	has_many :buses

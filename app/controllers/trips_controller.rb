@@ -1,14 +1,12 @@
 class TripsController < ApplicationController
 	before_action :set_trip, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_admin! , except: [:show, :index]
+	before_action :authenticate_admin! , except: [:show, :index, :cancel ]
 	
 	def index
 		
 		@trip = Trip.all.order(horario: :desc)
 		if (current_chofer)
-			
-			@trip = Trip.where(chofer_id: current_chofer.id).order(horario: :asc)
-			#byebug
+			@trip = Trip.where(chofer_id: current_chofer.id).where("horario > ?", Time.current()).order(horario: :asc)
 		end
 	end
 	def show
@@ -71,7 +69,25 @@ class TripsController < ApplicationController
 		end	
 
   	end
-  
+  def cancel
+  	@Trip = Trip.find(params[:viaje])
+
+
+
+
+ 	if @Trip.undiscarded?
+	 	@orders = @Trip.orders
+	 	@orders.each do |order|
+	 		order.refunded = order.cobro;
+	 		order.canceled = true;
+	 		order.save
+	 	end
+	  	@Trip.discard
+	  	redirect_to trips_path, notice: "El viaje fue cancelado, el dinero fue devuelto y usted es un IRRESPONSABLE"
+  	else
+  		redirect_to trips_path, notice: "El viaje ya se encuentra cancelado."
+  	end
+  end
 
   
 

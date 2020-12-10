@@ -6,17 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#Trip.destroy_all
 
-#Route.destroy_all
-#City.destroy_all
-#Chofer.destroy_all
-#User.destroy_all
 
+
+City.destroy_all
+Chofer.destroy_all
+User.destroy_all
+Route.destroy_all
 Admin.destroy_all
 Bus.destroy_all
 Additional.destroy_all
- 
+Trip.destroy_all
 user1 = User.create!  :name => 'John', :email => 'test@test.com', :password => 123456 , :password_confirmation => 123456, :dni => 37125636
 user2 = User.create! :name => 'Hernan', :email => 'hernan.k97@gmail.com', :password => 'asdasd123' , :password_confirmation => 'asdasd123', :dni => 25123987, date_of_birth: Date.parse("1997-01-05")
 

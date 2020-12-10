@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'hirb'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'pg_search'
+gem 'discard', '~> 1.2'
