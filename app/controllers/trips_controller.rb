@@ -5,6 +5,7 @@ class TripsController < ApplicationController
 	def index
 		
 		@trip = Trip.all.order(horario: :desc)
+		@tiempo = Time.now.strftime("%d/%m/%Y %H:%M")
 		if (current_chofer)
 			@trip = Trip.where(chofer_id: current_chofer.id).where("horario > ?", Time.current()).order(horario: :asc)
 		end
@@ -72,18 +73,19 @@ class TripsController < ApplicationController
   def cancel
   	@Trip = Trip.find(params[:viaje])
 
-
-
-
  	if @Trip.undiscarded?
 	 	@orders = @Trip.orders
-	 	@orders.each do |order|
-	 		order.refunded = order.cobro;
-	 		order.canceled = true;
-	 		order.save
+	 	if not @orders.empty?
+		 	@orders.each do |order|
+		 		order.refunded = order.cobro;
+		 		order.canceled = true;
+		 		order.save
+		 	end
+	 		redirect_to trips_path, notice: "El viaje fue cancelado, el dinero fue devuelto a los pasajeros"
+	 	else
+	 		redirect_to trips_path, notice: "El viaje no tenía pasajeros, fue descartado exitosamente"
 	 	end
-	  	@Trip.discard
-	  	redirect_to trips_path, notice: "El viaje fue cancelado, el dinero fue devuelto y usted es un IRRESPONSABLE"
+	  	@Trip.discard	
   	else
   		redirect_to trips_path, notice: "El viaje ya se encuentra cancelado."
   	end
