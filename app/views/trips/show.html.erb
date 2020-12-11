@@ -1,1 +1,25 @@
-<p>  Todos los pasajes de cada viaje? </p>
+<h2>Pasajes</h2>
+
+<table class="table table-striped">
+	<thead class="thead">
+		<tr>
+			<th>Nombre</th>
+			
+		</tr>
+	</thead>
+
+	<% @order.each do |t| %>
+	<tr>
+
+		<td><%=  User.find(t.user_id).name    %> </td>
+		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-danger" %> </td>
+		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
+		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-danger" %> </td>
+
+
+	</tr>
+	<% end %>
+
+</table>	
+
+

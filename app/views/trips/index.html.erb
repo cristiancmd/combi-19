@@ -23,6 +23,9 @@
 			
 		</tr>
 	</thead>
+	<% if @trip.empty?  %>
+		<h1 style="color:red;"> Usted no tiene viajes disponibles </h1>
+	<% end %>
 	<% @trip.each do |t| %>
 	<tr>
 
@@ -39,7 +42,7 @@
 		<% end %>
 
 		<% if current_chofer %>
-			<td> <%= button_to 'Gestionar viaje', t ,class:"btn btn-outline-primary" %></td>
+			<td> <%= link_to 'Gestionar viaje', trip_path(t) ,class:"btn btn-outline-primary" %></td>
 		<% end %>
 		<% if t.discarded? %>
 			<td> <%= link_to 'CANCELADO', '', class:"btn btn-outline-danger" %> </td>

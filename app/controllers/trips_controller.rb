@@ -5,13 +5,12 @@ class TripsController < ApplicationController
 	def index
 		
 		@trip = Trip.all.order(horario: :desc)
-		@tiempo = Time.now.strftime("%d/%m/%Y %H:%M")
 		if (current_chofer)
 			@trip = Trip.where(chofer_id: current_chofer.id).where("horario > ?", Time.current()).order(horario: :asc)
 		end
 	end
 	def show
-		@trip = Trip.find(params[:id]) 
+		@order = Trip.find(params[:id]).orders 
 		
 	end
 	def new
