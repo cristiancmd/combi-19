@@ -19,6 +19,7 @@
 			<th>Chofer</th>
 			<th>Combi</th>
 			<th>Capacidad</th>
+			<th>Tipo</th>
 			<th>Tarifa</th>
 			
 		</tr>
@@ -27,13 +28,20 @@
 		<h1 style="color:red;"> Usted no tiene viajes disponibles </h1>
 	<% end %>
 	<% @trip.each do |t| %>
+	
+	
+	<% if t.discarded? %>
+	<tr class="table-danger">
+	<% else %>	
 	<tr>
+	<% end %>	
 
 		<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
 		<td><%=  t.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
 		<td><%=  t.chofer.nombre_apellido  %>  </td>
 		<td><%=  t.bus.patente  %>  </td>
 		<td><%=  t.bus.asientos  %>  </td>
+		<td><%=  t.bus.tipo  %>  </td>
 
 		<td><%= t.rate %></td>
 		<% if current_admin %>
@@ -41,14 +49,15 @@
 		<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 		<% end %>
 
-		<% if current_chofer %>
-			<td> <%= link_to 'Gestionar viaje', trip_path(t) ,class:"btn btn-outline-primary" %></td>
+		<% if current_chofer   %>
+			<td > <%= link_to 'GESTIONAR', trip_path(t) ,class:"btn btn-outline-primary" %></td>
+			
 		<% end %>
 		<% if t.discarded? %>
-			<td> <%= link_to 'CANCELADO', '', class:"btn btn-outline-danger" %> </td>
+			<td > <%= link_to 'CANCELADO', "", class:"btn btn-outline-danger"  %> </td>
 		<% else %>
 			<% if not t.horario.past? %>
-			<td> <%= link_to 'Cancelar viaje', trips_cancel_path(viaje: t) , data: { confirm: "Esta acción tiene como consecuencia la cancelación del viaje, el dinero será devuelto a todos los clientes y no es posible anular esta acción." + "\r\r\n" + "¿Está seguro de continuar?"  }, class:"btn btn-outline-primary" %> </td>
+			<td> <%= link_to 'Cancelar', trips_cancel_path(viaje: t) , data: { confirm: "Esta acción tiene como consecuencia la cancelación del viaje, el dinero será devuelto a todos los clientes y no es posible anular esta acción." + "\r\r\n" + "¿Está seguro de continuar?"  }, class:"btn btn-outline-primary" %> </td>
 			<% end %>
 		<% end %>
 	</tr>
