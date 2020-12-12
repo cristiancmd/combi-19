@@ -1,4 +1,5 @@
 class Trip < ApplicationRecord
+	attr_accessor :start, :end, :dias
 	include Discard::Model
 	has_many :chofers
 	has_many :routes

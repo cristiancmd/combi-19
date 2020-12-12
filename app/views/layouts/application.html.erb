@@ -22,6 +22,19 @@
 		<div class="alert alert-success" role="alert"><%= notice %></p></div>
 		<% end %>
 
+		<% if !!flash[:errores] %>
+  			<% flash[:errores].each do |e| %>
+  	 		<div class="alert alert-warning" role="alert"><p><%= e %></p> </div>
+   	   		<% end %>
+  		<% end %>
+		
+  		<% if !!flash[:aciertos] %>
+  			<% flash[:aciertos].each do |e| %>
+  	 		<div class="alert alert-success" role="alert"><p><%= e %></p> </div> 
+   	   		<% end %>
+  		<% end %>
+
+
 		
 		<% if flash[:alert] %>
 		<div class="alert alert-danger" role="alert"><%= alert %></p></div>

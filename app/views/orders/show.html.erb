@@ -4,14 +4,14 @@
 <table class="table table-striped table-bordered table-hover">
 		<thead class="thead">
 		<tr>
-			<th>order ID</th>
+			
 			
 			<th>Ruta</th>
 			<th>Fecha del viaje</th>
 			<th>user</th>
 			<th>abonado</th>
 			<th>Combi</th>
-			<th>trip id</th>
+		
 			<th>Extras</th>
 			
 		</tr>
@@ -19,13 +19,13 @@
 		
 		<tr>
 			
-			<td><%= @order.id %>  </td>
+			
 			<td><%= @order.trip.route.origin_destination %>  </td>
 			<td><%= @order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
 			<td><%= @order.user.name %>  </td>
 			<td><%= '$ ' + @order.cobro.to_s %>  </td>
 			<td><%= @order.trip.bus.tipo %>  </td>
-			<td><%= @order.trip_id %>  </td>
+			
 			<td><%= @order.additionals.map { |additional| additional.nombre }.join(', ') %>  </td> 
 		</tr>
 		
@@ -47,9 +47,9 @@
 <% if @order.trip.horario.after?(DateTime.current) %>
 
 	<% if @order.trip.horario.after?(DateTime.current + 2) && @order.canceled==false %>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , class: "btn btn-primary" %>
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , data: { confirm: '¿ Está seguro de cancelar el viaje? Esta accion es irreversible' }, class: "btn btn-primary" %>
 	<% elsif @order.canceled==false %>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, class: "btn btn-primary" %>
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, data: { confirm: '¿ Está seguro, si cancela el viaje solo recibira el 50% del dinero ?' }, class: "btn btn-primary" %>
 
 
 	<% end %>

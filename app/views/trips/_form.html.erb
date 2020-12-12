@@ -14,32 +14,50 @@
 
   
   <div class="field">
-    <%= form.label :Dia_y_Horario %>
+   <%= form.label :"Dia y horario *" %>
     <%= form.datetime_field :horario, min: Date.today %>
   </div>
 
   <div class="field">
-    <%= form.label :Chofer %>
+   <%= form.label :"Chofer *" %>
     <%= form.collection_select( :chofer_id, Chofer.all , :id, :nombre_apellido, prompt: "Seleccione" ) %>
   </div>
 
   <div class="field">
-    <%= form.label :Combi %>
+     <%= form.label :"Combi *" %>
     <%= form.collection_select( :bus_id,  Bus.all, :id, :patente, prompt: "Seleccione" ) %>
   </div>
 
   <div class="field">
-    <%= form.label :Ruta %>
+    <%= form.label :"Ruta *" %>
     <%= form.collection_select( :route_id ,  Route.all, :id, :origin_destination ,prompt: "Seleccione" ) %>
   </div> 
  
 
   <div class="field">
-    <%= form.label :Tarifa %>
-    <%= form.number_field :rate, :step => 0.05%>
+    <%= form.label :"Tarifa *" %>
+    <%= form.number_field :rate, :step => 0.25, :placeholder => "0.00" %>
+
   </div>
   
 
+<hr>
+ <h3>Programar viaje recurrente</h3>
+<div class="field">
+    <%= form.label :"Seleccione una fecha final, y dia/s sólo para programar viajes recurrentes" %>
+    <%= form.date_field :end, min: Date.today%>
+</div>
+
+<%= collection_check_boxes(:dias ,:array, { 'Domingo': 0, 'Lunes': 1, 'Martes': 2, 'Miercoles': 3, 'Jueves': 4, 'Viernes': 5, 'Sabado': 6}, :last, :first) do |b| %>
+  <div class="form-check form-check">
+    <%= b.check_box class: 'form-check-input' %>
+    <%= b.label class: 'form-check-label' %> 
+  </div>
+<% end %>
+      
+<hr>
+
+<p> Los campos marcados con * son requeridos. </p>  
 
   
     <%= form.submit "Guardar" , class: "btn btn-danger" %>
@@ -48,3 +66,8 @@
 
         
 <% end %>
+
+
+<br><br>
+
+

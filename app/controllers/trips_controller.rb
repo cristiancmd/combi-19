@@ -17,23 +17,56 @@ class TripsController < ApplicationController
 		@trip = Trip.new
 	end
 
+
 	def create
-		@trip = Trip.new(trip_params)
-		if 	Trip.tiene_chofer_dia(trip_params["chofer_id"],trip_params["horario"]).exists?	
-			redirect_to new_trip_path, alert: 'El chofer no esta disponible en esa fecha, seleccione otro chofer'
 		
-		elsif Trip.tiene_combi_dia(trip_params["bus_id"],trip_params["horario"]).exists?	
-			redirect_to new_trip_path, alert: 'La combi no esta disponible en esa fecha, seleccione otra combi'
+		if (params[:trip][:horario]).empty? or (params[:trip][:chofer_id]).empty? or (params[:trip][:bus_id]).empty? or (params[:trip][:route_id]).empty? or (params[:trip][:rate]).empty? or (params[:trip][:rate]).to_i == 0
+			redirect_to new_trip_path , alert: 'Debe completar todos los campos requeridos antes de guardar un viaje'
+
+		elsif !(params[:trip][:end]).empty? && (params[:dias][:array]).reject(&:empty?).empty?
+			redirect_to new_trip_path , alert: 'Debe seleccionar al menos un dia de la semana para realizar viajes recurrentes'
+		elsif !(params[:trip][:end]).empty? && (params[:trip][:end]) < (params[:trip][:horario])
+			redirect_to new_trip_path , alert: 'Debe seleccionar una fecha final mayor a la fecha de origen para viajes recurrentes'
+
 		else	
-			respond_to do |format|
-				if @trip.save
-					format.html { redirect_to trips_path , notice: 'Viaje creado exitosamente.' }
-				else
-					format.html { render :new }
-		 		end
+
+			start_date = (params[:trip][:horario]).to_date
+			if (params[:trip][:end]).empty?
+				end_date = (params[:trip][:horario]).to_date
+				my_days = [0,1,2,3,4,5,6]
+			else	
+				end_date = (params[:trip][:end]).to_date
+					
+				my_days = (params[:dias][:array]).reject(&:empty?).map(&:to_i)
 			end
-		end	
+				fecha = (start_date..end_date).to_a.select {|k| my_days.include?(k.wday)}				
+				time1 = Time.parse((params[:trip][:horario]))				
+				flash[:errores] = []
+				flash[:aciertos] = []
+				
+				fecha.each do |h|		        	
+		        	d = h.to_date
+		        	dt = DateTime.new(d.year, d.month, d.day, time1.hour, time1.min )
+					
+					datos = trip_params.merge(horario: dt)
+					@trip = Trip.new(datos)
+					if Trip.tiene_chofer_dia(trip_params["chofer_id"], dt  ).exists?	
+						flash[:errores] << "Chofer no disponible fecha: #{dt.strftime("%-d/%-m/%y  |  %H:%M ")} "
+						next			
+					end
+					if Trip.tiene_combi_dia(trip_params["bus_id"],  dt ).exists?					
+						flash[:errores] << "Combi no disponible fecha: #{dt.strftime("%-d/%-m/%y  |  %H:%M ")} "
+						next	
+					end
+
+					if @trip.save
+						flash[:aciertos] << "Programacion exitosa: #{dt.strftime("%-d/%-m/%y  |  %H:%M ")}"
+					end	
+			end	
+			redirect_to trips_path 
+		end
 	end
+
 
 	def edit
 		@trip = Trip.find(params[:id])
@@ -100,7 +133,7 @@ class TripsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def trip_params
-    	params.require(:trip).permit(:horario,:fecha_inicio, :bus_id, :route_id, :chofer_id, :rate)
+    	params.require(:trip).permit(:horario,:fecha_inicio, :bus_id, :route_id, :chofer_id, :rate, :start, :end, :fecha)
     end
 
 end
