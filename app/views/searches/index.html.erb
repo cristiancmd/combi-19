@@ -53,7 +53,7 @@
 		</tr>
 
 	<% else %>
-		<%# if !s.discarded? %>
+		
 		<tr>
 			<td><%= s.route.origin_destination %>  </td>
 			<td><%= s.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%> </td>
@@ -65,7 +65,7 @@
 			 
 
 		</tr>
-		<%# end %>
+		
 		<% end %>
 		<% end %>
 
