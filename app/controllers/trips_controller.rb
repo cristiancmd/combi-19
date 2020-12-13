@@ -10,7 +10,9 @@ class TripsController < ApplicationController
 		end
 	end
 	def show
-		@order = Trip.find(params[:id]).orders 
+		if (current_chofer)
+			@order = Trip.find(params[:id]).orders 
+		end
 		
 	end
 	def new

@@ -14,6 +14,8 @@
 <table class="table table-striped">
 	<thead class="thead">
 		<tr>
+			
+			<th></th>
 			<th>Ruta</th>
 			<th>Dia y horario </th>
 			<th>Chofer</th>
@@ -35,9 +37,11 @@
 	<% else %>	
 	<tr>
 	<% end %>	
+		
+		<td> <%= link_to '+', orders_path(t),class:"btn btn-outline-primary" %> </td>
 
 		<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
-		<td><%=  t.horario.strftime("%-d/%-m/%y: %H:%M %Z")  %>  </td>
+		<td><%=  t.horario.strftime("%-d/%-m/%y - %H:%M ")  %>  </td>
 		<td><%=  t.chofer.nombre_apellido  %>  </td>
 		<td><%=  t.bus.patente  %>  </td>
 		<td><%=  t.bus.asientos  %>  </td>
@@ -49,7 +53,7 @@
 		<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 		<% end %>
 
-		<% if current_chofer   %>
+		<% if current_chofer%>
 			<td > <%= link_to 'GESTIONAR', trip_path(t) ,class:"btn btn-outline-primary" %></td>
 			
 		<% end %>

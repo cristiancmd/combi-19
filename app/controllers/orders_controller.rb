@@ -1,20 +1,25 @@
 class OrdersController < ApplicationController
- before_action :authenticate_user! #, except: [:show, :index]
+ before_action :authenticate_user! , except: [:show, :index]
  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
   def index
     #todos los viajes comprados del usuario
-    @orders = Order.order(id: :desc)
-    @orders =@orders.where(user_id: current_user.id)
-    orderdesc ||= []
-    @orders.each do |order|
-      if(order.trip.horario.future?)
-        orderdesc << order
-       end
+    if (current_user)
+      @orders = Order.order(id: :desc)
+      @orders =@orders.where(user_id: current_user.id)
+      orderdesc ||= []
+      @orders.each do |order|
+        if(order.trip.horario.future?)
+          orderdesc << order
+         end
+      end
+      @orders = orderdesc
+    elsif current_admin
+      
+      @orders =Order.where(trip_id: params[:format])
     end
-    @orders = orderdesc
-    
+#La Plata - Cordoba 14/12/20 | 00:00 hs
   end
 
   def show

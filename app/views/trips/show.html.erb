@@ -1,5 +1,11 @@
 <h2>Pasajes</h2>
 
+
+
+<% if @order.empty? %>
+	<p>No se han comprado pasajes para este viaje. </p> 
+<% else %>
+
 <table class="table table-striped">
 	<thead class="thead">
 		<tr>
@@ -8,10 +14,13 @@
 		</tr>
 	</thead>
 
+	  
+
+
 	<% @order.each do |t| %>
 	<tr>
 
-		<td><%=  User.find(t.user_id).name    %> </td>
+		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
 		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-danger" %> </td>
@@ -22,4 +31,6 @@
 
 </table>	
 
+<% end %>
 
+<%= link_to 'Volver', :back , class: "btn btn-primary"%>

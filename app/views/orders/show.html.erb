@@ -47,11 +47,13 @@
 <% if @order.trip.horario.after?(DateTime.current) %>
 
 	<% if @order.trip.horario.after?(DateTime.current + 2) && @order.canceled==false %>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , data: { confirm: '¿ Está seguro de cancelar el viaje? Esta accion es irreversible' }, class: "btn btn-primary" %>
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id} , data: { confirm: '¿ Está seguro de cancelar el viaje? Esta accion es irreversible' }, class: "btn btn-secondary" %>
 	<% elsif @order.canceled==false %>
-		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, data: { confirm: '¿ Está seguro, si cancela el viaje solo recibira el 50% del dinero ?' }, class: "btn btn-primary" %>
+		  <%= link_to 'Cancelar viaje', { controller: "orders", action: "cancel_order" , order_id: @order.id}, data: { confirm: '¿ Está seguro, si cancela el viaje solo recibira el 50% del dinero ?' }, class: "btn btn-secondary" %>
 
 
 	<% end %>
 <% end %>
+<br><br>
+<%= link_to 'Volver', :back  , class: "btn btn-primary"%>
 
