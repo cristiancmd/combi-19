@@ -1,4 +1,8 @@
+<% if @order.empty?  %>
+	<h1 style="color:red;"> El viaje no posee pasajes vendidos </h1>
+<% else %>
 <h2>Pasajes</h2>
+
 
 <table class="table table-striped">
 	<thead class="thead">
@@ -7,10 +11,10 @@
 			
 		</tr>
 	</thead>
-
+	
 	<% @order.each do |t| %>
 	<tr>
-
+		
 		<td><%=  User.find(t.user_id).name    %> </td>
 		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
@@ -22,4 +26,4 @@
 
 </table>	
 
-
+<% end %>
