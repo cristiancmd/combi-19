@@ -10,8 +10,12 @@ class TripsController < ApplicationController
 		end
 	end
 	def show
-		@order = Trip.find(params[:id]).orders 
+		if (current_chofer)
+			@order = Trip.find(params[:id]).orders.where(canceled: false)  # sin viajes cancelados
+		end
 		
+		@trip = Trip.find(params[:id])
+
 	end
 	def new
 		@trip = Trip.new

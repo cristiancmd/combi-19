@@ -1,10 +1,12 @@
 class Order < ApplicationRecord
+	
+
 	belongs_to :user
 	belongs_to :trip
 	has_and_belongs_to_many :additionals
 	
-	validates :tarjeta, presence: true,  format: { with: /[0-9]{12}(?:[0-9]{3})?/ } #{message:"Debe ingresar una tarjeta!"}
-	validate :validar_fondos
+	validates :tarjeta, presence: true,  format: { with: /[0-9]{12}(?:[0-9]{3})?/ } 
+	validate :validar_fondos 
 	
 	scope :tiene_viaje, -> (v) { where(trip_id: v) }	
 

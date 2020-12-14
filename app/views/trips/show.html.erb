@@ -1,24 +1,40 @@
-<% if @order.empty?  %>
-	<h1 style="color:red;"> El viaje no posee pasajes vendidos </h1>
-<% else %>
+
+<% if current_chofer or current_admin %>
 <h2>Pasajes</h2>
+<br>
+  <span> <%= link_to ' Vender ', orders_venta_chofer_path(@trip.id), class:"btn btn-danger btn-lg" %> </span> 
+   <span> <%= link_to 'Volver', trips_path , class:"btn btn-primary btn-lg"%></span> <br>
+
+<br>
+
+
+<% if @order.empty? %>
+	<hr>
+	<p>No se han comprado pasajes para este viaje. </p> 
+
+<% else %>
 
 
 <table class="table table-striped">
 	<thead class="thead">
 		<tr>
 			<th>Nombre</th>
+			<th>Email</th>
+			<th>DNI</th>
 			
 		</tr>
-	</thead>
-	
+
+
 	<% @order.each do |t| %>
 	<tr>
 		
-		<td><%=  User.find(t.user_id).name    %> </td>
-		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-danger" %> </td>
+		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
+		<td><%=  t.user.email   %> </td>
+		<td><%=  t.user.dni   %> </td>
+		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-primary" %> </td>
+		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
-		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-danger" %> </td>
+		
 
 
 	</tr>
@@ -27,3 +43,7 @@
 </table>	
 
 <% end %>
+
+
+<% end %>
+

@@ -1,21 +1,25 @@
+   <%  if (current_user) %>
     <h1>Mis pasajes</h1>
-
-<% if @orders.empty? %>
-
+   <% else %> 
+   <h1>Pasajes</h1>
+   <% end %>
+<% if @orders.empty? && current_user  %>
 	<p> Cuando compres un pasaje aparecerá aquí</p>
+<% elsif @orders.empty? && current_admin %>	
+	<p>No hay pasajes para este viaje.</p>
 <% else %>
 
 <table class="table table-striped table-bordered table-hover">
 		<thead class="thead">
 		<tr>
-			<th></th>
-			<th>order id</th>
+			<% if current_user %><th></th> <% end %>
+			<th>#Orden</th>
 			<th>Ruta</th>
 			<th>Fecha del viaje</th>
-			<th>user</th>
-			<th>abonado</th>
+			<th>Cliente</th>
+			<th>Abonado</th>
 			
-			<th>trip id</th>
+			<% if current_admin %><th>Devuelto</th><% end %>
 			
 		</tr>
 		</thead>
@@ -26,14 +30,15 @@
 	<% else %>	
 		<tr class="table-success">
 	<% end %>		
-			<td><%= link_to 'Ver', order_path(order) , class: "btn btn-primary"%> </td>
+			
+		<% if current_user %>	<td><%= link_to 'Ver', order_path(order)  , class: "btn btn-primary"%> </td><% end %>
 			<td><%= order.id %>  </td>
 			<td><%= order.trip.route.origin_destination %>  </td>
 			<td><%= order.trip.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M hs") %>  </td>
 			<td><%= order.user.name %>  </td>
 			<td><%= '$ ' + order.cobro.to_s %>  </td>
 			
-			<td><%= order.trip_id %>  </td>
+			<% if current_admin %><td><%=  order.refunded.to_s %></td><% end %>
  			
 
 
@@ -45,3 +50,7 @@
 	
 
 <% end %>
+<% if current_admin %>
+<%= link_to 'Volver', :back  , class: "btn btn-primary"%>
+<% end %>
+
