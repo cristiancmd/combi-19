@@ -7,9 +7,14 @@ class UserMailer < Devise::Mailer
 
   def welcome_reset_password_instructions(user)
     create_reset_password_token(user)
-    
-    mail(to: user.email, subject: 'Bienvenido a COMBI-19')
+    mail(to: user.email, subject: 'Bienvenido a COMBI-19!')
+
   end 
+
+  def test_send(email)
+    @email = email
+    mail(to: @email, subject: 'Test Send')
+  end
 
   private
 

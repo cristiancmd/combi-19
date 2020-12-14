@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
       
       @orders =Order.where(trip_id: params[:format])
     end
-#La Plata - Cordoba 14/12/20 | 00:00 hs
+
   end
 
   def show
