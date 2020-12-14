@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   #get 'order/show'
   #get 'order/new'
   #devise_for :admins, path: 'admin'
+  default_url_options :host => "localhost:3000"
+
   devise_for :admins, path_names: {
       sign_in: 'login', sign_out: 'logout',
       password: 'secret', confirmation: 'verification',

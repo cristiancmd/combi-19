@@ -34,6 +34,11 @@
    	   		<% end %>
   		<% end %>
 
+  		<% if !!flash[:error] %>
+  			<% flash[:error].each do |e| %>
+  	 		<div class="alert alert-danger" role="alert"><p><%= e %></p> </div> 
+   	   		<% end %>
+  		<% end %>
 
 		
 		<% if flash[:alert] %>

@@ -57,7 +57,7 @@
 		<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 		<% end %>
 
-		<% if current_chofer%>
+		<% if current_chofer && !t.discarded? %>
 			<td > <%= link_to 'Gestionar', trip_path(t) ,class:"btn btn-outline-primary" %></td>
 			
 		<% end %>

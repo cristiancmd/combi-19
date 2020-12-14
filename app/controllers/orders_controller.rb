@@ -96,12 +96,18 @@ class OrdersController < ApplicationController
     @user = User.where(email: (params[:order][:email])).first
     if @user.nil?
       @user = User.new(:email => params[:order][:email],:dni => params[:order][:dni], :password => 'password', :password_confirmation => 'password')
-      @user.save
+      if @user.save
+        UserMailer.welcome_reset_password_instructions(@user).deliver
+      else
+        flash.now[:error] = @user.errors.full_messages
+        render :venta_chofer
+      end  
     end  
     @order = Order.new(:user_id => @user.id, :trip_id => params[:order][:trip_id],:cobro => params[:order][:cobro] )
     if @order.save(validate: false)
       redirect_to session.delete(:return_to), notice: "Venta efectiva para usuario: #{@user.email} "
     else
+      flash.now[:error] = @order.errors.full_messages
       redirect_to session.delete(:return_to), alert: 'Venta no realizada, ocurrio un error'
     end
   end
