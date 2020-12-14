@@ -1,6 +1,9 @@
 <h2>Pasajes</h2>
+<br>
+  <p><span> <%= link_to 'Vender', orders_venta_chofer_path(@trip.id), class:"btn btn-primary" %> </span> </p>
 
-
+<br>
+<%= @trip.inspect %>
 
 <% if @order.empty? %>
 	<p>No se han comprado pasajes para este viaje. </p> 
@@ -10,6 +13,7 @@
 	<thead class="thead">
 		<tr>
 			<th>Nombre</th>
+			<th>Email</th>
 			
 		</tr>
 	</thead>
@@ -21,6 +25,7 @@
 	<tr>
 
 		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
+		<td><%=  t.user.email   %> </td>
 		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-danger" %> </td>

@@ -38,8 +38,9 @@
             </li>
         <% elsif current_chofer %>
             <li class="nav-item">
-                <%= link_to 'Mis pasajes', trips_path , class: "nav-link"%>
+                <%= link_to 'Viajes', trips_path , class: "nav-link"%>
             </li>
+            
         <% else %>   
             <li class="nav-item">
                 <%= link_to 'Buscar viajes', trips_path, class: "nav-link"%>

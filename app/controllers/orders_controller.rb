@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
- before_action :authenticate_user! , except: [:show, :index]
+ #before_action :authenticate_user! , except: [:show, :index, :venta_chofer, :create_efectivo]
  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
@@ -84,11 +84,33 @@ class OrdersController < ApplicationController
   	end	
   end
 
+  def venta_chofer  
+    @viaje = Trip.find_by id:(params[:format])
+    @order = Order.new
+    @total = @viaje.rate   
+    session[:return_to] ||= request.referer
+  end
+
+  def create_efectivo
+    
+    @user = User.where(email: (params[:order][:email])).first
+    if @user.nil?
+      @user = User.new(:email => params[:order][:email],:dni => params[:order][:dni], :password => 'password', :password_confirmation => 'password')
+      @user.save
+    end  
+    @order = Order.new(:user_id => @user.id, :trip_id => params[:order][:trip_id],:cobro => params[:order][:cobro] )
+    if @order.save(validate: false)
+      redirect_to session.delete(:return_to), notice: "Venta efectiva para usuario: #{@user.email} "
+    else
+      redirect_to session.delete(:return_to), alert: 'Venta no realizada, ocurrio un error'
+    end
+  end
+
   def create
     
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
-
+    
     if params[:order][:additional_ids].present?
 
       extras = params[:order][:additional_ids]

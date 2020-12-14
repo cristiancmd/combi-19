@@ -14,6 +14,8 @@ class TripsController < ApplicationController
 			@order = Trip.find(params[:id]).orders 
 		end
 		
+		@trip = Trip.find(params[:id])
+
 	end
 	def new
 		@trip = Trip.new
