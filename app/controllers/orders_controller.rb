@@ -92,7 +92,9 @@ class OrdersController < ApplicationController
   end
 
   def create_efectivo
-    
+    if (params[:order][:email]).empty? or (params[:order][:dni]).empty?
+      redirect_to session.delete(:return_to), alert: 'Debe completar los campos'
+    else
     @user = User.where(email: (params[:order][:email])).first
     if @user.nil?
       @user = User.new(:email => params[:order][:email],:dni => params[:order][:dni], :password => 'password', :password_confirmation => 'password')
@@ -110,6 +112,7 @@ class OrdersController < ApplicationController
       flash.now[:error] = @order.errors.full_messages
       redirect_to session.delete(:return_to), alert: 'Venta no realizada, ocurrio un error'
     end
+  end
   end
 
   def create
