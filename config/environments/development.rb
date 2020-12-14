@@ -42,6 +42,13 @@ Rails.application.configure do
   :port => '2525',
   :authentication => :cram_md5
 }
+
+ # config.action_mailer.perform_deliveries = true
+ # config.action_mailer.smtp_settings = {
+  #  address: 'localhost',
+  #  port: 1025
+ # }
+
   config.action_mailer.default_options = { from: 'noreply@combi.com' }
 
   # Don't care if the mailer can't send.
