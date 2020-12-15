@@ -13,7 +13,6 @@
 
 
 
-<%= form.hidden_field :user_id, value: @user.id %>
 
   <div class="field">
    <%= form.label :Temperatura_actual %>
@@ -90,6 +89,7 @@
   </div>
 
   <%=hidden_field_tag "viaje_id", @viaje %> 
+<%= form.hidden_field :user_id, value: @user.id %>
 
 <p> Los campos marcados con * son requeridos. </p>  
 

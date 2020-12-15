@@ -31,10 +31,24 @@
 		<td><%=  o.user.email   %> </td>
 		<td><%=  o.user.dni   %> </td>
 		<td> <%= link_to 'Planilla', new_planilla_path(o.user.id, viaje: @trip) , class:"btn btn-outline-danger" %> </td>
-		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
-		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
+		<% @planilla = Planilla.where(user_id: o.user.id).last %>
 		
+		<% if @planilla %>
+			
 
+			<% fecha = @planilla.created_at.change(day: @planilla.created_at.day-2) %>
+			<% if @planilla.created_at > fecha %>
+				<% if not @planilla.aceptado %>
+					<td> <%= link_to 'Aceptado', '', class:"btn btn-outline-success" %> </td>
+				<% else %>
+					<td> <%= link_to 'Rechazado', '', class:"btn btn-outline-danger" %> </td>
+				<% end %>
+			<% else %>
+				<td> <%= link_to 'No hay datos', '', class:"btn btn-outline-danger" %> </td>
+			<% end %>
+		<% else %>
+			<td> <%= link_to 'No hay datos', '', class:"btn btn-outline-danger" %> </td>
+		<% end %>
 
 	</tr>
 	<% end %>
