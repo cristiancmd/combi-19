@@ -1,7 +1,7 @@
 class PlanillasController < ApplicationController
 
 	before_action :set_bus, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_admin! #, except: [:show, :index]
+	before_action :authenticate_chofer! , except: [:show, :index]
 
 
 	def index
@@ -9,7 +9,10 @@ class PlanillasController < ApplicationController
 		
 	end	
 	def new
+		
 		@planilla = Planilla.new
+		@user = User.find((params[:format]))
+
 	end
 
 	def show
@@ -18,7 +21,16 @@ class PlanillasController < ApplicationController
 	def edit
 	end	
 
+	def aceptar
+		
+	end
+
+	def rechazar
+		
+		
+	end
 	def create
+			#byebug
 			@planilla = Planilla.new(planilla_params)
 			respond_to do |format|
 				if @planilla.save
@@ -38,7 +50,7 @@ class PlanillasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def planilla_params
-    	params.require(:planilla).permit(:temp, :ext14, :cont14, :sintomas, :fiebre, :garganta, :hipt, :eResp, :diabetes, :inmDep, :corazon, :hijos, :embarazada, :cFiebre)
+    	params.require(:planilla).permit(:temp, :ext14, :cont14, :sintomas, :fiebre, :garganta, :hipt, :eResp, :diabetes, :inmDep, :corazon, :hijos, :embarazada, :cFiebre,:user_id)
     	
     end
 

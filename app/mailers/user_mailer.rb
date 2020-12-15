@@ -11,10 +11,7 @@ class UserMailer < Devise::Mailer
 
   end 
 
-  def test_send(email)
-    @email = email
-    mail(to: @email, subject: 'Test Send')
-  end
+  
 
   private
 
