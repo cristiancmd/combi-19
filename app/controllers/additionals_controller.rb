@@ -4,7 +4,7 @@ class AdditionalsController < ApplicationController
 	before_action :is_logued?
 
 	def is_logued?
-      redirect_to new_user_session_path , alert: 'Debe loguearse antes de continuar' unless current_admin or current_user
+      redirect_to new_user_session_path , alert: 'Debe loguearse antes de continuar' unless current_admin or current_user or current_chofer
     end
 
 	def index

@@ -6,6 +6,20 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # config de mailer
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :user_name => 'e1b7969004c205',
+  :password => 'f56dc659c2b041',
+  :address => 'smtp.mailtrap.io',
+  :domain => 'smtp.mailtrap.io',
+  :port => '2525',
+  :authentication => :cram_md5
+}
+
+ config.action_mailer.default_options = { from: 'noreply@combi.com' }
+
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 
@@ -46,4 +60,6 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  
 end

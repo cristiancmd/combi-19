@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
- before_action :authenticate_user! , except: [:show, :index]
+ #before_action :authenticate_user! , except: [:show, :index, :venta_chofer, :create_efectivo]
  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
       
       @orders =Order.where(trip_id: params[:format])
     end
-#La Plata - Cordoba 14/12/20 | 00:00 hs
+
   end
 
   def show
@@ -84,11 +84,42 @@ class OrdersController < ApplicationController
   	end	
   end
 
+  def venta_chofer  
+    @viaje = Trip.find_by id:(params[:format])
+    @order = Order.new
+    @total = @viaje.rate   
+    session[:return_to] ||= request.referer
+  end
+
+  def create_efectivo
+    if (params[:order][:email]).empty? or (params[:order][:dni]).empty?
+      redirect_to session.delete(:return_to), alert: 'Debe completar los campos'
+    else
+    @user = User.where(email: (params[:order][:email])).first
+    if @user.nil?
+      @user = User.new(:email => params[:order][:email],:dni => params[:order][:dni], :password => 'password', :password_confirmation => 'password')
+      if @user.save
+        UserMailer.welcome_reset_password_instructions(@user).deliver
+      else
+        flash.now[:error] = @user.errors.full_messages
+        render :venta_chofer
+      end  
+    end  
+    @order = Order.new(:user_id => @user.id, :trip_id => params[:order][:trip_id],:cobro => params[:order][:cobro] )
+    if @order.save(validate: false)
+      redirect_to session.delete(:return_to), notice: "Venta efectiva para usuario: #{@user.email} "
+    else
+      flash.now[:error] = @order.errors.full_messages
+      redirect_to session.delete(:return_to), alert: 'Venta no realizada, ocurrio un error'
+    end
+  end
+  end
+
   def create
     
     session[:return_to] ||= request.referer #guardo la url para redireccionar
     @order = Order.new(order_params)
-
+    
     if params[:order][:additional_ids].present?
 
       extras = params[:order][:additional_ids]

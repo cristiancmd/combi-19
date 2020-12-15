@@ -1,15 +1,25 @@
-<h2>Pasajes</h2>
 
+<% if current_chofer or current_admin %>
+<h2>Pasajes</h2>
+<br>
+  <span> <%= link_to ' Vender ', orders_venta_chofer_path(@trip.id), class:"btn btn-danger btn-lg" %> </span> 
+   <span> <%= link_to 'Volver', trips_path , class:"btn btn-primary btn-lg"%></span> <br>
+
+<br>
 
 
 <% if @order.empty? %>
+	<hr>
 	<p>No se han comprado pasajes para este viaje. </p> 
+
 <% else %>
 
 <table class="table table-striped">
 	<thead class="thead">
 		<tr>
 			<th>Nombre</th>
+			<th>Email</th>
+			<th>DNI</th>
 			
 		</tr>
 	</thead>
@@ -19,11 +29,14 @@
 
 	<% @order.each do |t| %>
 	<tr>
-
-		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
+		
+		<td><%=  t.user.name   %> </td>  
+		<td><%=  t.user.email   %> </td>
+		<td><%=  t.user.dni   %> </td>
 		<td> <%= link_to 'Planilla', new_planilla_path, class:"btn btn-outline-danger" %> </td>
+		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
-		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-danger" %> </td>
+		
 
 
 	</tr>
@@ -33,4 +46,4 @@
 
 <% end %>
 
-<%= link_to 'Volver', :back , class: "btn btn-primary"%>
+<% end %>

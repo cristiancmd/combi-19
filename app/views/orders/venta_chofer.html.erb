@@ -1,0 +1,87 @@
+
+
+<h1>Venta en efectivo</h1> <br>
+
+<%= form_with(model: @order, url: orders_create_efectivo_path(@order), method: :get, local: true) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "errores") %> impidieron que se genere su orden:</h2>
+      <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<div class="container">
+	
+  <div class="row">
+
+  	<div class="col">
+  	<h4>Datos del pasajero:</h4> 
+	<%= form.label :email %>
+    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form.label :dni %>
+    <%= form.number_field :dni, autofocus: true %>
+
+	<br>
+      	
+
+		
+ 		 <%= form.hidden_field :trip_id, value: @viaje.id %> 
+ 		 
+ 		
+		<%= form.hidden_field :cobro, value: @total %>
+ 		<br><%= form.submit "Confirmar" , class: "btn btn-danger btn-lg" %>
+ 		<%= link_to 'Volver', :back , class: "btn btn-primary btn-lg"%>
+    <% end %>  
+	</div>
+	    <div class="col"> 
+
+		   <div class="card" style="width: 20rem;">
+		   	<ul class="list-group list-group-flush">
+	    		<li class="list-group-item">TOTAL <h5>  <%='$' +@total.to_s %></li>	</h5>
+	    		</ul>
+		  <% if @viaje.bus.tipo=='Cómoda' %>
+		  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQsTQWEjnh_pBESEl2ik445mqDgUlv6TDQJA&usqp=CAU" alt="...">
+		  <% else %> <img src="https://i.pinimg.com/originals/01/a2/ea/01a2eac66af0470a42d2d1b90aa94659.jpg" class="card-img-top" alt="..."> <% end %>
+		  <div class="card-body">
+		    <h5 class="card-title">Pasaje vendido en ruta</h5>
+		  </div>
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item"><h5><%= @viaje.route.origin_destination %> </h5> <%= '$ ' + @viaje.rate.to_s %>   </li>  
+
+		    <li class="list-group-item"><h5>IDA</h5><%= @viaje.horario.strftime("%-d/%-m/%y" '  |  ' "%H:%M ")%></li>
+		    <li class="list-group-item"><h5>COMBI</h5><%=  @viaje.bus.tipo %></li>
+		    <% if @extras %>
+		    <li class="list-group-item"><h5>EXTRA</h5>
+		    <% if @extras %>	
+			    <% @extras.each do |e|%>
+			    <%=  e.nombre %> </br> Precio: $ <%=  e.precio  %></br></br>
+			    
+	 			<% end %>
+ 			<% end %>
+		    </li>
+		    <% end %>
+		  </ul>
+		  
+		     
+		    
+  	
+	</div>
+    </div> 
+  </div>
+ <br>
+   
+  
+</div>
+
+
+
+
+
+
+

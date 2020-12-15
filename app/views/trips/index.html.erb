@@ -2,8 +2,11 @@
 
 <br>
 <div>
-		<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+		
 
+	<% if !current_chofer %> <%# chofer no tiene busqueda magica %>
+	<%= link_to 'Busqueda magica', new_search_path, class:"btn btn-primary" %>
+	<% end %>
 
 
 	<% if current_admin or current_chofer %>
@@ -38,7 +41,8 @@
 	<tr>
 	<% end %>	
 		
-		<td> <%= link_to '+', orders_path(t),class:"btn btn-outline-primary" %> </td>
+
+			<td> <% if current_admin %><%= link_to '+', orders_path(t),class:"btn btn-outline-primary" %><% end %> </td>
 
 		<td><%= link_to  t.route.origen_destino(t.route.initial_city, t.route.destination_city) , route_path(t.route.id)  %> </td>
 		<td><%=  t.horario.strftime("%-d/%-m/%y - %H:%M ")  %>  </td>
@@ -53,12 +57,12 @@
 		<td> <%= button_to 'Eliminar', t , method: :delete, data: { confirm: '¿ Está seguro ?' },class:"btn btn-outline-danger" %></td>
 		<% end %>
 
-		<% if current_chofer%>
-			<td > <%= link_to 'GESTIONAR', trip_path(t) ,class:"btn btn-outline-primary" %></td>
+		<% if current_chofer && !t.discarded? %>
+			<td > <%= link_to 'Gestionar', trip_path(t) ,class:"btn btn-outline-primary" %></td>
 			
 		<% end %>
 		<% if t.discarded? %>
-			<td > <%= link_to 'CANCELADO', "", class:"btn btn-outline-danger"  %> </td>
+			<td > <%= link_to 'Cancelado', "", class:"btn btn-outline-danger"  %> </td>
 		<% else %>
 			<% if not t.horario.past? %>
 			<td> <%= link_to 'Cancelar', trips_cancel_path(viaje: t) , data: { confirm: "Esta acción tiene como consecuencia la cancelación del viaje, el dinero será devuelto a todos los clientes y no es posible anular esta acción." + "\r\r\n" + "¿Está seguro de continuar?"  }, class:"btn btn-outline-primary" %> </td>
