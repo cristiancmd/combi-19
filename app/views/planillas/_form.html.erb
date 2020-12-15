@@ -89,6 +89,7 @@
     <%= form.collection_select :cFiebre, { 'No': 0, 'Si': 1} , :last, :first, include_blank: false, prompt: "Seleccione" %>
   </div>
 
+  <%=hidden_field_tag "viaje_id", @viaje %> 
 
 <p> Los campos marcados con * son requeridos. </p>  
 

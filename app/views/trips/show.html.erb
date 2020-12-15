@@ -14,6 +14,7 @@
 
 <% else %>
 
+
 <table class="table table-striped">
 	<thead class="thead">
 		<tr>
@@ -22,9 +23,6 @@
 			<th>DNI</th>
 			
 		</tr>
-	</thead>
-
-	  
 
 
 	<% @order.each do |o| %>
@@ -32,7 +30,7 @@
 		<td><%=  o.user.name   %> </td>  
 		<td><%=  o.user.email   %> </td>
 		<td><%=  o.user.dni   %> </td>
-		<td> <%= link_to 'Planilla', new_planilla_path(o.user.id) , class:"btn btn-outline-danger" %> </td>
+		<td> <%= link_to 'Planilla', new_planilla_path(o.user.id, viaje: @trip) , class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
 		
@@ -45,4 +43,6 @@
 
 <% end %>
 
+
 <% end %>
+
