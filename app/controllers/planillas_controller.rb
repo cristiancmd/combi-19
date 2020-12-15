@@ -46,7 +46,7 @@ class PlanillasController < ApplicationController
 				end
 			end
 			end
-			
+
 			respond_to do |format|
 				if @planilla.save
 					format.html { redirect_to trip_path(params[:viaje_id]), notice: 'La planilla se agregó correctamente.' }
