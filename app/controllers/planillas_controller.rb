@@ -1,6 +1,6 @@
 class PlanillasController < ApplicationController
 
-	before_action :set_bus, only: [:show, :edit, :update, :destroy]
+	before_action :set_planilla, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_chofer! , except: [:show, :index]
 
 
@@ -48,7 +48,7 @@ class PlanillasController < ApplicationController
 			
 			respond_to do |format|
 				if @planilla.save
-					format.html { redirect_to trip_path(params[:viaje_id]), notice: 'La planilla se agregó correctamente.' }
+					format.html { redirect_to trip_path, notice: 'La planilla se agregó correctamente.' }
 				else
 					format.html { render :new }
 				end
@@ -59,7 +59,7 @@ class PlanillasController < ApplicationController
 
 	private
     # Use callbacks to share common setup or constraints between actions.
-    def set_bus
+    def set_planilla
     	@planilla = Planilla.find(params[:id])
     end
 
