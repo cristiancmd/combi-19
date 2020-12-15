@@ -9,10 +9,9 @@ class PlanillasController < ApplicationController
 		
 	end	
 	def new
-		
 		@planilla = Planilla.new
 		@user = User.find((params[:format]))
-
+		@viaje = params[:viaje]
 	end
 
 	def show
@@ -25,20 +24,36 @@ class PlanillasController < ApplicationController
 		
 	end
 
-	def rechazar
-		
-		
-	end
 	def create
-			#byebug
 			@planilla = Planilla.new(planilla_params)
+			@planilla.aceptado = true
+			if @planilla.temp != nil 
+			if @planilla.temp >= 37.5
+				if @planilla.ext14 or @planilla.cont14 or @planilla.sintomas or @planilla.fiebre or @planilla.garganta or @planilla.hipt or @planilla.eResp or @planilla.diabetes or @planilla.inmDep or @planilla.corazon or @planilla.corazon or @planilla.embarazada or @planilla.cFiebre or @planilla.hijos
+					@planilla.aceptado = false
+				end
+			else
+				suma = params[:planilla][:ext14] + params[:planilla][:cont14] + params[:planilla][:fiebre] + params[:planilla][:garganta]
+				if suma == 1
+					if @planilla.sintomas or @planilla.hipt or @planilla.eResp or @planilla.diabetes or @planilla.inmDep or @planilla.corazon or @planilla.embarazada or @planilla.cFiebre or @planilla.hijos
+						@planilla.aceptado = false
+					end
+				else
+					if suma >1
+						@planilla.aceptado = false
+					end
+				end
+			end
+			end
+			
 			respond_to do |format|
 				if @planilla.save
-					format.html { redirect_to trips_path, notice: 'La planilla se agregó correctamente.' }
+					format.html { redirect_to trip_path(params[:viaje_id]), notice: 'La planilla se agregó correctamente.' }
 				else
 					format.html { render :new }
 				end
 			end
+
 	end	
 	
 

@@ -14,7 +14,7 @@ class TripsController < ApplicationController
 			@order = Trip.find(params[:id]).orders.where(canceled: false)  # sin viajes cancelados
 		end
 		
-		@trip = Trip.find(params[:id])
+		@trip_params = Trip.find(params[:id])
 
 	end
 	def new
