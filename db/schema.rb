@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_165131) do
+ActiveRecord::Schema.define(version: 2020_12_15_054756) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -87,6 +87,27 @@ ActiveRecord::Schema.define(version: 2020_12_10_165131) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "planillas", force: :cascade do |t|
+    t.float "temp"
+    t.boolean "ext14"
+    t.boolean "cont14"
+    t.boolean "sintomas"
+    t.boolean "fiebre"
+    t.boolean "garganta"
+    t.boolean "hipt"
+    t.boolean "eResp"
+    t.boolean "diabetes"
+    t.boolean "inmDep"
+    t.boolean "corazon"
+    t.boolean "hijos"
+    t.boolean "embarazada"
+    t.boolean "cFiebre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_planillas_on_user_id"
+  end
+
   create_table "routes", force: :cascade do |t|
     t.string "nombre"
     t.string "duracion"
@@ -133,12 +154,14 @@ ActiveRecord::Schema.define(version: 2020_12_10_165131) do
     t.string "name"
     t.datetime "date_of_birth"
     t.integer "dni"
+    t.datetime "covid_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "orders", "trips"
   add_foreign_key "orders", "users"
+  add_foreign_key "planillas", "users"
   add_foreign_key "routes", "cities", column: "destination_city_id"
   add_foreign_key "routes", "cities", column: "initial_city_id"
   add_foreign_key "searches", "cities", column: "destino_id"

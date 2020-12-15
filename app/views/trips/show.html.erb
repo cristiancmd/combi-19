@@ -25,13 +25,12 @@
 		</tr>
 
 
-	<% @order.each do |t| %>
+	<% @order.each do |o| %>
 	<tr>
-		
-		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
-		<td><%=  t.user.email   %> </td>
-		<td><%=  t.user.dni   %> </td>
-		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-primary" %> </td>
+		<td><%=  o.user.name   %> </td>  
+		<td><%=  o.user.email   %> </td>
+		<td><%=  o.user.dni   %> </td>
+		<td> <%= link_to 'Planilla', new_planilla_path(o.user.id) , class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
 		
