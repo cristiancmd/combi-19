@@ -1,0 +1,115 @@
+<%= form_with(model: planilla, local: true) do |form| %>
+  <% if planilla.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(planilla.errors.count, "errores") %> impidieron que se guarde la planilla:</h2>
+
+      <ul>
+        <% planilla.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  
+  <div class="field">
+   <%= form.label :Temperatura_actual %>
+    <%= form.text_field :temp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Ha_retornado_del_exterior_del_país_en_los_últimos_14_días? %>
+    <% @tipos= ['Si','No'] %>
+    <%= form.collection_select :ext14, @tipos , :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Ha_estado_en_contacto_con_alguien_que_haya_presentado_síntomas_respiratorios_o_fiebre_o_haya_sido_caso_confirmado_de_COVID_en_los_últimos_14_días? %>
+    <% @tipos= ['Si','No'] %>
+    <%= form.collection_select :cont14, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+  
+  <h3> En los últimos 14 días: </h3>
+
+  <div class="field">
+  	<%= form.label :Presentó_síntomas_respiratorios_tos_dificultad_respiratoria? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :sintomas, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Tuvo_fiebre_de_37x5ºC_o_más? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :fiebre, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Tuvo_dolor_de_garganta? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :garganta, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <h3> Prevalencia </h3>
+  <div class="field">
+  	<%= form.label :Es_hipertenso? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :hipt, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Tiene_enfermedades_respiratorias? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :eResp, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Es_diabético? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :diabetes, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Es_una_persona_inmunodeprimida? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :inmDep, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Tiene_problemas_cardíacos? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :corazon, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <h3> Entorno familiar</h3>
+  <div class="field">
+  	<%= form.label :Tiene_hijos_menores_de_edad_escolarizados? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :hijos, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Convive_en_su_hogar_persona_embarazada? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :embarazada, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+  <div class="field">
+  	<%= form.label :Convive_en_su_hogar_con_alguna_persona_que_presenta_fiebre_de_al_menos_37x5ºC_y_además_síntomas_respiratorios? %>
+  	<% @tipos= ['Si','No'] %>
+    <%= form.collection_select :cFiebre, @tipos, :to_s, :to_s, include_blank: false, prompt: "Seleccione" %>
+  </div>
+
+
+<p> Los campos marcados con * son requeridos. </p>  
+
+  
+    <%= form.submit "Guardar" , class: "btn btn-danger" %>
+ 
+<%= link_to 'Volver', trips_path , class: "btn btn-primary"%>
+
+        
+<% end %>
+
+
+<br><br>

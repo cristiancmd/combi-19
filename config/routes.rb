@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   #end
 
   resources :orders
-
+  resources :planillas
+  
   root 'trips#index'
   
 
