@@ -33,13 +33,14 @@ class PlanillasController < ApplicationController
 					@planilla.aceptado = false
 				end
 			else
-				suma = params[:planilla][:ext14] + params[:planilla][:cont14] + params[:planilla][:fiebre] + params[:planilla][:garganta]
+				suma = (params[:planilla][:ext14]).to_i + (params[:planilla][:cont14]).to_i + (params[:planilla][:fiebre]).to_i + (params[:planilla][:garganta]).to_i
 				if suma == 1
 					if @planilla.sintomas or @planilla.hipt or @planilla.eResp or @planilla.diabetes or @planilla.inmDep or @planilla.corazon or @planilla.embarazada or @planilla.cFiebre or @planilla.hijos
 						@planilla.aceptado = false
 					end
 				else
-					if suma >1
+					
+					if suma > 1
 						@planilla.aceptado = false
 					end
 				end
