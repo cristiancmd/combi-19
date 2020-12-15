@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_165131) do
+ActiveRecord::Schema.define(version: 2020_12_13_210412) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -85,6 +85,25 @@ ActiveRecord::Schema.define(version: 2020_12_10_165131) do
     t.decimal "refunded"
     t.index ["trip_id"], name: "index_orders_on_trip_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "planillas", force: :cascade do |t|
+    t.float "temp"
+    t.string "ext14"
+    t.string "cont14"
+    t.string "sintomas"
+    t.string "fiebre"
+    t.string "garganta"
+    t.string "hipt"
+    t.string "eResp"
+    t.string "diabetes"
+    t.string "inmDep"
+    t.string "corazon"
+    t.string "hijos"
+    t.string "embarazada"
+    t.string "cFiebre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "routes", force: :cascade do |t|

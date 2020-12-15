@@ -30,10 +30,10 @@
 	<% @order.each do |t| %>
 	<tr>
 		
-		<td><%=  t.user.name   %> </td>  <!-- asi es mas facil! --> 
+		<td><%=  t.user.name   %> </td>  
 		<td><%=  t.user.email   %> </td>
 		<td><%=  t.user.dni   %> </td>
-		<td> <%= link_to 'Planilla', '', class:"btn btn-outline-primary" %> </td>
+		<td> <%= link_to 'Planilla', new_planilla_path, class:"btn btn-outline-danger" %> </td>
 		<td> <%= link_to 'Aceptar', '', class:"btn btn-outline-success" %> </td>
 		<td> <%= link_to 'Rechazar', '', class:"btn btn-outline-danger" %> </td>
 		
