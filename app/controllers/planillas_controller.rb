@@ -25,6 +25,7 @@ class PlanillasController < ApplicationController
 	end
 
 	def create
+			session[:return_to] ||= request.referer
 			@planilla = Planilla.new(planilla_params)
 			@planilla.aceptado = true
 			if @planilla.temp != nil 
@@ -48,10 +49,16 @@ class PlanillasController < ApplicationController
 			end
 
 			respond_to do |format|
+				
 				if @planilla.save
+					if @planilla.aceptado == false
+						@user = User.find((params[:planilla][:user_id]))
+						
+						@user.update(covid_at: Time.now)
+					end
 					format.html { redirect_to trip_path(params[:viaje_id]), notice: 'La planilla se agregó correctamente.' }
 				else
-					format.html { render :new }
+					format.html { redirect_to session.delete(:return_to), alert: 'Debe completar todos los campos!'  }
 				end
 			end
 

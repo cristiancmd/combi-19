@@ -15,8 +15,8 @@ class TripsController < ApplicationController
 		end
 		
 		@trip_params = Trip.find(params[:id])
+		@trip = Trip.find(params[:id])
 		
-		byebug
 	end
 	def new
 		@trip = Trip.new
