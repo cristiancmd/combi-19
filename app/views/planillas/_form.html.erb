@@ -4,8 +4,10 @@
       <h2><%= pluralize(planilla.errors.count, "errores") %> impidieron que se guarde la planilla:</h2>
 
       <ul>
-        <% planilla.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% planilla.errors.messages.values.each do |message| %>
+          <%message.each do |m| %>
+            <li><%= m %></li>
+          <% end %>
         <% end %>
       </ul>
     </div>
@@ -13,7 +15,7 @@
 
 
 
-<%= form.hidden_field :user_id, value: @user %>
+<%= form.hidden_field :user_id, value: @users %>
 
   <div class="field">
    <%= form.label :Temperatura_actual %>
