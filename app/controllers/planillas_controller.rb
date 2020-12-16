@@ -33,7 +33,17 @@ class PlanillasController < ApplicationController
 					@planilla.aceptado = false
 				end
 			else
-				suma = params[:planilla][:ext14] + params[:planilla][:cont14] + params[:planilla][:fiebre] + params[:planilla][:garganta]
+				a = params[:planilla][:ext14]
+				b = params[:planilla][:cont14]
+				c = params[:planilla][:fiebre]
+				d = params[:planilla][:garganta]
+				e = Integer(a)
+				f = Integer(b)
+				g = Integer(c)
+				h = Integer(d)
+				suma = e + f + g + h
+
+			#	suma = params[:planilla][:ext14] + params[:planilla][:cont14] + params[:planilla][:fiebre] + params[:planilla][:garganta]
 				if suma == 1
 					if @planilla.sintomas or @planilla.hipt or @planilla.eResp or @planilla.diabetes or @planilla.inmDep or @planilla.corazon or @planilla.embarazada or @planilla.cFiebre or @planilla.hijos
 						@planilla.aceptado = false
@@ -48,7 +58,7 @@ class PlanillasController < ApplicationController
 			
 			respond_to do |format|
 				if @planilla.save
-					format.html { redirect_to trip_path, notice: 'La planilla se agregó correctamente.' }
+					format.html { redirect_to trip_path(params[:viaje_id]), notice: 'La planilla se agregó correctamente.' }
 				else
 					format.html { render :new }
 				end
