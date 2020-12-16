@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     }  
   get '/users/index', to: 'users#index'
   get '/users/show', to: 'users#show'
+  post '/users/suscripcion', to: 'users#suscripcion'
+
   get '/orders/past_trips', to: 'orders#past_trips'
   get '/orders/cancel_order', to: 'orders#cancel_order'
   get '/trips/cancel', to: 'trips#cancel'

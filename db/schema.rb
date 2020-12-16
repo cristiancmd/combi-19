@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_15_204947) do
+ActiveRecord::Schema.define(version: 2020_12_16_025733) do
 
   create_table "additionals", force: :cascade do |t|
     t.string "nombre"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_204947) do
     t.datetime "date_of_birth"
     t.integer "dni"
     t.datetime "covid_at"
+    t.boolean "suscripcion", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

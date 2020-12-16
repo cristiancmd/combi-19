@@ -1,7 +1,20 @@
- <h1>Nombre: <%= @user.name %></h1>
- <h1>Email: <%= @user.email%></h1>
- <h1>DNI: <%= @user.dni%></h1>
- <h1>Creado: <%= @user.created_at%></h1>
+ <h2>Nombre: <%= @user.name %></h2>
+ <h2>Email: <%= @user.email%></h2>
+ <h2>DNI: <%= @user.dni%></h2>
+ 
+
+<br>
+
+<% if !@user.suscripcion? %>
+
+<p><%= link_to 'Suscribirse', '/users/suscripcion', method: :post, class:"btn btn-danger btn-lg" %></p>  
+<p>Suscribite ahora para obtener todos los beneficios</p>
+<% else %>
+<p><%= link_to 'Suscripto', '', class:"btn btn-success btn-lg" %></p>  
+<p>Ya te suscribiste.</p>
+
+<% end %>
+<br>
 
 
- <h4><%= link_to 'Volver', users_index_path, class:"btn btn-primary" %></h4>
+ <h4><%= link_to 'Volver', users_index_path, class:"btn btn-secondary" %></h4>

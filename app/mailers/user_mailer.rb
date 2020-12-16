@@ -11,7 +11,10 @@ class UserMailer < Devise::Mailer
 
   end 
 
-  
+  def test_send(user)
+    mail(to: user.email, subject: 'Suscripcion a COMBI-19')
+
+  end 
 
   private
 

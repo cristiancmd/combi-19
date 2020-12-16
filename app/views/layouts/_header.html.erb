@@ -36,6 +36,9 @@
             <li class="nav-item">
                 <%= link_to 'Buscar viajes', new_search_path , class: "nav-link"%>
             </li>
+            <li class="nav-item">
+                <%= link_to 'Suscripcion', users_show_path(current_user) , class: "nav-link"%>
+            </li>
         <% elsif current_chofer %>
             <li class="nav-item">
                 <%= link_to 'Viajes', trips_path , class: "nav-link"%>
