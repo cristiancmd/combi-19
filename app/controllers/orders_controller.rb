@@ -44,16 +44,16 @@ class OrdersController < ApplicationController
     cobro = @order.cobro
     half_cobro = (cobro/2)
 
-    if @order.canceled == false && @order.update_attribute(:canceled, true)
+    if @order.canceled == false && @order.update(canceled: true)
        if order.trip.horario.after?(DateTime.current + 2)
-          @order.update_attribute(:refunded, cobro)
+          @order.update(refunded: cobro)
           redirect_to order_path(@order) , notice: 'Devolvimos tu dinero!'
        else   
-          @order.update_attribute(:refunded, half_cobro)
+          @order.update(refunded: half_cobro)
           redirect_to order_path(@order) , notice: 'Devolvimos la mitad de tu dinero!'
        end
     else
-        redirect_to order_path(@order) , alert: 'Hubo un problema al cancelar el pasaje'   
+        redirect_to order_path(@order) , alert: 'Hubo un problema al cancelar el pasaje, contacte a soporte.'   
     end
   end
 

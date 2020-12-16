@@ -4,17 +4,18 @@
  
 
 <br>
+<% if current_user %>
 
 <% if !@user.suscripcion? %>
 
 <p><%= link_to 'Suscribirse', '/users/suscripcion', method: :post, class:"btn btn-danger btn-lg" %></p>  
-<p>Suscribite ahora para obtener todos los beneficios</p>
+<p>Suscribete ahora para obtener todos los beneficios</p>
 <% else %>
-<p><%= link_to 'Suscripto', '', class:"btn btn-success btn-lg" %></p>  
+<p><%= link_to 'Suscrito', '', class:"btn btn-success btn-lg" %></p>  
 <p>Ya te suscribiste.</p>
 
 <% end %>
 <br>
 
-
+<% end %>
  <h4><%= link_to 'Volver', users_index_path, class:"btn btn-secondary" %></h4>
